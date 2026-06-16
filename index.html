@@ -1,135 +1,221 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Coach Tascabile v2</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Coach Tascabile</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">Coach Tascabile v2</p>
-      <h1>Allenamento + Dieta</h1>
-      <p class="sub">5 giorni · guida tecnica · timer · diario · dieta 14 giorni</p>
-    </div>
-    <button id="installBtn" class="ghost hidden">Installa</button>
-  </header>
-
-  <main>
-    <section id="home" class="screen active">
-      <div class="card hero">
-        <div>
-          <p class="eyebrow">Obiettivo fisico</p>
-          <h2>Ridurre pancia e fianchi, arrivare progressivamente verso il 15% di massa grassa.</h2>
-          <p>La foto desiderata richiede prima dimagrimento costante, poi costruzione muscolare di petto, spalle e braccia. Questa app ti guida su allenamento, recuperi, dieta e progressi.</p>
-        </div>
-        <div class="pillgrid">
-          <div><span>Età</span><strong>36</strong></div>
-          <div><span>Peso</span><strong>88 kg</strong></div>
-          <div><span>Altezza</span><strong>180 cm</strong></div>
-          <div><span>Target kcal</span><strong>2100–2300</strong></div>
-        </div>
+  <div class="app-shell">
+    <header class="topbar glass">
+      <div>
+        <p class="eyebrow">Coach personale</p>
+        <h1>Coach Tascabile</h1>
+        <p class="sub">Versione 5 · progressi, dieta e storico</p>
       </div>
+      <button id="installBtn" class="install-btn hidden">Installa</button>
+    </header>
 
-      <div class="card">
-        <div class="row between center">
-          <div>
-            <p class="eyebrow">Allenamento rapido</p>
-            <h2 id="todayName">Upper A</h2>
+    <main class="main-wrap">
+      <section id="tab-home" class="tab active">
+        <div class="hero-card glass">
+          <div class="hero-copy">
+            <span class="pill">Obiettivo 15% BF</span>
+            <h2>Allenamento, dieta, misure e storico in una mini-app completa</h2>
+            <p>Segui la scheda, controlla la tecnica, registra allenamenti, misure corporee e dieta di 14 giorni.</p>
           </div>
-          <select id="daySelect" aria-label="Seleziona giorno"></select>
+          <div class="hero-badges">
+            <div class="metric"><span>Giorni</span><strong>5</strong></div>
+            <div class="metric"><span>Esercizi</span><strong>25</strong></div>
+            <div class="metric"><span>Metodo</span><strong>DP</strong></div>
+          </div>
         </div>
-        <div id="todayList" class="list"></div>
+
+        <div class="section-head">
+          <div>
+            <p class="mini">Allenamento del giorno</p>
+            <h3 id="todayTitle">Upper A</h3>
+          </div>
+          <select id="dayPicker"></select>
+        </div>
+
+        <div class="quick-row">
+          <button class="quick-card quick-nav" data-targettab="workouts">
+            <span class="quick-icon">🏋️</span>
+            <span class="quick-title">Vai alla scheda</span>
+            <span class="quick-sub">Tutte le giornate</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="exercises">
+            <span class="quick-icon">🧠</span>
+            <span class="quick-title">Tecnica</span>
+            <span class="quick-sub">Esercizi illustrati</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="timer">
+            <span class="quick-icon">⏱️</span>
+            <span class="quick-title">Timer</span>
+            <span class="quick-sub">Recuperi rapidi</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="diet">
+            <span class="quick-icon">🍽️</span>
+            <span class="quick-title">Dieta</span>
+            <span class="quick-sub">14 giorni</span>
+          </button>
+        </div>
+
+        <div id="todayWorkout" class="today-list"></div>
+
+        <div class="tips-grid">
+          <div class="info-card soft">
+            <h4>Regole rapide</h4>
+            <ul>
+              <li>Multiarticolari: 90–120 sec.</li>
+              <li>Isolamento/addome: 45–75 sec.</li>
+              <li>Lascia 1–2 reps in riserva.</li>
+              <li>Aumenta il carico solo con tecnica pulita.</li>
+            </ul>
+          </div>
+          <div class="info-card soft">
+            <h4>Doppia progressione</h4>
+            <ol>
+              <li>Parti dal peso iniziale.</li>
+              <li>Aumenta le ripetizioni.</li>
+              <li>Raggiungi il tetto del range.</li>
+              <li>Alza il carico e riparti dal range basso.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-workouts" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Programma</p>
+            <h2>Scheda settimanale</h2>
+          </div>
+          <p class="muted">Ogni card mostra serie, ripetizioni, recupero e accesso alla guida tecnica.</p>
+        </div>
+        <div id="workoutDays"></div>
+      </section>
+
+      <section id="tab-exercises" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Libreria</p>
+            <h2>Esercizi illustrati</h2>
+          </div>
+          <p class="muted">Cerca per nome e apri la scheda completa dell’esercizio.</p>
+        </div>
+        <div class="search-wrap">
+          <input id="searchExercises" class="search" type="search" placeholder="Cerca un esercizio...">
+        </div>
+        <div id="exerciseLibrary" class="library-grid"></div>
+      </section>
+
+      <section id="tab-timer" class="tab">
+        <div class="timer-screen glass">
+          <p class="mini center">Timer recupero</p>
+          <h2 class="center">Recupero</h2>
+          <div class="timer-ring"><div id="timerDisplay">01:30</div></div>
+          <div class="timer-presets">
+            <button class="preset" data-seconds="45">45</button>
+            <button class="preset" data-seconds="60">60</button>
+            <button class="preset active" data-seconds="90">90</button>
+            <button class="preset" data-seconds="120">120</button>
+            <button class="preset" data-seconds="180">180</button>
+          </div>
+          <div class="timer-actions">
+            <button id="startTimer">Avvia</button>
+            <button id="pauseTimer" class="secondary">Pausa</button>
+            <button id="resetTimer" class="secondary">Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-diet" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Alimentazione</p>
+            <h2>Dieta 14 giorni</h2>
+          </div>
+          <p class="muted">Schema pratico orientativo: proteine alte, carboidrati controllati, legumi inclusi, poca carne e niente pesce obbligatorio.</p>
+        </div>
+        <div class="diet-controls">
+          <button class="diet-filter active" data-dietfilter="all">Tutti</button>
+          <button class="diet-filter" data-dietfilter="week1">Settimana 1</button>
+          <button class="diet-filter" data-dietfilter="week2">Settimana 2</button>
+        </div>
+        <div id="dietList" class="diet-list"></div>
+      </section>
+
+      <section id="tab-progress" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Diario</p>
+            <h2>Progressi</h2>
+          </div>
+          <p class="muted">Carichi, progressione automatica, misure corporee e cronologia allenamenti.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="info-card soft">
+            <h4>Misure corporee</h4>
+            <div class="measure-form">
+              <input id="measureWeight" type="number" step="0.1" placeholder="Peso kg">
+              <input id="measureWaist" type="number" step="0.1" placeholder="Girovita cm">
+              <button id="addMeasure">Aggiungi</button>
+            </div>
+            <canvas id="measureChart" height="170"></canvas>
+            <div id="measureList" class="mini-list"></div>
+          </div>
+
+          <div class="info-card soft">
+            <h4>Cronologia allenamenti</h4>
+            <div class="history-form">
+              <select id="historyDay"></select>
+              <input id="historyNotes" type="text" placeholder="Note: energia, carichi, fatica...">
+              <button id="addHistory">Registra allenamento</button>
+            </div>
+            <div id="historyList" class="mini-list"></div>
+          </div>
+        </div>
+
+        <div class="progress-card soft">
+          <div class="section-head compact">
+            <div>
+              <p class="mini">Carichi</p>
+              <h3>Progressione esercizi</h3>
+            </div>
+            <p class="muted">Spunta “range alto completato” quando hai chiuso tutte le serie al limite alto con tecnica pulita.</p>
+          </div>
+          <div id="progressTable"></div>
+        </div>
+        <button id="resetProgress" class="danger full">Azzera carichi salvati</button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav glass">
+      <button class="nav-btn active" data-tab="home"><span>🏠</span><small>Home</small></button>
+      <button class="nav-btn" data-tab="workouts"><span>📋</span><small>Scheda</small></button>
+      <button class="nav-btn" data-tab="exercises"><span>🖼️</span><small>Esercizi</small></button>
+      <button class="nav-btn" data-tab="timer"><span>⏱️</span><small>Timer</small></button>
+      <button class="nav-btn" data-tab="diet"><span>🍽️</span><small>Dieta</small></button>
+      <button class="nav-btn" data-tab="progress"><span>📈</span><small>Progressi</small></button>
+    </nav>
+  </div>
+
+  <dialog id="exerciseModal" class="sheet-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-top">
+      <div>
+        <p class="mini" id="modalEyebrow">Esercizio</p>
+        <h3 id="modalTitle"></h3>
       </div>
-
-      <div class="grid2">
-        <div class="card">
-          <h3>Regola progressione</h3>
-          <p>Quando completi tutte le serie al limite alto del range con tecnica pulita, aumenta il peso nella seduta successiva. Se la tecnica peggiora, mantieni il peso.</p>
-        </div>
-        <div class="card">
-          <h3>Regola dimagrimento</h3>
-          <p>Controlla la media peso settimanale e la circonferenza vita. Se per 2 settimane non scendono, riduci 100–150 kcal o aumenta i passi.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="scheda" class="screen">
-      <div class="card"><h2>Scheda settimanale</h2><p class="muted">Tocca “Tecnica” per vedere setup, impugnatura, concentrica ed eccentrica.</p></div>
-      <div id="weekPlan"></div>
-    </section>
-
-    <section id="esercizi" class="screen">
-      <div class="card"><h2>Libreria esercizi</h2><input id="search" class="search" placeholder="Cerca esercizio..." /></div>
-      <div id="library" class="cards"></div>
-    </section>
-
-    <section id="timer" class="screen">
-      <div class="card timerbox">
-        <h2>Timer recupero</h2>
-        <div id="timerValue">01:30</div>
-        <div class="presetrow">
-          <button class="preset" data-sec="45">45s</button>
-          <button class="preset" data-sec="60">60s</button>
-          <button class="preset active" data-sec="90">90s</button>
-          <button class="preset" data-sec="120">120s</button>
-          <button class="preset" data-sec="180">180s</button>
-        </div>
-        <div class="row center wrap">
-          <button id="startTimer">Avvia</button><button id="pauseTimer" class="ghost">Pausa</button><button id="resetTimer" class="ghost">Reset</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="progressi" class="screen">
-      <div class="card"><h2>Diario progressi esercizi</h2><p class="muted">Salvato sul telefono. Spunta “range completato” quando hai completato tutte le serie al massimo del range.</p><div id="progressList"></div><button id="resetTraining" class="danger">Azzera diario esercizi</button></div>
-    </section>
-
-    <section id="dieta" class="screen">
-      <div class="card">
-        <h2>Dieta 14 giorni</h2>
-        <p class="muted">Schema pratico: poca carne, niente pesce obbligatorio, legumi come ceci, carboidrati che usi già. Le quantità sono una base: pesa il cibo cotto dove indicato.</p>
-        <div class="rules"><span>Proteine alte</span><span>Frutta ok</span><span>Verdure minime</span><span>Pecorino dosato</span></div>
-      </div>
-      <div id="dietPlan"></div>
-    </section>
-
-    <section id="misure" class="screen">
-      <div class="card">
-        <h2>Misure corporee</h2>
-        <p class="muted">Inserisci peso e girovita 1–3 volte a settimana, sempre al mattino.</p>
-        <div class="measure-form">
-          <input id="mDate" type="date" />
-          <input id="mWeight" type="number" step="0.1" placeholder="Peso kg" />
-          <input id="mWaist" type="number" step="0.5" placeholder="Vita cm" />
-          <button id="addMeasure">Aggiungi</button>
-        </div>
-        <canvas id="measureChart" width="900" height="360"></canvas>
-        <div id="measureList"></div>
-        <button id="resetMeasures" class="danger">Azzera misure</button>
-      </div>
-    </section>
-  </main>
-
-  <nav class="nav">
-    <button data-screen="home" class="active">Home</button>
-    <button data-screen="scheda">Scheda</button>
-    <button data-screen="esercizi">Tecnica</button>
-    <button data-screen="timer">Timer</button>
-    <button data-screen="progressi">Diario</button>
-    <button data-screen="dieta">Dieta</button>
-    <button data-screen="misure">Misure</button>
-  </nav>
-
-  <dialog id="modal">
-    <div class="modalHead"><h3 id="modalTitle"></h3><button id="closeModal" class="icon">×</button></div>
-    <div id="modalBody"></div>
+      <button id="closeModal" class="icon-btn">✕</button>
+    </div>
+    <div id="modalContent"></div>
   </dialog>
 
   <script src="app.js"></script>

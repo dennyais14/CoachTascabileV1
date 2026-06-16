@@ -1,4 +1,4 @@
-const CACHE='coach-tascabile-v2';
-const FILES=['./','./index.html','./styles.css','./app.js','./manifest.json','./assets/icon-192.png','./assets/icon-512.png','./assets/trazioni.png','./assets/panca_piana.png','./assets/rematore1.png','./assets/shoulder_press.png','./assets/goblet_squat.png','./assets/bulgarian_split_squat.png','./assets/rdl.png','./assets/alzate_laterali.png','./assets/pushup.png','./assets/dip.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)))});
-self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});
+const CACHE="coach-tascabile-v5";
+const FILES=["./", "./index.html", "./styles.css", "./app.js", "./manifest.json", "./assets/affondi_indietro.png", "./assets/alzate_laterali.png", "./assets/bulgarian_split_squat.png", "./assets/cable_crunch.png", "./assets/calf_raise.png", "./assets/curl_barra_corta.png", "./assets/dip.png", "./assets/face_pull.png", "./assets/goblet_squat.png", "./assets/hanging_knee_raise.png", "./assets/hip_thrust.png", "./assets/icon-192.png", "./assets/icon-512.png", "./assets/lat_machine_pulldown.png", "./assets/pallof_press.png", "./assets/panca_piana.png", "./assets/plank.png", "./assets/pushdown_tricipiti.png", "./assets/pushup.png", "./assets/rdl.png", "./assets/rear_delt_fly.png", "./assets/rematore1.png", "./assets/rematore_cavo_basso.png", "./assets/shoulder_press.png", "./assets/sliding_leg_curl.png", "./assets/step_up_panca.png", "./assets/trazioni.png"];
+self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)))});
+self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});
