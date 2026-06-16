@@ -204,3 +204,12 @@ dialog::backdrop{background:rgba(2,6,23,.55);backdrop-filter:blur(6px)}
   .measure-form,.history-form{grid-template-columns:1fr}
   .progress-row.v5{grid-template-columns:1fr}
 }
+
+/* V6 extras */
+.block-label{margin:12px 0 8px;display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:rgba(124,58,237,.10);color:#6d28d9;font-weight:800;font-size:.82rem}
+.block-label.main{background:rgba(37,99,235,.10);color:#1d4ed8}
+.block-label.extra{background:rgba(16,185,129,.10);color:#047857}
+.workout-note{margin:10px 0 0;color:#475569;font-size:.92rem}
+.library-card.guide img{aspect-ratio:1/1.25;object-fit:cover}
+.exercise-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.modal-grid .guide-full{border-radius:22px;max-height:70vh;object-fit:contain;background:#fff}

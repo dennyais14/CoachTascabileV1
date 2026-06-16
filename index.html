@@ -14,7 +14,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 5 · progressi, dieta e storico</p>
+        <p class="sub">Versione 6 · focus avambracci e collo</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -24,13 +24,13 @@
         <div class="hero-card glass">
           <div class="hero-copy">
             <span class="pill">Obiettivo 15% BF</span>
-            <h2>Allenamento, dieta, misure e storico in una mini-app completa</h2>
-            <p>Segui la scheda, controlla la tecnica, registra allenamenti, misure corporee e dieta di 14 giorni.</p>
+            <h2>Scheda aggiornata con focus avambracci, collo e nuove guide visuali</h2>
+            <p>Segui la scheda, controlla la tecnica, registra allenamenti, misure corporee e usa le nuove guide per avambracci e collo.</p>
           </div>
           <div class="hero-badges">
             <div class="metric"><span>Giorni</span><strong>5</strong></div>
-            <div class="metric"><span>Esercizi</span><strong>25</strong></div>
-            <div class="metric"><span>Metodo</span><strong>DP</strong></div>
+            <div class="metric"><span>Esercizi</span><strong id="metricExercises">39</strong></div>
+            <div class="metric"><span>Metodo</span><strong>DP+</strong></div>
           </div>
         </div>
 
@@ -46,12 +46,12 @@
           <button class="quick-card quick-nav" data-targettab="workouts">
             <span class="quick-icon">🏋️</span>
             <span class="quick-title">Vai alla scheda</span>
-            <span class="quick-sub">Tutte le giornate</span>
+            <span class="quick-sub">Piano base + extra</span>
           </button>
           <button class="quick-card quick-nav" data-targettab="exercises">
             <span class="quick-icon">🧠</span>
             <span class="quick-title">Tecnica</span>
-            <span class="quick-sub">Esercizi illustrati</span>
+            <span class="quick-sub">Esercizi illustrati e guide</span>
           </button>
           <button class="quick-card quick-nav" data-targettab="timer">
             <span class="quick-icon">⏱️</span>
@@ -73,7 +73,7 @@
             <ul>
               <li>Multiarticolari: 90–120 sec.</li>
               <li>Isolamento/addome: 45–75 sec.</li>
-              <li>Lascia 1–2 reps in riserva.</li>
+              <li>Lascia 1–2 reps in riserva.</li><li>Extra collo/avambracci: 2 volte a settimana.</li>
               <li>Aumenta il carico solo con tecnica pulita.</li>
             </ul>
           </div>
@@ -83,7 +83,7 @@
               <li>Parti dal peso iniziale.</li>
               <li>Aumenta le ripetizioni.</li>
               <li>Raggiungi il tetto del range.</li>
-              <li>Alza il carico e riparti dal range basso.</li>
+              <li>Alza il carico e riparti dal range basso.</li><li>Se hai poco tempo, fai gli extra come finisher da 8–12 min.</li>
             </ol>
           </div>
         </div>
@@ -104,14 +104,14 @@
         <div class="section-head stacked">
           <div>
             <p class="mini">Libreria</p>
-            <h2>Esercizi illustrati</h2>
+            <h2>Esercizi illustrati e guide</h2>
           </div>
-          <p class="muted">Cerca per nome e apri la scheda completa dell’esercizio.</p>
+          <p class="muted">Cerca per nome e apri la scheda completa. In alto trovi anche le guide riassuntive per avambracci e collo.</p>
         </div>
         <div class="search-wrap">
           <input id="searchExercises" class="search" type="search" placeholder="Cerca un esercizio...">
         </div>
-        <div id="exerciseLibrary" class="library-grid"></div>
+        <div id="guideHighlights" class="library-grid"></div><div id="exerciseLibrary" class="library-grid"></div>
       </section>
 
       <section id="tab-timer" class="tab">

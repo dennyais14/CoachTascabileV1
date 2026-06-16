@@ -1,19 +1,16 @@
-COACH TASCABILE V5
+COACH TASCABILE V6
 
-Novità della v5:
-- dieta di 14 giorni dentro la app
-- grafico peso / girovita con canvas
-- cronologia allenamenti per giorno
-- progressione automatica: “mantieni” o “aumenta peso”
-- tutte le immagini tecniche degli esercizi sono incluse
-- grafica mobile premium della v4 mantenuta
+Novità principali:
+- piano aggiornato con focus avambracci e collo
+- nuovi esercizi aggiunti alla libreria
+- nuove guide visuali / poster per avambracci e collo
+- scheda settimanale aggiornata con blocchi "base" e "extra"
+- restano disponibili dieta, timer, progressione, misure e cronologia
 
-Uso:
-1) Apri index.html oppure pubblica la cartella su GitHub Pages.
-2) Sul telefono apri il link e fai “Aggiungi alla schermata Home”.
-3) Nella sezione Progressi registra carichi, misure e allenamenti.
-4) Nella sezione Dieta consulta i 14 giorni.
+Cosa caricare su GitHub Pages:
+- sostituisci i vecchi file con TUTTO il contenuto della cartella coach_tascabile_v6
+- index.html deve stare nella root del repository
+- carica anche la cartella assets, manifest.json, service-worker.js, styles.css e app.js
 
-Per aggiornare GitHub Pages:
-- sostituisci i file della vecchia versione con il contenuto della cartella coach_tascabile_v5.
-- index.html deve stare nella root del repository.
+Suggerimento:
+Dopo l'upload, se Safari mostra ancora la vecchia versione, apri il sito con ?v=6 oppure elimina i dati del sito / la vecchia icona dalla schermata Home e aggiungila di nuovo.
