@@ -71,6 +71,9 @@ const historyKey = 'coach-tascabile-v6-history';
 let progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
 let measures = JSON.parse(localStorage.getItem(measureKey) || '[]');
 let historyLog = JSON.parse(localStorage.getItem(historyKey) || '[]');
+const trackKey = 'coach-tascabile-v7-workout-tracking';
+let workoutTracking = JSON.parse(localStorage.getItem(trackKey) || '{}');
+const trackItems = {};
 
 const dietPlan = [
  {day:1,week:'week1',kcal:'2100–2200',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + pane 60 g + frutta + caffè.'],['Pranzo','Pasta 80 g con ceci 120 g, poco pecorino 10–15 g.'],['Spuntino','Frutta + yogurt greco 150 g.'],['Cena','Uova 2 + albumi 150 g, riso 70 g secco o patate 300 g.']]},
@@ -94,15 +97,188 @@ function saveMeasures(){ localStorage.setItem(measureKey, JSON.stringify(measure
 function saveHistory(){ localStorage.setItem(historyKey, JSON.stringify(historyLog)); }
 function rangeHighFromReps(str){ const nums=(str||'').match(/\d+/g); return nums?nums[nums.length-1]:''; }
 function formatBadge(v){ return `<span class="badge">${v}</span>`; }
-function exerciseCardHTML(item, showButtons=true){ const ex=exercises[item.id]; return `<article class="today-item"><div class="today-top"><img class="thumb" src="${ex.image}" alt="${ex.name}"><div class="today-meta"><h4>${ex.name}</h4><div class="exercise-meta">${formatBadge(`${item.sets} serie`)}${formatBadge(item.reps)}${formatBadge(`${item.rest} sec`)}</div></div></div>${showButtons?`<div class="today-actions"><button class="detail-btn" data-open="${item.id}">Apri guida</button></div>`:''}</article>`; }
+function makeTrackKey(dayId, index, item){
+  return `${dayId.replace(/\s+/g,'_')}__${index}__${item.id}`;
+}
+function registerTrackItem(dayId, index, item){
+  const key = makeTrackKey(dayId, index, item);
+  trackItems[key] = {dayId, index, item};
+  return key;
+}
+function parseHighNumber(str){
+  const nums = String(str||'').match(/\d+/g);
+  return nums ? Number(nums[nums.length-1]) : 1;
+}
+function parseFirstNumber(str){
+  const nums = String(str||'').match(/\d+/g);
+  return nums ? Number(nums[0]) : 1;
+}
+function parseSetCount(sets){
+  return Math.max(1, parseHighNumber(sets));
+}
+function parseRepTarget(reps){
+  const s = String(reps||'').toLowerCase();
+  if(s.includes('sec') && !s.includes('reps')){
+    const sec = parseHighNumber(s);
+    return {target: Math.max(1, Math.ceil(sec/5)), unit:'blocchi da 5 sec', display:`${sec} sec`};
+  }
+  const target = s.includes('reps') ? parseFirstNumber(s) : parseHighNumber(s);
+  return {target: Math.max(1, target), unit:'ripetizioni', display:`${target} reps`};
+}
+function getTrackRecord(key){
+  const meta = trackItems[key];
+  if(!meta) return {sets:[]};
+  const setCount = parseSetCount(meta.item.sets);
+  if(!workoutTracking[key]) workoutTracking[key] = {sets: Array(setCount).fill(0)};
+  if(!Array.isArray(workoutTracking[key].sets)) workoutTracking[key].sets = Array(setCount).fill(0);
+  while(workoutTracking[key].sets.length < setCount) workoutTracking[key].sets.push(0);
+  if(workoutTracking[key].sets.length > setCount) workoutTracking[key].sets = workoutTracking[key].sets.slice(0,setCount);
+  return workoutTracking[key];
+}
+function saveTracking(){
+  localStorage.setItem(trackKey, JSON.stringify(workoutTracking));
+}
+function isTrackComplete(key){
+  const meta = trackItems[key];
+  if(!meta) return false;
+  const rec = getTrackRecord(key);
+  const repInfo = parseRepTarget(meta.item.reps);
+  return rec.sets.length > 0 && rec.sets.every(v => Number(v) >= repInfo.target);
+}
+function actionButtonsHTML(key, item){
+  const complete = isTrackComplete(key);
+  return `<div class="today-actions">
+    <button class="detail-btn" data-open="${item.id}">Dettagli</button>
+    <button class="rest-btn" data-rest="${item.rest}">Recupero</button>
+    <button class="track-btn ${complete?'complete':''}" data-track="${key}">${complete?'Completo':'Segna'}</button>
+  </div>`;
+}
+function exerciseCardHTML(item, showButtons=true, dayId='Giorno', index=0){
+  const ex = exercises[item.id];
+  const key = registerTrackItem(dayId, index, item);
+  return `<article class="today-item"><div class="today-top"><img class="thumb" src="${ex.image}" alt="${ex.name}"><div class="today-meta"><h4>${ex.name}</h4><div class="exercise-meta">${formatBadge(`${item.sets} serie`)}${formatBadge(item.reps)}${formatBadge(`${item.rest} sec`)}</div></div></div>${showButtons?actionButtonsHTML(key,item):''}</article>`;
+}
 function groupWorkoutExercises(exList){ const groups=[]; exList.forEach(it=>{ const key=it.block||'main'; let grp=groups.find(g=>g.key===key && g.label===(it.label||'')); if(!grp){ grp={key,label:it.label||'',items:[]}; groups.push(grp);} grp.items.push(it); }); return groups; }
-function renderTodayWorkout(workout){ const wrap=document.getElementById('todayWorkout'); wrap.innerHTML=groupWorkoutExercises(workout.exercises).map(g=>`<section><div class="block-label ${g.key==='main'?'main':'extra'}">${g.key==='main'?'Blocco base':(g.label||'Extra')}</div><div class="today-list">${g.items.map(it=>exerciseCardHTML(it)).join('')}</div></section>`).join('') + `<p class="workout-note">${workout.note||''}</p>`; }
-function renderWorkoutDays(){ const wrap=document.getElementById('workoutDays'); wrap.innerHTML=workouts.map(day=>`<section class="workout-shell"><div class="section-head"><div><p class="mini">${day.summary}</p><h3>${day.id}</h3></div></div>${groupWorkoutExercises(day.exercises).map(g=>`<div class="block-label ${g.key==='main'?'main':'extra'}">${g.key==='main'?'Blocco base':(g.label||'Extra')}</div><div class="workout-day-list">${g.items.map(it=>`<article class="exercise-card"><h4>${exercises[it.id].name}</h4><div class="exercise-meta">${formatBadge(`${it.sets} serie`)}${formatBadge(it.reps)}${formatBadge(`${it.rest} sec`)}</div><div class="actions"><button class="detail-btn" data-open="${it.id}">Tecnica</button></div></article>`).join('')}</div>`).join('')}<p class="workout-note">${day.note||''}</p></section>`).join(''); }
+function renderTodayWorkout(workout){
+  const wrap = document.getElementById('todayWorkout');
+  let globalIndex = 0;
+  wrap.innerHTML = groupWorkoutExercises(workout.exercises).map(g=>`<section><div class="block-label ${g.key==='main'?'main':'extra'}">${g.key==='main'?'Blocco base':(g.label||'Extra')}</div><div class="today-list">${g.items.map(it=>exerciseCardHTML(it, true, workout.id, globalIndex++)).join('')}</div></section>`).join('') + `<p class="workout-note">${workout.note||''}</p>`;
+}
+function renderWorkoutDays(){
+  const wrap=document.getElementById('workoutDays');
+  wrap.innerHTML=workouts.map(day=>{
+    let globalIndex = 0;
+    return `<section class="workout-shell"><div class="section-head"><div><p class="mini">${day.summary}</p><h3>${day.id}</h3></div></div>${groupWorkoutExercises(day.exercises).map(g=>`<div class="block-label ${g.key==='main'?'main':'extra'}">${g.key==='main'?'Blocco base':(g.label||'Extra')}</div><div class="workout-day-list">${g.items.map(it=>{ const key=registerTrackItem(day.id, globalIndex++, it); const ex=exercises[it.id]; return `<article class="exercise-card"><h4>${ex.name}</h4><div class="exercise-meta">${formatBadge(`${it.sets} serie`)}${formatBadge(it.reps)}${formatBadge(`${it.rest} sec`)}</div><div class="actions"><button class="detail-btn" data-open="${it.id}">Dettagli</button><button class="rest-btn" data-rest="${it.rest}">Recupero</button><button class="track-btn ${isTrackComplete(key)?'complete':''}" data-track="${key}">${isTrackComplete(key)?'Completo':'Segna'}</button></div></article>`; }).join('')}</div>`).join('')}<p class="workout-note">${day.note||''}</p></section>`;
+  }).join('');
+}
 function renderGuideHighlights(){ const wrap=document.getElementById('guideHighlights'); if(!wrap) return; wrap.innerHTML=guideCards.map(g=>`<article class="library-card guide"><img src="${g.image}" alt="${g.name}"><div class="library-head"><div class="library-title"><p class="mini">Guida</p><h3>${g.name}</h3><p>${g.short}</p></div></div><div class="actions"><button class="detail-btn" data-open-guide="${g.id}">Apri poster</button></div></article>`).join(''); }
 function renderExerciseLibrary(filter=''){ const wrap=document.getElementById('exerciseLibrary'); const f=filter.trim().toLowerCase(); const list=Object.entries(exercises).filter(([id,ex])=>`${ex.name} ${ex.short}`.toLowerCase().includes(f)||!f); wrap.innerHTML=list.map(([id,ex])=>`<article class="library-card"><img src="${ex.image}" alt="${ex.name}"><div class="library-head"><div class="library-title"><p>Recupero ${ex.rest}</p><h3>${ex.name}</h3><p>Peso iniziale: ${ex.startWeight}</p></div></div><div class="exercise-chip-row"><span class="badge">${ex.short}</span><span class="badge">${ex.rest}</span></div><div class="actions"><button class="detail-btn" data-open="${id}">Scheda completa</button></div></article>`).join(''); }
 function openExerciseModal(id){ const ex=exercises[id]; if(!ex) return; document.getElementById('modalEyebrow').textContent='Esercizio'; document.getElementById('modalTitle').textContent=ex.name; document.getElementById('modalContent').innerHTML=`<div class="modal-grid"><img src="${ex.image}" alt="${ex.name}"><div class="exercise-chip-row"><span class="badge">Peso iniziale: ${ex.startWeight}</span><span class="badge">Recupero: ${ex.rest}</span></div><div class="detail-grid"><div class="detail-card"><h4>Impostazione</h4><p>${ex.setup}</p></div><div class="detail-card"><h4>Impugnatura</h4><p>${ex.grip}</p></div><div class="detail-card"><h4>Concentrica</h4><p>${ex.concentric}</p></div><div class="detail-card"><h4>Eccentrica</h4><p>${ex.eccentric}</p></div></div><div class="note-card"><h4>Nota coach</h4><p>${ex.tip || 'Usa tecnica pulita e progressione graduale.'}</p></div></div>`; document.getElementById('exerciseModal').showModal(); }
 function openGuideModal(id){ const g=guideCards.find(x=>x.id===id); if(!g) return; document.getElementById('modalEyebrow').textContent='Poster guida'; document.getElementById('modalTitle').textContent=g.name; document.getElementById('modalContent').innerHTML=`<div class="modal-grid"><img class="guide-full" src="${g.image}" alt="${g.name}"><div class="exercise-chip-row"><span class="badge">${g.category}</span><span class="badge">${g.short}</span></div><div class="detail-grid"><div class="detail-card"><h4>Uso consigliato</h4><p>${g.setup}</p></div><div class="detail-card"><h4>Frequenza</h4><p>${g.grip}</p></div><div class="detail-card"><h4>Contenuto</h4><p>${g.concentric}</p></div><div class="detail-card"><h4>Chiusura</h4><p>${g.eccentric}</p></div></div><div class="note-card"><h4>Nota coach</h4><p>${g.tip}</p></div></div>`; document.getElementById('exerciseModal').showModal(); }
-function initOpeners(){ document.body.addEventListener('click',e=>{ const btn=e.target.closest('[data-open]'); const gbtn=e.target.closest('[data-open-guide]'); if(btn) openExerciseModal(btn.dataset.open); if(gbtn) openGuideModal(gbtn.dataset.openGuide); const nav=e.target.closest('.nav-btn'); if(nav) activateTab(nav.dataset.tab); const qnav=e.target.closest('.quick-nav'); if(qnav) activateTab(qnav.dataset.targettab); }); }
+
+function polarToCartesian(cx, cy, r, angleDeg){
+  const a = (angleDeg - 90) * Math.PI / 180;
+  return {x: cx + r * Math.cos(a), y: cy + r * Math.sin(a)};
+}
+function describeArc(cx, cy, r, startAngle, endAngle){
+  const start = polarToCartesian(cx, cy, r, endAngle);
+  const end = polarToCartesian(cx, cy, r, startAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  return `M ${cx} ${cy} L ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y} Z`;
+}
+function repPieHTML(key, setIndex, value, target, unit){
+  const slices = [];
+  const cx=50, cy=50, r=47;
+  for(let i=0;i<target;i++){
+    const start = i * 360 / target;
+    const end = (i+1) * 360 / target;
+    const done = i < value;
+    slices.push(`<path class="rep-slice ${done?'done':'todo'}" data-pie="${key}" data-set="${setIndex}" data-rep="${i+1}" d="${describeArc(cx,cy,r,start,end)}"></path>`);
+  }
+  return `<svg class="rep-pie" viewBox="0 0 100 100" role="button" aria-label="Serie ${setIndex+1}: ${value} di ${target}">
+    ${slices.join('')}
+    <circle cx="50" cy="50" r="25" fill="#fff" stroke="rgba(148,163,184,.25)"></circle>
+    <text class="pie-center" x="50" y="45">${value}/${target}</text>
+    <text class="pie-sub" x="50" y="58">${unit.includes('sec')?'tempo':'reps'}</text>
+  </svg>`;
+}
+function openTrackingModal(key){
+  const meta = trackItems[key];
+  if(!meta) return;
+  const ex = exercises[meta.item.id];
+  const rec = getTrackRecord(key);
+  const repInfo = parseRepTarget(meta.item.reps);
+  document.getElementById('modalEyebrow').textContent = 'Segna serie';
+  document.getElementById('modalTitle').textContent = ex.name;
+  const complete = isTrackComplete(key);
+  document.getElementById('modalContent').innerHTML = `<div class="track-overview">
+    <div class="track-head-card">
+      <p class="rep-note"><strong>${meta.dayId}</strong> · ${meta.item.sets} serie · target: ${meta.item.reps}</p>
+      <div class="exercise-chip-row"><span class="badge">Clicca uno spicchio per segnare le ripetizioni</span><span class="badge">${repInfo.unit}</span></div>
+    </div>
+    ${complete?'<div class="track-complete-banner">Esercizio completato ✅</div>':''}
+    <div class="track-grid">
+      ${rec.sets.map((v,i)=>`<div class="set-card"><div class="set-top"><h4>Serie ${i+1}</h4><small>${v}/${repInfo.target} ${repInfo.unit}</small></div><div class="pie-wrap">${repPieHTML(key,i,Number(v),repInfo.target,repInfo.unit)}<div class="rep-controls"><p class="rep-note">Tocca uno spicchio: gli spicchi fino a quel punto diventano verdi.</p><div class="mini-actions"><button class="secondary" data-adjust="${key}" data-set="${i}" data-delta="-1">-1</button><button data-adjust="${key}" data-set="${i}" data-delta="1">+1</button><button class="secondary" data-fillset="${key}" data-set="${i}">Serie completa</button></div></div></div></div>`).join('')}
+    </div>
+    <div class="track-summary"><strong>Stato:</strong> ${complete?'completo':'in corso'} · quando tutte le ruote sono verdi il pulsante diventa “Completo”.</div>
+  </div>`;
+  document.getElementById('exerciseModal').showModal();
+}
+function updateSetValue(key, setIndex, value){
+  const meta = trackItems[key];
+  if(!meta) return;
+  const rec = getTrackRecord(key);
+  const target = parseRepTarget(meta.item.reps).target;
+  rec.sets[setIndex] = Math.max(0, Math.min(target, value));
+  saveTracking();
+  openTrackingModal(key);
+  renderTodayWorkout(workouts.find(w=>w.id===meta.dayId)||workouts[0]);
+  renderWorkoutDays();
+}
+function initTrackingEvents(){
+  document.body.addEventListener('click', e=>{
+    const slice = e.target.closest('[data-pie]');
+    if(slice){
+      updateSetValue(slice.dataset.pie, Number(slice.dataset.set), Number(slice.dataset.rep));
+    }
+    const adj = e.target.closest('[data-adjust]');
+    if(adj){
+      const key=adj.dataset.adjust, set=Number(adj.dataset.set), delta=Number(adj.dataset.delta);
+      const rec=getTrackRecord(key);
+      updateSetValue(key,set,Number(rec.sets[set]||0)+delta);
+    }
+    const fill = e.target.closest('[data-fillset]');
+    if(fill){
+      const key=fill.dataset.fillset, set=Number(fill.dataset.set);
+      const meta=trackItems[key];
+      updateSetValue(key,set,parseRepTarget(meta.item.reps).target);
+    }
+  });
+}
+
+function initOpeners(){
+  document.body.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-open]');
+    const gbtn=e.target.closest('[data-open-guide]');
+    const trackBtn=e.target.closest('[data-track]');
+    const restBtn=e.target.closest('[data-rest]');
+    if(btn) openExerciseModal(btn.dataset.open);
+    if(gbtn) openGuideModal(gbtn.dataset.openGuide);
+    if(trackBtn) openTrackingModal(trackBtn.dataset.track);
+    if(restBtn){
+      timerSeconds = timerRemaining = Number(restBtn.dataset.rest);
+      updateTimerDisplay();
+      document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('active', Number(b.dataset.seconds)===timerSeconds));
+      activateTab('timer');
+      if(timerInt){ clearInterval(timerInt); timerInt=null; }
+      document.getElementById('startTimer').click();
+    }
+    const nav=e.target.closest('.nav-btn');
+    if(nav) activateTab(nav.dataset.tab);
+    const qnav=e.target.closest('.quick-nav');
+    if(qnav) activateTab(qnav.dataset.targettab);
+  });
+}
 function activateTab(tab){ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id===`tab-${tab}`)); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); window.scrollTo({top:0,behavior:'smooth'}); }
 function initDayPicker(){ const picker=document.getElementById('dayPicker'); picker.innerHTML=workouts.map(w=>`<option value="${w.id}">${w.id}</option>`).join(''); const current=workouts[0]; document.getElementById('todayTitle').textContent=current.id; renderTodayWorkout(current); picker.addEventListener('change',()=>{ const workout=workouts.find(w=>w.id===picker.value)||workouts[0]; document.getElementById('todayTitle').textContent=workout.id; renderTodayWorkout(workout); }); }
 function initSearch(){ const input=document.getElementById('searchExercises'); input.addEventListener('input',()=>renderExerciseLibrary(input.value)); }
@@ -121,5 +297,5 @@ function initModal(){ document.getElementById('closeModal').onclick=()=>document
 function initInstall(){ let deferredPrompt=null; const btn=document.getElementById('installBtn'); window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredPrompt=e; btn.classList.remove('hidden'); }); btn.onclick=async()=>{ if(!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; btn.classList.add('hidden'); }; }
 function registerSW(){ if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js').catch(()=>{}); } }
 function initMetrics(){ const metric=document.getElementById('metricExercises'); if(metric) metric.textContent=Object.keys(exercises).length; }
-function init(){ initMetrics(); initDayPicker(); renderWorkoutDays(); renderGuideHighlights(); renderExerciseLibrary(); initSearch(); initOpeners(); initTimer(); renderProgress(); renderDiet(); bindDietFilters(); initProgressExtras(); initModal(); initInstall(); registerSW(); }
+function init(){ initTrackingEvents(); initMetrics(); initDayPicker(); renderWorkoutDays(); renderGuideHighlights(); renderExerciseLibrary(); initSearch(); initOpeners(); initTimer(); renderProgress(); renderDiet(); bindDietFilters(); initProgressExtras(); initModal(); initInstall(); registerSW(); }
 document.addEventListener('DOMContentLoaded', init);

@@ -1,16 +1,15 @@
-COACH TASCABILE V6
+COACH TASCABILE V7
 
 Novità principali:
-- piano aggiornato con focus avambracci e collo
-- nuovi esercizi aggiunti alla libreria
-- nuove guide visuali / poster per avambracci e collo
-- scheda settimanale aggiornata con blocchi "base" e "extra"
-- restano disponibili dieta, timer, progressione, misure e cronologia
+- ripristinati i tre pulsanti sotto ogni esercizio: Dettagli, Recupero, Segna
+- nuovo sistema “Segna” con ruote a spicchi per ogni serie
+- puoi cliccare gli spicchi per segnare le ripetizioni completate
+- quando tutte le serie sono complete, il pulsante diventa “Completo”
+- mantenute tutte le funzioni della v6: dieta, timer, misure, cronologia, guide avambracci/collo
 
-Cosa caricare su GitHub Pages:
-- sostituisci i vecchi file con TUTTO il contenuto della cartella coach_tascabile_v6
-- index.html deve stare nella root del repository
-- carica anche la cartella assets, manifest.json, service-worker.js, styles.css e app.js
-
-Suggerimento:
-Dopo l'upload, se Safari mostra ancora la vecchia versione, apri il sito con ?v=6 oppure elimina i dati del sito / la vecchia icona dalla schermata Home e aggiungila di nuovo.
+Come aggiornare GitHub Pages:
+1) Decomprimi coach_tascabile_app_v7.zip.
+2) Entra nella cartella coach_tascabile_v7.
+3) Carica su GitHub il contenuto interno della cartella, non la cartella intera.
+4) Assicurati che index.html sia nella root del repository.
+5) Dopo l’upload apri il sito con ?v=7 se Safari mostra ancora la versione vecchia.
