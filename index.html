@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Coach Tascabile v2</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Coach Tascabile v2</p>
+      <h1>Allenamento + Dieta</h1>
+      <p class="sub">5 giorni · guida tecnica · timer · diario · dieta 14 giorni</p>
+    </div>
+    <button id="installBtn" class="ghost hidden">Installa</button>
+  </header>
+
+  <main>
+    <section id="home" class="screen active">
+      <div class="card hero">
+        <div>
+          <p class="eyebrow">Obiettivo fisico</p>
+          <h2>Ridurre pancia e fianchi, arrivare progressivamente verso il 15% di massa grassa.</h2>
+          <p>La foto desiderata richiede prima dimagrimento costante, poi costruzione muscolare di petto, spalle e braccia. Questa app ti guida su allenamento, recuperi, dieta e progressi.</p>
+        </div>
+        <div class="pillgrid">
+          <div><span>Età</span><strong>36</strong></div>
+          <div><span>Peso</span><strong>88 kg</strong></div>
+          <div><span>Altezza</span><strong>180 cm</strong></div>
+          <div><span>Target kcal</span><strong>2100–2300</strong></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row between center">
+          <div>
+            <p class="eyebrow">Allenamento rapido</p>
+            <h2 id="todayName">Upper A</h2>
+          </div>
+          <select id="daySelect" aria-label="Seleziona giorno"></select>
+        </div>
+        <div id="todayList" class="list"></div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Regola progressione</h3>
+          <p>Quando completi tutte le serie al limite alto del range con tecnica pulita, aumenta il peso nella seduta successiva. Se la tecnica peggiora, mantieni il peso.</p>
+        </div>
+        <div class="card">
+          <h3>Regola dimagrimento</h3>
+          <p>Controlla la media peso settimanale e la circonferenza vita. Se per 2 settimane non scendono, riduci 100–150 kcal o aumenta i passi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="scheda" class="screen">
+      <div class="card"><h2>Scheda settimanale</h2><p class="muted">Tocca “Tecnica” per vedere setup, impugnatura, concentrica ed eccentrica.</p></div>
+      <div id="weekPlan"></div>
+    </section>
+
+    <section id="esercizi" class="screen">
+      <div class="card"><h2>Libreria esercizi</h2><input id="search" class="search" placeholder="Cerca esercizio..." /></div>
+      <div id="library" class="cards"></div>
+    </section>
+
+    <section id="timer" class="screen">
+      <div class="card timerbox">
+        <h2>Timer recupero</h2>
+        <div id="timerValue">01:30</div>
+        <div class="presetrow">
+          <button class="preset" data-sec="45">45s</button>
+          <button class="preset" data-sec="60">60s</button>
+          <button class="preset active" data-sec="90">90s</button>
+          <button class="preset" data-sec="120">120s</button>
+          <button class="preset" data-sec="180">180s</button>
+        </div>
+        <div class="row center wrap">
+          <button id="startTimer">Avvia</button><button id="pauseTimer" class="ghost">Pausa</button><button id="resetTimer" class="ghost">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="progressi" class="screen">
+      <div class="card"><h2>Diario progressi esercizi</h2><p class="muted">Salvato sul telefono. Spunta “range completato” quando hai completato tutte le serie al massimo del range.</p><div id="progressList"></div><button id="resetTraining" class="danger">Azzera diario esercizi</button></div>
+    </section>
+
+    <section id="dieta" class="screen">
+      <div class="card">
+        <h2>Dieta 14 giorni</h2>
+        <p class="muted">Schema pratico: poca carne, niente pesce obbligatorio, legumi come ceci, carboidrati che usi già. Le quantità sono una base: pesa il cibo cotto dove indicato.</p>
+        <div class="rules"><span>Proteine alte</span><span>Frutta ok</span><span>Verdure minime</span><span>Pecorino dosato</span></div>
+      </div>
+      <div id="dietPlan"></div>
+    </section>
+
+    <section id="misure" class="screen">
+      <div class="card">
+        <h2>Misure corporee</h2>
+        <p class="muted">Inserisci peso e girovita 1–3 volte a settimana, sempre al mattino.</p>
+        <div class="measure-form">
+          <input id="mDate" type="date" />
+          <input id="mWeight" type="number" step="0.1" placeholder="Peso kg" />
+          <input id="mWaist" type="number" step="0.5" placeholder="Vita cm" />
+          <button id="addMeasure">Aggiungi</button>
+        </div>
+        <canvas id="measureChart" width="900" height="360"></canvas>
+        <div id="measureList"></div>
+        <button id="resetMeasures" class="danger">Azzera misure</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="nav">
+    <button data-screen="home" class="active">Home</button>
+    <button data-screen="scheda">Scheda</button>
+    <button data-screen="esercizi">Tecnica</button>
+    <button data-screen="timer">Timer</button>
+    <button data-screen="progressi">Diario</button>
+    <button data-screen="dieta">Dieta</button>
+    <button data-screen="misure">Misure</button>
+  </nav>
+
+  <dialog id="modal">
+    <div class="modalHead"><h3 id="modalTitle"></h3><button id="closeModal" class="icon">×</button></div>
+    <div id="modalBody"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
