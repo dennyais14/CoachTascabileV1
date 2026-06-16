@@ -1,15 +1,17 @@
-COACH TASCABILE V7
+COACH TASCABILE V7.1
 
-Novità principali:
-- ripristinati i tre pulsanti sotto ogni esercizio: Dettagli, Recupero, Segna
-- nuovo sistema “Segna” con ruote a spicchi per ogni serie
-- puoi cliccare gli spicchi per segnare le ripetizioni completate
+Questa versione corregge il problema di cache per cui Safari/GitHub Pages poteva continuare a mostrare la v6 con il solo pulsante “Apri guida”.
+
+Novità confermate:
+- sotto ogni esercizio ci sono i tre pulsanti: Dettagli, Recupero, Segna
+- “Segna” apre una schermata con ruote a spicchi per segnare le ripetizioni/serie
 - quando tutte le serie sono complete, il pulsante diventa “Completo”
-- mantenute tutte le funzioni della v6: dieta, timer, misure, cronologia, guide avambracci/collo
+- cache-busting: index.html richiama app.js?v=7.1 e styles.css?v=7.1
+- service worker aggiornato con cache coach-tascabile-v7-1
 
 Come aggiornare GitHub Pages:
-1) Decomprimi coach_tascabile_app_v7.zip.
-2) Entra nella cartella coach_tascabile_v7.
+1) Decomprimi coach_tascabile_app_v7_1.zip.
+2) Apri la cartella coach_tascabile_v7_1.
 3) Carica su GitHub il contenuto interno della cartella, non la cartella intera.
-4) Assicurati che index.html sia nella root del repository.
-5) Dopo l’upload apri il sito con ?v=7 se Safari mostra ancora la versione vecchia.
+4) Dopo l’upload apri il sito con ?v=7.1.
+5) Se Safari mostra ancora la vecchia versione, elimina i dati sito di github.io o rimuovi e riaggiungi l’icona dalla schermata Home.
