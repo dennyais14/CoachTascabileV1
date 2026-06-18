@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Coach Tascabile v11.1</title>
+  <title>Coach Tascabile v12</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="stylesheet" href="styles.css?v=11.1" />
+  <link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
   <div class="app-shell">
@@ -17,7 +17,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 11.1 · petto + spalle + braccia, deficit sostenibile</p>
+        <p class="sub">Versione 12 · dieta smart 2000 kcal, alternative economiche</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -188,80 +188,99 @@
       <section id="tab-diet" class="tab">
         <div class="section-head stacked">
           <div>
-            <p class="mini">Alimentazione flessibile</p>
-            <h2>Dieta + alternative</h2>
+            <p class="mini">Alimentazione flessibile · V12</p>
+            <h2>Dieta 2000 kcal smart</h2>
           </div>
-          <p class="muted">Schema indicativo: giorni allenamento circa 2000 kcal, giorni riposo circa 1850–1950 kcal. Proteine 150–170 g/die, grassi 55–70 g/die, carboidrati gestiti con il convertitore.</p>
+          <p class="muted">Schema indicativo da circa 2000 kcal/giorno. Obiettivo: perdere pancia mantenendo massa muscolare, con alternative pratiche ed economiche: tonno, pesce economico, latticini light e burger vegetariani. Non è una prescrizione medica: le calorie reali cambiano in base a marca, peso sgocciolato, cottura e prodotto.</p>
         </div>
 
-        <div class="diet-summary-grid">
-          <article class="diet-tool glass compact-diet-card">
-            <p class="mini">Giorno allenamento · circa 2000 kcal</p>
-            <h3>Schema base</h3>
+        <div class="diet-accordion">
+          <details class="diet-panel" open>
+            <summary><span>📌</span><strong>Regole rapide</strong></summary>
             <ul class="clean-list">
-              <li><strong>Colazione:</strong> yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g</li>
-              <li><strong>Pranzo:</strong> pollo/tacchino 180–200 g + pasta 70 g o riso 70–75 g o patate 300–350 g o polenta cotta 300 g + verdure 300 g + olio EVO 10 g o grana/pecorino 20–25 g</li>
-              <li><strong>Merenda:</strong> yogurt greco 200 g + whey 20 g + frutta 200–300 g</li>
-              <li><strong>Cena:</strong> proteina magra 180–200 g + patate 300 g o pasta 60 g o riso 60–65 g o polenta 250–300 g + verdure 300 g + olio EVO 10 g</li>
+              <li>Pasta, riso, noodles e farina per polenta: pesali da crudi/secco.</li>
+              <li>Carne, pollo, tacchino e pesce: meglio pesarli da crudi o da sgocciolati quando sono in scatola.</li>
+              <li>Tonno, sgombro e sardine in scatola: considera sempre il peso sgocciolato.</li>
+              <li>Olio, formaggio, mozzarella e frutta secca vanno pesati sempre.</li>
+              <li>Se usi alimenti più grassi, come tonno all’olio, sgombro, sardine o mozzarella, riduci o togli i 10 g di olio del pasto.</li>
+              <li>La frutta va conteggiata, ma non va evitata.</li>
             </ul>
-          </article>
-          <article class="diet-tool glass compact-diet-card">
-            <p class="mini">Giorno riposo · 1850–1950 kcal</p>
-            <h3>Schema base</h3>
-            <ul class="clean-list">
-              <li><strong>Colazione:</strong> yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g</li>
-              <li><strong>Pranzo:</strong> pollo/tacchino/uova/albumi 180–200 g + pasta 60 g o riso 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g</li>
-              <li><strong>Merenda:</strong> yogurt greco 200 g oppure whey 30 g + frutta 150–250 g</li>
-              <li><strong>Cena:</strong> proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g o pane 50–60 g o polenta 200–250 g + olio EVO 10 g</li>
-            </ul>
-          </article>
-        </div>
+          </details>
 
-        <div class="diet-summary-grid">
-          <article class="diet-tool glass compact-diet-card">
-            <p class="mini">Proteine economiche</p>
-            <h3>Ceci e lenticchie</h3>
-            <p class="muted">Ceci e lenticchie vanno bene, costano meno della carne e possono aiutare la dieta. Però non sono una proteina pura: sono proteine + carboidrati. Quando li usi, riduci pasta, riso, pane o patate nello stesso pasto.</p>
-            <div class="quick-carb-table"><table><tbody>
-              <tr><td>Lenticchie cotte</td><td>180–220 g</td></tr>
-              <tr><td>Ceci cotti</td><td>150–200 g</td></tr>
-              <tr><td>Con 200 g legumi cotti riduci</td><td>pasta/riso 40–60 g oppure pane 60–80 g oppure patate 200–250 g</td></tr>
-              <tr><td>Esempio</td><td>lenticchie 200 g + pollo/tacchino 100–150 g o albumi 200 g + verdure 300 g + olio EVO 10 g + pane max 30–40 g</td></tr>
-            </tbody></table></div>
-          </article>
-          <article class="diet-tool glass compact-diet-card">
-            <p class="mini">Frutta</p>
-            <h3>Alternative stagionali</h3>
-            <div class="quick-carb-table"><table><tbody>
-              <tr><td>Fragole</td><td>300 g</td><td>Albicocche</td><td>250 g</td></tr>
-              <tr><td>Mela/Pera</td><td>180–220 g</td><td>Banana</td><td>100–120 g</td></tr>
-              <tr><td>Uva</td><td>120–150 g</td><td>Kiwi</td><td>200 g</td></tr>
-              <tr><td>Arancia</td><td>200–250 g</td><td>Melone/anguria</td><td>300–400 g</td></tr>
-              <tr><td>Pesca/nettarina</td><td>200–250 g</td><td></td><td></td></tr>
-            </tbody></table></div>
+          <details class="diet-panel" open>
+            <summary><span>🍽️</span><strong>Giornata tipo da circa 2000 kcal</strong></summary>
+            <div class="accordion-grid">
+              <article class="mini-diet-box"><h4>Colazione — opzione A</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>250 g</td></tr><tr><td>Proteine in polvere</td><td>30 g</td></tr><tr><td>Pane integrale/comune</td><td>50 g</td></tr><tr><td>Frutta</td><td>200 g</td></tr></tbody></table></div><p class="muted">Se usi yogurt greco intero: fai 200 g invece di 250 g, oppure togli 5 g di olio più avanti.</p></article>
+              <article class="mini-diet-box"><h4>Colazione alternativa</h4><div class="quick-carb-table"><table><tbody><tr><td>Pane</td><td>70 g</td></tr><tr><td>Uova intere</td><td>2, circa 110–120 g</td></tr><tr><td>Yogurt greco 0–2%</td><td>150 g</td></tr><tr><td>Frutta</td><td>150–200 g</td></tr></tbody></table></div><p class="muted">Questa sostituisce la colazione A: non si aggiunge.</p></article>
+              <article class="mini-diet-box"><h4>Pranzo</h4><div class="quick-carb-table"><table><tbody><tr><td>Proteina principale</td><td>vedi tabella alternative</td></tr><tr><td>Pasta secca</td><td>70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article>
+              <article class="mini-diet-box"><h4>Cena</h4><div class="quick-carb-table"><table><tbody><tr><td>Proteina principale</td><td>vedi alternative proteiche</td></tr><tr><td>Patate</td><td>300 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article>
+            </div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🔁</span><strong>Alternative carboidrati</strong></summary>
+            <div class="accordion-grid">
+              <article class="mini-diet-box"><h4>Alternative ai 70 g di pasta secca</h4><div class="quick-carb-table"><table><tbody><tr><td>Riso secco</td><td>70–75 g</td></tr><tr><td>Riso cotto</td><td>210–230 g</td></tr><tr><td>Patate</td><td>300–350 g</td></tr><tr><td>Polenta cotta</td><td>300 g</td></tr><tr><td>Farina per polenta secca</td><td>65–70 g</td></tr><tr><td>Pane</td><td>90–100 g</td></tr><tr><td>Noodles secchi</td><td>65–70 g</td></tr><tr><td>Noodles cotti</td><td>180–220 g</td></tr></tbody></table></div></article>
+              <article class="mini-diet-box"><h4>Alternative ai 300 g di patate</h4><div class="quick-carb-table"><table><tbody><tr><td>Pasta secca</td><td>60 g</td></tr><tr><td>Riso secco</td><td>60–65 g</td></tr><tr><td>Riso cotto</td><td>180–200 g</td></tr><tr><td>Polenta cotta</td><td>250–300 g</td></tr><tr><td>Pane</td><td>70–80 g</td></tr><tr><td>Noodles secchi</td><td>60 g</td></tr></tbody></table></div></article>
+            </div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🥩</span><strong>Alternative proteiche pranzo/cena</strong></summary>
+            <div class="quick-carb-table"><table><tbody><tr><td>Pollo/tacchino</td><td>180–200 g</td></tr><tr><td>Manzo magro</td><td>150–180 g</td></tr><tr><td>Tonno al naturale</td><td>150–170 g sgocciolato</td></tr><tr><td>Tonno all’olio</td><td>120–140 g sgocciolato; togli olio del pasto</td></tr><tr><td>Merluzzo/nasello surgelato</td><td>230–280 g</td></tr><tr><td>Sgombro o sardine</td><td>120–160 g sgocciolati; togli olio del pasto</td></tr><tr><td>Uova + albumi</td><td>2 uova intere + 200 g albumi</td></tr><tr><td>Macinato magro per polpette</td><td>180 g</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🥛</span><strong>Latticini: come inserirli</strong></summary>
+            <p class="muted">I latticini possono aiutare, ma non tutti sono equivalenti. Yogurt greco, fiocchi di latte e mozzarella light sono più utili. Formaggi stagionati, ricotta normale e mozzarella non light hanno più calorie: usali con porzioni più controllate.</p>
+            <div class="quick-carb-table"><table><tbody><tr><td>Mozzarella light</td><td>125 g come parte proteica; 250 g come pasto più proteico</td></tr><tr><td>Fiocchi di latte</td><td>200–250 g</td></tr><tr><td>Yogurt greco 0–2%</td><td>250–300 g</td></tr><tr><td>Ricotta light</td><td>180–220 g; meglio con albumi o tonno</td></tr><tr><td>Grana/pecorino</td><td>20–25 g al posto di 10 g olio</td></tr><tr><td>Mozzarella normale</td><td>100–125 g, ma togli olio e riduci carboidrati</td></tr></tbody></table></div>
+            <ul class="clean-list"><li>125 g mozzarella light da sola spesso non basta come proteina principale: abbinala a 100 g tonno al naturale oppure 150–200 g albumi.</li><li>Se usi 250 g mozzarella light, togli l’olio del pasto e valuta di ridurre pane/pasta/riso se le calorie del prodotto sono alte.</li><li>Se usi mozzarella normale, considerala più come grasso + proteine, non come proteina magra.</li></ul>
+            <h4>Esempio pranzo con mozzarella light</h4><div class="quick-carb-table"><table><tbody><tr><td>Mozzarella light</td><td>125 g</td></tr><tr><td>Tonno al naturale</td><td>100 g sgocciolato</td></tr><tr><td>Pane</td><td>60–70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>0–5 g</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🐟</span><strong>Pesce economico e tonno</strong></summary>
+            <p class="muted">Il tonno in scatola si può inserire, soprattutto al naturale. Non renderlo però l’unica fonte proteica tutti i giorni: ruotalo con pollo, uova, latticini, legumi e altri pesci.</p>
+            <div class="quick-carb-table"><table><tbody><tr><td>Tonno al naturale</td><td>150–170 g sgocciolato; pratico e magro</td></tr><tr><td>Tonno all’olio</td><td>120–140 g sgocciolato; togli 10 g olio</td></tr><tr><td>Merluzzo/nasello surgelato</td><td>230–280 g; economico e molto leggero</td></tr><tr><td>Sgombro in scatola</td><td>120–160 g; più grasso, saziante</td></tr><tr><td>Sardine in scatola</td><td>120–160 g; più grasse, togli olio</td></tr><tr><td>Salmone</td><td>150 g; ok se in offerta, più calorico</td></tr></tbody></table></div>
+            <div class="accordion-grid"><article class="mini-diet-box"><h4>Cena pesce economico</h4><div class="quick-carb-table"><table><tbody><tr><td>Merluzzo o nasello</td><td>250 g</td></tr><tr><td>Patate</td><td>300 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article><article class="mini-diet-box"><h4>Cena sgombro/sardine</h4><div class="quick-carb-table"><table><tbody><tr><td>Sgombro o sardine</td><td>140 g sgocciolati</td></tr><tr><td>Pane o patate</td><td>50–60 g pane oppure 200–250 g patate</td></tr><tr><td>Verdure</td><td>300–400 g</td></tr><tr><td>Olio EVO</td><td>0 g</td></tr></tbody></table></div></article></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🌱</span><strong>Burger vegetariani e legumi</strong></summary>
+            <p class="muted">I burger vegetariani possono andare bene, ma devi guardare l’etichetta: alcuni sono proteici, altri sono soprattutto patate, pane, formaggio o olio. Non tutti valgono come proteina principale.</p>
+            <div class="quick-carb-table"><table><tbody><tr><td>Burger veg proteico</td><td>150–200 g; cerca almeno 20 g proteine totali</td></tr><tr><td>Burger soia/seitan/pisello</td><td>spesso migliore come proteina</td></tr><tr><td>Burger verdure/patate</td><td>non è proteina; conta come carbo + grassi</td></tr><tr><td>Tofu compatto</td><td>180–220 g; meglio con verdure e carbo controllati</td></tr><tr><td>Legumi cotti</td><td>ceci 150–200 g; lenticchie 180–220 g</td></tr></tbody></table></div>
+            <ul class="clean-list"><li>Scegli prodotti con almeno 15–20 g di proteine per porzione e calorie non troppo alte.</li><li>Se il burger ha molti grassi, togli i 10 g di olio del pasto.</li><li>Se il burger ha molti carboidrati, riduci pasta/riso/pane nello stesso pasto.</li><li>Se il burger è di sole verdure/patate, usalo come contorno/carboidrato, non come proteina principale.</li></ul>
+            <h4>Esempio pasto con burger vegetale</h4><div class="quick-carb-table"><table><tbody><tr><td>Burger vegetariano proteico</td><td>160–200 g</td></tr><tr><td>Pane</td><td>50–70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>0–5 g, in base al burger</td></tr></tbody></table></div>
+            <h4>Ceci e lenticchie</h4><p class="muted">Ceci e lenticchie sono economici e utili, ma sono proteine + carboidrati. Quando li usi, riduci pasta, riso, pane o patate nello stesso pasto.</p><div class="quick-carb-table"><table><tbody><tr><td>Se usi 200 g legumi cotti</td><td>riduci circa</td></tr><tr><td>Pasta/riso secco</td><td>40–60 g</td></tr><tr><td>Pane</td><td>60–80 g</td></tr><tr><td>Patate</td><td>200–250 g</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🍓</span><strong>Merenda e frutta</strong></summary>
+            <div class="accordion-grid"><article class="mini-diet-box"><h4>Merenda base</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>200 g</td></tr><tr><td>Proteine in polvere</td><td>20 g</td></tr><tr><td>Frutta</td><td>200–300 g</td></tr></tbody></table></div></article><article class="mini-diet-box"><h4>Alternative merenda</h4><div class="quick-carb-table"><table><tbody><tr><td>Fiocchi di latte</td><td>200 g + frutta 150–200 g</td></tr><tr><td>Yogurt greco</td><td>250 g + frutta 200 g</td></tr><tr><td>Mozzarella light</td><td>125 g + frutta 150 g</td></tr><tr><td>Whey in acqua</td><td>30 g + frutta 200 g</td></tr></tbody></table></div></article></div>
+            <h4>Frutta: alternative stagionali</h4><div class="quick-carb-table"><table><tbody><tr><td>Fragole</td><td>300 g</td></tr><tr><td>Albicocche</td><td>250 g</td></tr><tr><td>Mela/pera</td><td>180–220 g</td></tr><tr><td>Banana</td><td>100–120 g</td></tr><tr><td>Uva</td><td>120–150 g</td></tr><tr><td>Kiwi</td><td>200 g</td></tr><tr><td>Arancia</td><td>200–250 g</td></tr><tr><td>Melone/anguria</td><td>300–400 g</td></tr><tr><td>Pesca/nettarina</td><td>200–250 g</td></tr></tbody></table></div>
             <p class="muted">La frutta va conteggiata, ma non va evitata. Fragole, melone e anguria hanno molto volume per poche calorie. Banana e uva sono buone ma più caloriche, quindi meglio pesarle.</p>
-          </article>
-        </div>
+          </details>
 
-        <div class="diet-tool glass compact-diet-card">
-          <p class="mini">Regolazione</p>
-          <h3>Come regolare le calorie</h3>
-          <p class="muted">Parti da 2000 kcal. Pesati ogni mattina e guarda la media settimanale, non il peso del singolo giorno.</p>
-          <ul class="clean-list rules-list">
-            <li>Se perdi 0,4–0,8 kg/settimana: resta a 2000 kcal</li>
-            <li>Se perdi più di 1 kg/settimana e ti senti scarico: sali a 2100 kcal</li>
-            <li>Se non perdi per 2 settimane: scendi a 1900 kcal</li>
-            <li>Se sei ancora bloccato dopo altre 2 settimane: 1800 kcal temporanee</li>
-            <li>Se i carichi crollano: probabilmente stai tagliando troppo</li>
-            <li>Se i carichi salgono ma il girovita non scende: probabilmente le calorie sono troppo alte</li>
-          </ul>
+          <details class="diet-panel">
+            <summary><span>⚡</span><strong>Cena veloce e prima di dormire</strong></summary>
+            <h4>Pasti pronti/combinazioni veloci</h4><div class="quick-carb-table"><table><tbody><tr><td>Tonno naturale + patate</td><td>160 g tonno + 300 g patate + verdure + 10 g olio</td></tr><tr><td>Mozzarella light + tonno</td><td>125 g mozzarella + 100 g tonno + 60 g pane + verdure</td></tr><tr><td>Burger veg proteico</td><td>160–200 g burger + 50–70 g pane + verdure</td></tr><tr><td>Nasello surgelato</td><td>250 g nasello + 300 g patate + verdure + 10 g olio</td></tr><tr><td>Fiocchi di latte salati</td><td>250 g fiocchi + 80 g pane + verdure</td></tr></tbody></table></div>
+            <h4>Prima di dormire — solo se hai fame</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>150 g</td></tr><tr><td>Fiocchi di latte</td><td>150 g</td></tr><tr><td>Albumi</td><td>200 g</td></tr><tr><td>Proteine in polvere in acqua</td><td>20 g</td></tr><tr><td>Mozzarella light</td><td>80–100 g, se rientra nelle calorie</td></tr></tbody></table></div>
+            <p class="muted">Per inserirlo senza salire troppo con le calorie, togli una di queste cose dalla giornata:</p><div class="quick-carb-table"><table><tbody><tr><td>Pane</td><td>30–40 g</td></tr><tr><td>Pasta secca</td><td>25–30 g</td></tr><tr><td>Riso secco</td><td>25–30 g</td></tr><tr><td>Olio</td><td>10 g</td></tr><tr><td>Frutta</td><td>200–300 g, a seconda del frutto</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel" open>
+            <summary><span>📉</span><strong>Come passare a 1800 kcal + controllo progressi</strong></summary>
+            <p class="muted">Mantieni uguale la struttura e togli una di queste opzioni.</p><div class="quick-carb-table"><table><tbody><tr><td>Pasta/riso secco</td><td>30 g in meno nella giornata</td></tr><tr><td>Pane</td><td>70–80 g in meno nella giornata</td></tr><tr><td>Olio</td><td>10 g in meno, se non hai troppa fame</td></tr><tr><td>Mix</td><td>15 g pasta + 30–40 g pane</td></tr></tbody></table></div>
+            <ul class="clean-list"><li>Pesati ogni mattina nelle stesse condizioni e guarda la media settimanale, non il singolo giorno.</li><li>Se perdi circa 0,4–0,8 kg a settimana e ti alleni bene, resta a 2000 kcal.</li><li>Se non scendi per 2 settimane, passa a 1900 kcal.</li><li>Se a 1900 kcal ti blocchi ancora, valuta 1800 kcal per alcune settimane.</li><li>Se cali troppo velocemente, hai fame e peggiori nei carichi, risali leggermente.</li><li>Se usi spesso alimenti più calorici come mozzarella normale, tonno all’olio, sgombro, sardine o burger molto conditi, riduci olio e carboidrati del pasto.</li></ul>
+            <div class="swap-result"><strong>Obiettivo reale:</strong> la pancia non si perde con alimenti speciali: si perde con deficit calorico sostenibile, proteine alte, allenamento progressivo e costanza. Il piano deve essere aggiustato ogni 4 settimane in base alla risposta del corpo.</div>
+          </details>
         </div>
 
         <div class="diet-tool glass">
           <div>
             <p class="mini">Scambia carboidrati</p>
             <h3>Convertitore porzioni</h3>
-            <p class="muted">Valori approssimativi: pesa pasta/riso/noodles a crudo; patate e polenta già cotti, salvo dove indicato.</p>
+            <p class="muted">Valori approssimativi: pesa pasta/riso/noodles/farina per polenta a crudo; riso cotto, noodles cotti, patate e polenta cotta da già pronti.</p>
           </div>
           <div class="swap-form">
             <label>Ho nel piano
@@ -278,11 +297,22 @@
           <div id="quickCarbTable" class="quick-carb-table"></div>
         </div>
 
+        <div class="diet-tool glass compact-diet-card">
+          <p class="mini">Versione semplice del giorno</p>
+          <h3>Nuove opzioni rapide</h3>
+          <ul class="clean-list">
+            <li><strong>Colazione:</strong> yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g.</li>
+            <li><strong>Pranzo:</strong> pollo 180 g oppure tonno naturale 160 g oppure nasello 250 g + pasta 70 g + verdure 300 g + olio 10 g.</li>
+            <li><strong>Merenda:</strong> yogurt greco 200 g + whey 20 g + frutta 200–300 g.</li>
+            <li><strong>Cena:</strong> tacchino/pollo 200 g oppure mozzarella light 125 g + tonno 100 g oppure burger veg proteico 160–200 g + patate 300 g + verdure 300 g + olio 0–10 g.</li>
+          </ul>
+        </div>
+
         <div class="diet-controls">
           <button class="diet-filter active" data-dietfilter="all">Tutti</button>
           <button class="diet-filter" data-dietfilter="week1">Settimana 1</button>
           <button class="diet-filter" data-dietfilter="week2">Settimana 2</button>
-          <button class="diet-filter" data-dietfilter="sweet">Colazioni/merende dolci</button>
+          <button class="diet-filter" data-dietfilter="sweet">Allenamento</button>
         </div>
         <div id="dietList" class="diet-list"></div>
       </section>
@@ -368,6 +398,6 @@
     <div id="guidedContent"></div>
   </dialog>
 
-  <script src="app.js?v=11.1"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>

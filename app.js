@@ -1,4 +1,4 @@
-const VERSION = '11.1';
+const VERSION = '12';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -100,34 +100,35 @@ const extraPlans = [
 ];
 
 const dietPlan = [
-  day(1,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + pasta secca 70 g oppure riso 70–75 g oppure patate 300–350 g + verdure 300 g + olio EVO 10 g o pecorino/grana 20–25 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Pollo/tacchino/manzo magro 180–200 g + patate 300 g oppure pasta 60 g/riso 60–65 g/polenta 250–300 g + verdure 300 g + olio EVO 10 g']),
-  day(2,'Lower A · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + fragole 300 g o mela 200 g','Manzo magro 180 g oppure pollo 200 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
-  day(3,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino/uova+albumi 180–200 g + pasta secca 60 g oppure riso 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g oppure whey 30 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g oppure pane 50–60 g o polenta 200–250 g + olio EVO 10 g']),
-  day(4,'Upper B · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + noodles/pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Uova 2 + albumi 200 g oppure carne magra 180 g + riso 60–65 g o patate 300 g + verdure 300 g']),
-  day(5,'Lower B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + pasta secca 70 g + verdure 300 g + pecorino/grana 20 g','Yogurt greco 200 g + whey 20 g + frutta 200 g','Pollo 180–200 g + polenta cotta 250–300 g o patate 300 g + verdure 300 g + olio EVO 10 g']),
-  day(6,'Upper C · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + banana 100–120 g o fragole 300 g','Manzo magro 180 g oppure pollo 200 g + pasta 60 g oppure polenta cotta 250–300 g + verdure 300 g']),
-  day(7,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino 180–200 g + patate 250–300 g + verdure 300 g + olio EVO 10 g','Whey 30 g oppure yogurt greco 200 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + pane 50–60 g oppure polenta 200–250 g + olio EVO 10 g']),
-  day(8,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Carne magra 180–200 g + riso 60–65 g oppure patate 300 g + verdure 300 g']),
-  day(9,'Lower A · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + riso secco 70–75 g o polenta cotta 300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200 g','Pollo 200 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
-  day(10,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Uova 2 + albumi 200 g oppure pollo 180 g + pasta secca 60 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g o whey 30 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g + olio EVO 10 g']),
-  day(11,'Upper B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + noodles o pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Manzo magro 180 g o pollo 200 g + riso 60–65 g + verdure 300 g']),
-  day(12,'Lower B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + pasta secca 70 g + verdure 300 g + grana/pecorino 20–25 g','Yogurt greco 200 g + whey 20 g + frutta 200 g','Pollo 180–200 g + patate 300 g o polenta cotta 250–300 g + verdure 300 g + olio EVO 10 g']),
-  day(13,'Upper C · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + fragole 300 g o banana 100–120 g','Proteina magra 180–200 g + pasta secca 60 g o polenta 250–300 g + verdure 300 g']),
-  day(14,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino/uova+albumi 180–200 g + riso secco 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g oppure whey 30 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + pane 50–60 g o polenta 200–250 g + olio EVO 10 g'])
+  day(1,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g oppure tonno naturale 150–170 g sgocciolato + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Proteina magra 180–200 g oppure merluzzo/nasello 250 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
+  day(2,'Lower A · circa 2000 kcal',true,['Colazione alternativa: pane 70 g + 2 uova intere + yogurt greco 0–2% 150 g + frutta 150–200 g','Tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Fiocchi di latte 200 g + frutta 150–200 g','Manzo magro 150–180 g + polenta cotta 250–300 g + verdure 300 g + olio EVO 10 g']),
+  day(3,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Uova 2 + albumi 200 g + pasta secca 60 g oppure patate 250–300 g + verdure 300 g + olio EVO 10 g','Whey in acqua 30 g + frutta 200 g','Proteina magra 180–200 g + verdure 300–400 g + pane 50–60 g oppure polenta 200–250 g + olio EVO 10 g']),
+  day(4,'Upper B · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + noodles secchi 65–70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 250 g + frutta 200 g','Mozzarella light 125 g + tonno naturale 100 g sgocciolato + pane 60 g + verdure 300 g + olio EVO 0–5 g']),
+  day(5,'Lower B · circa 2000 kcal',true,['Colazione alternativa: pane 70 g + 2 uova + yogurt greco 150 g + frutta 150–200 g','Macinato magro per polpette 180 g + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + fragole 300 g','Sgombro/sardine 140 g sgocciolati + pane 50–60 g o patate 200–250 g + verdure 300–400 g + olio EVO 0 g']),
+  day(6,'Upper C · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Nasello/merluzzo 250 g + riso secco 70–75 g oppure riso cotto 210–230 g + verdure 300 g + olio EVO 10 g','Mozzarella light 125 g + frutta 150 g','Burger veg proteico 160–200 g + pane 50–70 g + verdure 300 g + olio EVO 0–5 g']),
+  day(7,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino 180–200 g + patate 250–300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g oppure whey 30 g + frutta 150–250 g','Ceci 150–200 g o lenticchie 180–220 g + pollo/tacchino 100–150 g o albumi 200 g + verdure 300 g + olio EVO 10 g + pane max 30–40 g']),
+  day(8,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Tonno naturale 160 g sgocciolato + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Fiocchi di latte 200 g + frutta 150–200 g','Tacchino/pollo 200 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
+  day(9,'Lower A · circa 2000 kcal',true,['Colazione alternativa: pane 70 g + 2 uova + yogurt greco 150 g + frutta 150–200 g','Pollo/tacchino 180–200 g + polenta cotta 300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Tonno all’olio 120–140 g sgocciolato + riso secco 60–65 g + verdure 300 g + olio EVO 0 g']),
+  day(10,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Uova 2 + albumi 200 g + pasta secca 60 g + verdure 300 g + olio EVO 10 g','Whey in acqua 30 g + frutta 200 g','Proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g + olio EVO 10 g']),
+  day(11,'Upper B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Manzo magro 150–180 g + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 250 g + frutta 200 g','Nasello surgelato 250 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
+  day(12,'Lower B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + grana/pecorino 20–25 g al posto dell’olio','Mozzarella light 125 g + frutta 150 g','Fiocchi di latte 250 g + pane 70–80 g + verdure 300 g']),
+  day(13,'Upper C · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo 180 g oppure tonno naturale 160 g + pasta 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Burger veg proteico 160–200 g + patate 300 g oppure pane 50–70 g + verdure 300 g + olio EVO 0–5 g']),
+  day(14,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino 180–200 g + riso secco 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g oppure fiocchi di latte 200 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + pane 50–60 g o polenta 200–250 g + olio EVO 10 g'])
 ];
 function day(n,focus,sweet,meals){ return {n,focus,sweet,meals}; }
 
 const carbs = [
-  {id:'riso-crudo', name:'Riso crudo', kcal:360, note:'peso a crudo'},
-  {id:'pasta-cruda', name:'Pasta cruda', kcal:350, note:'peso a crudo'},
-  {id:'noodles-crudi', name:'Noodles crudi', kcal:360, note:'peso a crudo'},
+  {id:'pasta-cruda', name:'Pasta secca', kcal:350, note:'peso a crudo/secco'},
+  {id:'riso-crudo', name:'Riso secco', kcal:360, note:'peso a crudo/secco'},
+  {id:'riso-cotto', name:'Riso cotto', kcal:130, note:'peso già cotto'},
+  {id:'noodles-crudi', name:'Noodles secchi', kcal:360, note:'peso a crudo/secco'},
+  {id:'noodles-cotti', name:'Noodles cotti', kcal:120, note:'peso già cotto'},
   {id:'pane', name:'Pane', kcal:270, note:'peso pronto'},
   {id:'patate-cotte', name:'Patate cotte/lesse', kcal:85, note:'peso cotto'},
   {id:'polenta-cotta', name:'Polenta cotta', kcal:85, note:'peso cotto'},
-  {id:'farina-polenta', name:'Farina per polenta secca', kcal:360, note:'peso a crudo'},
+  {id:'farina-polenta', name:'Farina per polenta secca', kcal:360, note:'peso a crudo/secco'},
   {id:'avena', name:'Avena', kcal:380, note:'peso a crudo'}
 ];
-
 
 const exerciseImages = {
   'panca-piana-manubri':'assets/panca_piana.png',
@@ -241,7 +242,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=11.1').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=12').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -594,15 +595,34 @@ function renderSwap(){
   $('#swapResult').innerHTML=`<strong>${grams} g di ${from.name}</strong> ≈ <strong>${Math.round(toGrams)} g di ${to.name}</strong><br><span class="muted">Energia stimata: circa ${Math.round(kcal)} kcal. ${from.note} → ${to.note}.</span>`;
 }
 function renderQuickCarbTable(){
-  const rows=[
-    ['Riso crudo 80 g','Pasta cruda 80–85 g','Patate cotte 330–350 g','Polenta cotta 330–350 g','Farina polenta 80 g'],
-    ['Pasta cruda 70 g','Riso crudo 68–72 g','Patate cotte 285–300 g','Polenta cotta 285–300 g','Pane 90 g'],
-    ['Patate cotte 300 g','Pasta cruda 70–75 g','Riso crudo 70 g','Polenta cotta 300 g','Noodles crudi 70 g'],
-    ['Polenta cotta 300 g','Pasta cruda 70–75 g','Riso crudo 70 g','Patate cotte 300 g','Farina polenta 60–65 g secca']
+  const lunchRows=[
+    ['Pasta secca 70 g','base pranzo'],
+    ['Riso secco 70–75 g','equivalente'],
+    ['Riso cotto 210–230 g','equivalente'],
+    ['Patate 300–350 g','equivalente'],
+    ['Polenta cotta 300 g','equivalente'],
+    ['Farina per polenta secca 65–70 g','equivalente'],
+    ['Pane 90–100 g','equivalente'],
+    ['Noodles secchi 65–70 g','equivalente'],
+    ['Noodles cotti 180–220 g','equivalente']
   ];
-  $('#quickCarbTable').innerHTML=`<table><thead><tr><th>Nel piano</th><th colspan="4">Alternative pratiche</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  const dinnerRows=[
+    ['Patate 300 g','base cena'],
+    ['Pasta secca 60 g','alternativa'],
+    ['Riso secco 60–65 g','alternativa'],
+    ['Riso cotto 180–200 g','alternativa'],
+    ['Polenta cotta 250–300 g','alternativa'],
+    ['Pane 70–80 g','alternativa'],
+    ['Noodles secchi 60 g','alternativa']
+  ];
+  $('#quickCarbTable').innerHTML=`
+    <table>
+      <thead><tr><th colspan="2">Alternative ai 70 g di pasta secca — pranzo</th></tr></thead>
+      <tbody>${lunchRows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody>
+      <thead><tr><th colspan="2">Alternative ai 300 g di patate — cena</th></tr></thead>
+      <tbody>${dinnerRows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody>
+    </table>`;
 }
-
 function bindProgress(){
   $('#addMeasure').addEventListener('click',addMeasure);
   $('#addHistory').addEventListener('click',addHistory);
