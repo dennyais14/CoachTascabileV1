@@ -114,3 +114,18 @@ button{cursor:pointer;color:inherit}
   .series-row{align-items:flex-start;flex-direction:column}
   .series-row .series-tracker{justify-content:flex-start}
 }
+
+
+.goal-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.clean-list{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.45}
+.clean-list li{margin:7px 0}
+.volume-grid{grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
+.diet-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.compact-diet-card{align-content:start}
+.compact-diet-card h3{margin:4px 0 8px}
+.compact-diet-card p{line-height:1.45}
+.rules-list li{padding:3px 0}
+@media (max-width:760px){
+  .goal-columns,.diet-summary-grid{grid-template-columns:1fr}
+  .hero-badges{grid-template-columns:repeat(2,1fr);min-width:0}
+}

@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Coach Tascabile v11</title>
+  <title>Coach Tascabile v11.1</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="stylesheet" href="styles.css?v=11" />
+  <link rel="stylesheet" href="styles.css?v=11.1" />
 </head>
 <body>
   <div class="app-shell">
@@ -17,7 +17,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 11 · anteprime immagini negli esercizi + immagini ripristinate</p>
+        <p class="sub">Versione 11.1 · petto + spalle + braccia, deficit sostenibile</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -27,12 +27,13 @@
         <div class="hero-card glass">
           <div class="hero-copy">
             <span class="pill">Obiettivo 15% BF</span>
-            <h2>Fase focus petto con tracking semplificato per serie</h2>
-            <p>La scheda principale resta concentrata su dimagrimento, forza e petto. Avambracci e collo sono ora una scheda extra separata, da fare solo quando vuoi.</p>
+            <h2>Fase petto + spalle + braccia</h2>
+            <p>La scheda principale ora lavora su dimagrimento, forza e sviluppo estetico di petto, spalle, braccia e dorso. Avambracci e collo restano una scheda extra separata e opzionale.</p>
           </div>
           <div class="hero-badges">
             <div class="metric"><span>Giorni</span><strong>5</strong></div>
             <div class="metric"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="metric"><span>Focus</span><strong>Spalle/Braccia</strong></div>
             <div class="metric"><span>Extra</span><strong>Opz.</strong></div>
           </div>
         </div>
@@ -69,12 +70,49 @@
         </div>
 
         <div class="chest-focus-card">
-          <h3>Focus petto — 8 settimane</h3>
-          <p>Petto all’inizio di Upper A e Upper C. Volume diretto controllato: circa 17 serie reali a settimana, senza spingere subito oltre 20 serie.</p>
+          <h3>Focus petto + spalle + braccia — 8 settimane</h3>
+          <p>Petto all’inizio di Upper A e Upper C, ma con dorso, spalle e braccia sufficienti per costruire un fisico più atletico e a V. Volume controllato: petto circa 17 serie settimanali, spalle/dorso ben mantenuti, braccia in crescita graduale.</p>
           <div class="focus-grid">
-            <div class="focus-stat"><span>Volume petto</span><strong>17 serie</strong></div>
-            <div class="focus-stat"><span>Target panca</span><strong>22 kg × 8–12</strong></div>
-            <div class="focus-stat"><span>Extra braccia</span><strong>non obbl.</strong></div>
+            <div class="focus-stat"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="focus-stat"><span>Focus extra</span><strong>Spalle/Braccia</strong></div>
+            <div class="focus-stat"><span>Obiettivo</span><strong>Fisico a V</strong></div>
+          </div>
+        </div>
+
+        <div class="chest-focus-card goal-card">
+          <h3>Obiettivi forza per fisico atletico</h3>
+          <div class="goal-columns">
+            <div>
+              <p class="mini">Target intermedi 12 mesi</p>
+              <ul class="clean-list">
+                <li>Panca manubri: 24 kg/mano × 10–12 reps pulite</li>
+                <li>Push-up: 25–35 ripetizioni pulite</li>
+                <li>Trazioni/pulldown: progressione costante</li>
+                <li>Panca inclinata: migliora gradualmente senza trasformarla in shoulder press</li>
+              </ul>
+            </div>
+            <div>
+              <p class="mini">Target avanzati lungo periodo</p>
+              <ul class="clean-list">
+                <li>Panca bilanciere: 80–90 kg × 8–10 reps</li>
+                <li>Panca manubri: 30–34 kg/mano × 8–10 reps</li>
+                <li>Panca inclinata manubri: 26–32 kg/mano × 8–10 reps</li>
+                <li>Dip: 10–15 ripetizioni pulite</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="chest-focus-card volume-card">
+          <h3>Volume settimanale V11.1</h3>
+          <div class="focus-grid volume-grid">
+            <div class="focus-stat"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="focus-stat"><span>Dorso</span><strong>16 serie</strong></div>
+            <div class="focus-stat"><span>Spalle</span><strong>14–15 serie</strong></div>
+            <div class="focus-stat"><span>Bicipiti</span><strong>6 dirette</strong></div>
+            <div class="focus-stat"><span>Tricipiti</span><strong>9 + spinte</strong></div>
+            <div class="focus-stat"><span>Core</span><strong>9 serie</strong></div>
+            <div class="focus-stat"><span>Gambe</span><strong>mantenimento completo</strong></div>
           </div>
         </div>
 
@@ -153,7 +191,70 @@
             <p class="mini">Alimentazione flessibile</p>
             <h2>Dieta + alternative</h2>
           </div>
-          <p class="muted">Schema indicativo: scegli il giorno, poi usa il convertitore per scambiare riso, pasta, patate, polenta, pane o noodles senza stravolgere le calorie.</p>
+          <p class="muted">Schema indicativo: giorni allenamento circa 2000 kcal, giorni riposo circa 1850–1950 kcal. Proteine 150–170 g/die, grassi 55–70 g/die, carboidrati gestiti con il convertitore.</p>
+        </div>
+
+        <div class="diet-summary-grid">
+          <article class="diet-tool glass compact-diet-card">
+            <p class="mini">Giorno allenamento · circa 2000 kcal</p>
+            <h3>Schema base</h3>
+            <ul class="clean-list">
+              <li><strong>Colazione:</strong> yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g</li>
+              <li><strong>Pranzo:</strong> pollo/tacchino 180–200 g + pasta 70 g o riso 70–75 g o patate 300–350 g o polenta cotta 300 g + verdure 300 g + olio EVO 10 g o grana/pecorino 20–25 g</li>
+              <li><strong>Merenda:</strong> yogurt greco 200 g + whey 20 g + frutta 200–300 g</li>
+              <li><strong>Cena:</strong> proteina magra 180–200 g + patate 300 g o pasta 60 g o riso 60–65 g o polenta 250–300 g + verdure 300 g + olio EVO 10 g</li>
+            </ul>
+          </article>
+          <article class="diet-tool glass compact-diet-card">
+            <p class="mini">Giorno riposo · 1850–1950 kcal</p>
+            <h3>Schema base</h3>
+            <ul class="clean-list">
+              <li><strong>Colazione:</strong> yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g</li>
+              <li><strong>Pranzo:</strong> pollo/tacchino/uova/albumi 180–200 g + pasta 60 g o riso 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g</li>
+              <li><strong>Merenda:</strong> yogurt greco 200 g oppure whey 30 g + frutta 150–250 g</li>
+              <li><strong>Cena:</strong> proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g o pane 50–60 g o polenta 200–250 g + olio EVO 10 g</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="diet-summary-grid">
+          <article class="diet-tool glass compact-diet-card">
+            <p class="mini">Proteine economiche</p>
+            <h3>Ceci e lenticchie</h3>
+            <p class="muted">Ceci e lenticchie vanno bene, costano meno della carne e possono aiutare la dieta. Però non sono una proteina pura: sono proteine + carboidrati. Quando li usi, riduci pasta, riso, pane o patate nello stesso pasto.</p>
+            <div class="quick-carb-table"><table><tbody>
+              <tr><td>Lenticchie cotte</td><td>180–220 g</td></tr>
+              <tr><td>Ceci cotti</td><td>150–200 g</td></tr>
+              <tr><td>Con 200 g legumi cotti riduci</td><td>pasta/riso 40–60 g oppure pane 60–80 g oppure patate 200–250 g</td></tr>
+              <tr><td>Esempio</td><td>lenticchie 200 g + pollo/tacchino 100–150 g o albumi 200 g + verdure 300 g + olio EVO 10 g + pane max 30–40 g</td></tr>
+            </tbody></table></div>
+          </article>
+          <article class="diet-tool glass compact-diet-card">
+            <p class="mini">Frutta</p>
+            <h3>Alternative stagionali</h3>
+            <div class="quick-carb-table"><table><tbody>
+              <tr><td>Fragole</td><td>300 g</td><td>Albicocche</td><td>250 g</td></tr>
+              <tr><td>Mela/Pera</td><td>180–220 g</td><td>Banana</td><td>100–120 g</td></tr>
+              <tr><td>Uva</td><td>120–150 g</td><td>Kiwi</td><td>200 g</td></tr>
+              <tr><td>Arancia</td><td>200–250 g</td><td>Melone/anguria</td><td>300–400 g</td></tr>
+              <tr><td>Pesca/nettarina</td><td>200–250 g</td><td></td><td></td></tr>
+            </tbody></table></div>
+            <p class="muted">La frutta va conteggiata, ma non va evitata. Fragole, melone e anguria hanno molto volume per poche calorie. Banana e uva sono buone ma più caloriche, quindi meglio pesarle.</p>
+          </article>
+        </div>
+
+        <div class="diet-tool glass compact-diet-card">
+          <p class="mini">Regolazione</p>
+          <h3>Come regolare le calorie</h3>
+          <p class="muted">Parti da 2000 kcal. Pesati ogni mattina e guarda la media settimanale, non il peso del singolo giorno.</p>
+          <ul class="clean-list rules-list">
+            <li>Se perdi 0,4–0,8 kg/settimana: resta a 2000 kcal</li>
+            <li>Se perdi più di 1 kg/settimana e ti senti scarico: sali a 2100 kcal</li>
+            <li>Se non perdi per 2 settimane: scendi a 1900 kcal</li>
+            <li>Se sei ancora bloccato dopo altre 2 settimane: 1800 kcal temporanee</li>
+            <li>Se i carichi crollano: probabilmente stai tagliando troppo</li>
+            <li>Se i carichi salgono ma il girovita non scende: probabilmente le calorie sono troppo alte</li>
+          </ul>
         </div>
 
         <div class="diet-tool glass">
@@ -267,6 +368,6 @@
     <div id="guidedContent"></div>
   </dialog>
 
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=11.1"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const VERSION = '11';
+const VERSION = '11.1';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -8,20 +8,20 @@ const STORE = {
 
 const workouts = [
   {
-    id:'upper-a', name:'Upper A — priorità petto pesante', focus:'Petto + schiena controllata', meta:'Petto all’inizio. Dorso ridotto per liberare recupero.',
+    id:'upper-a', name:'Upper A — petto forza + schiena', focus:'Petto forza + schiena', meta:'Petto all’inizio, ma dorso e spalle restano presenti per un fisico atletico e bilanciato.',
     exercises:[
-      ex('panca-piana-manubri','Panca piana manubri','petto','4','8–12','90–120s','16 kg/mano','Scapole addotte e depresse, petto alto, discesa 2–3 sec, fermo leggero in basso.'),
-      ex('push-up','Push-up','petto','3','8–15','75–90s','corpo libero','Fermati con 1–2 reps in riserva. Quando fai 3×15 pulite, aggiungi zaino leggero o una serie.'),
-      ex('croci-cavo-manubri','Croci al cavo o manubri','petto','2','12–20','60–75s','leggero','Allungamento controllato, gomiti morbidi, chiudi senza perdere il petto alto.'),
+      ex('panca-piana-manubri','Panca piana manubri','petto','4','8–12','90–120s','16 kg/mano','Scapole addotte e depresse, petto alto, discesa 2–3 secondi, fermo leggero in basso.'),
+      ex('push-up','Push-up','petto','3','8–15','75–90s','corpo libero','Quando arrivi a 3×15 pulite, aggiungi zaino leggero o aumenta difficoltà.'),
+      ex('croci-cavo-manubri','Croci al cavo o manubri','petto','2','12–20','60–75s','leggero','Allungamento controllato, gomiti morbidi, non usare carico eccessivo.'),
       ex('rematore-manubrio','Rematore manubrio 1 braccio','dorso','3','8–12/lato','90s','18–20 kg','Gomito vicino al fianco, busto stabile, non ruotare per tirare più peso.'),
       ex('trazioni-prone','Trazioni prone / pulldown','dorso','3','6–10','120s','BW o 25–35 kg cavo','Petto verso la barra, scapole attive, ROM pulita prima della zavorra.'),
-      ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Movimento pulito, no slancio. Polso neutro e stop circa a spalle orizzontali.'),
-      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa, non spingere con le spalle.'),
+      ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Movimento pulito, no slancio. Sono importanti per spalle più larghe.'),
+      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','3','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa, non spingere con le spalle.'),
       ex('hanging-knee-raise','Hanging knee raise','core','3','8–15','60s','corpo libero','Bacino in retroversione, evita dondolio e slancio.')
     ]
   },
   {
-    id:'lower-a', name:'Lower A — gambe + core', focus:'Quadricipiti/glutei', meta:'Seduta gambe solida, senza extra collo integrati.',
+    id:'lower-a', name:'Lower A — gambe + core', focus:'Quadricipiti/glutei + core', meta:'Mantenimento serio delle gambe senza renderle il focus estetico principale.',
     exercises:[
       ex('goblet-squat','Goblet squat','gambe','4','10–15','90–120s','24 kg','Discesa controllata 3 sec se il carico è facile, busto alto, ginocchia stabili.'),
       ex('bulgarian-split-squat','Bulgarian split squat','gambe','4','8–12/gamba','90s','8–10 kg/mano','Prima stabilità e profondità, poi carico. Spingi con tutta la pianta del piede.'),
@@ -32,19 +32,20 @@ const workouts = [
     ]
   },
   {
-    id:'upper-b', name:'Upper B — dorso/spalle/braccia', focus:'Schiena + spalle', meta:'Giornata senza volume petto diretto: aiuta recupero e postura.',
+    id:'upper-b', name:'Upper B — dorso/spalle/braccia', focus:'Schiena + spalle + braccia', meta:'Giornata chiave per postura, spalle larghe e fisico a V.',
     exercises:[
       ex('pulldown','Lat machine / pulldown','dorso','4','10–15','90s','25–35 kg cavo','Tira i gomiti verso il basso, non dietro al collo. Petto alto.'),
       ex('rematore-cavo','Rematore al cavo basso','dorso','4','10–15','90s','20–30 kg cavo','Scapole indietro, petto alto, niente slancio lombare.'),
-      ex('shoulder-press','Shoulder press manubri','spalle','4','8–12','90s','9 kg/mano','Chiudi sopra la testa senza iperestendere la schiena.'),
-      ex('face-pull','Face pull','spalle','3','12–20','60s','5–10 kg cavo','Tira verso fronte/occhi, gomiti alti, lento.'),
-      ex('rear-delt-fly','Rear delt fly','spalle','3','12–20','60s','3–5 kg/mano','Braccia quasi tese, scapole stabili, niente slancio.'),
+      ex('shoulder-press','Shoulder press manubri','spalle','3','8–12','90s','9 kg/mano','Chiudi sopra la testa senza iperestendere la schiena. Volume ridotto a 3 serie per recuperare meglio.'),
+      ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Fondamentali per spalle più larghe: leggere, controllate, senza slancio.'),
+      ex('face-pull','Face pull','spalle posteriori','3','12–20','60s','5–10 kg cavo','Tira verso fronte/occhi, gomiti alti, lento.'),
+      ex('rear-delt-fly','Rear delt fly','spalle posteriori','2','12–20','60s','3–5 kg/mano','Braccia quasi tese, scapole stabili, niente slancio.'),
       ex('curl-barra','Curl barra corta/manubri','bicipiti','3','8–12','60–75s','12–18 kg','Polsi neutri, gomiti fermi, evita swing.'),
-      ex('estensioni-tricipiti','Estensioni tricipiti al cavo','tricipiti','2','10–15','60s','leggero/mod.','Controlla la fase eccentrica e non aprire i gomiti.')
+      ex('estensioni-tricipiti','Estensioni tricipiti al cavo','tricipiti','3','10–15','60s','leggero/mod.','Controlla la fase eccentrica e non aprire i gomiti.')
     ]
   },
   {
-    id:'lower-b', name:'Lower B — posterior chain + core', focus:'Femorali/glutei/addome', meta:'Catena posteriore, core e stabilità.',
+    id:'lower-b', name:'Lower B — posterior chain + core', focus:'Femorali/glutei/addome', meta:'Catena posteriore, core e stabilità: mantenimento completo senza spostare il focus estetico dalle upper.',
     exercises:[
       ex('rdl-pesante','Romanian deadlift pesante','posteriori','4','8–12','120s','18–22 kg/mano','Priorità alla tecnica: anche indietro, schiena neutra, peso vicino alle gambe.'),
       ex('hip-thrust','Hip thrust / glute bridge','glutei','4','10–15','90s','24 kg','Pausa 1 sec in alto. Se facile usa zaino o manubrio più stabile.'),
@@ -56,16 +57,16 @@ const workouts = [
     ]
   },
   {
-    id:'upper-c', name:'Upper C — priorità petto alto + volume', focus:'Petto alto + spalle/braccia', meta:'Seconda seduta petto. Volume diretto settimanale totale circa 17 serie.',
+    id:'upper-c', name:'Upper C — petto alto + spalle/braccia', focus:'Petto alto + spalle/braccia', meta:'Seconda seduta petto: mantiene il focus su petto alto ma rinforza anche spalle e braccia.',
     exercises:[
       ex('panca-inclinata','Panca inclinata 30° manubri','petto','4','8–12','90–120s','14–16 kg/mano','Petto alto, scapole stabili, non trasformare in shoulder press.'),
       ex('push-up-rialzati','Push-up piedi rialzati','petto','2','8–15','75–90s','corpo libero','Spingi controllato, busto rigido, fermati prima che la tecnica crolli.'),
-      ex('dip-assistiti','Dip assistiti/controllati','petto','2','6–10','90s','assistiti/BW','Inclinati leggermente avanti, spalle basse, ROM senza fastidio.'),
+      ex('dip-assistiti','Dip assistiti/controllati','petto/tricipiti','2','6–10','90s','assistiti/BW','Inclinati leggermente avanti, spalle basse, ROM senza fastidio.'),
       ex('pulldown-stretto','Pulldown presa stretta','dorso','3','10–12','90s','25–35 kg cavo','Movimento controllato, gomiti verso il basso, petto alto.'),
       ex('rematore-cavo-leggero','Rematore cavo leggero','dorso','2','12–15','75–90s','medio','Solo mantenimento dorso: non trasformarlo in una seduta schiena pesante.'),
       ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Meglio leggere e pulite che pesanti e sporche.'),
-      ex('curl-inclinato','Curl manubri o cavo','bicipiti','2','8–12','60s','moderato','Gomiti stabili, fase negativa controllata.'),
-      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa.')
+      ex('curl-inclinato','Curl manubri o cavo','bicipiti','3','8–12','60s','moderato','Gomiti stabili, fase negativa controllata.'),
+      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','3','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa.')
     ]
   }
 ];
@@ -99,20 +100,20 @@ const extraPlans = [
 ];
 
 const dietPlan = [
-  day(1,'Upper A',true,['Yogurt greco 250 g + whey 30 g + pane 60 g con eritritolo/cannella','Pasta 75 g + pollo/tacchino 160 g + verdure + pecorino 10 g','Merenda: yogurt 70 g + whey 30 g + uovo cotto/pastorizzato con eritritolo','Riso 80 g crudo oppure alternativa + uova/albumi o carne magra + verdure']),
-  day(2,'Lower A',true,['Crêpe dolce: farina 50 g + albumi 200 g + latte/ acqua + eritritolo','Riso 80 g + manzo magro 150 g o seitan 180 g + verdure','Yogurt greco 200 g + frutta','Patate 300 g + pollo 170 g + verdure + olio 10 g']),
-  day(3,'Recupero',false,['Yogurt greco 250 g + frutta + pane 40–60 g','Pasta 70 g + 2 uova + albumi 150 g + verdure','Whey 30 g + banana o pane 50 g','Polenta cotta 300 g + tacchino 170 g + verdure']),
-  day(4,'Upper B',true,['Pane 80 g + yogurt greco 250 g + cacao amaro/eritritolo','Noodles 75 g crudi + pollo 170 g + verdure saltate','Merenda dolce proteica: yogurt 70 g + whey + uovo cotto/pastorizzato','Riso 80 g + uova/albumi o carne magra + verdure']),
-  day(5,'Lower B',false,['Crêpe dolce proteica oppure yogurt + pane','Pasta 80 g + tacchino 170 g + pecorino 10 g + verdure','Whey 30 g + frutta','Patate 300–350 g + pollo 170–200 g + verdure']),
-  day(6,'Upper C',true,['Yogurt greco 250–300 g + pane 60 g + miele/eritritolo se vuoi dolce','Riso 80 g + pollo 170 g + verdure','Merenda: whey + yogurt oppure uovo cotto/pastorizzato','Pasta 70 g o polenta 300 g + proteina magra + verdure']),
-  day(7,'Recupero',false,['Colazione dolce leggera: yogurt + frutta + pane 40 g','Piatto libero controllato: carbo equivalente + proteina 150–180 g','Yogurt greco 200 g o whey','Cena semplice: patate/polenta + uova/albumi + verdure']),
-  day(8,'Upper A',true,['Yogurt greco 250 g + whey + pane 60 g','Pasta 75 g + pollo 170 g + verdure','Merenda proteica dolce','Riso 80 g o patate 300 g + tacchino/uova + verdure']),
-  day(9,'Lower A',true,['Crêpe dolce proteica','Riso 80 g + carne magra 150–180 g o seitan','Yogurt + frutta','Polenta cotta 300–350 g + pollo/tacchino + verdure']),
-  day(10,'Recupero',false,['Yogurt greco 250 g + pane 50 g','Pasta 70 g + uova/albumi + verdure','Whey 30 g','Patate 300 g + proteina magra']),
-  day(11,'Upper B',true,['Pane 70–80 g + yogurt greco 250 g','Noodles 75 g crudi + pollo/tacchino + verdure','Merenda yogurt+whey oppure uovo cotto/pastorizzato','Riso 80 g + proteina magra + verdure']),
-  day(12,'Lower B',false,['Crêpe dolce o yogurt + pane','Pasta 80 g + tacchino + pecorino 10 g','Whey + frutta','Patate 300–350 g + pollo 170–200 g']),
-  day(13,'Upper C',true,['Yogurt greco + whey + pane','Riso 80 g + pollo 170 g + verdure','Merenda dolce proteica','Polenta 300 g o pasta 70 g + uova/albumi']),
-  day(14,'Recupero',false,['Colazione dolce controllata','Carbo equivalente + proteina + verdure','Yogurt greco o whey','Cena semplice e leggera con patate/polenta/riso equivalente'])
+  day(1,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + pasta secca 70 g oppure riso 70–75 g oppure patate 300–350 g + verdure 300 g + olio EVO 10 g o pecorino/grana 20–25 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Pollo/tacchino/manzo magro 180–200 g + patate 300 g oppure pasta 60 g/riso 60–65 g/polenta 250–300 g + verdure 300 g + olio EVO 10 g']),
+  day(2,'Lower A · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + fragole 300 g o mela 200 g','Manzo magro 180 g oppure pollo 200 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
+  day(3,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino/uova+albumi 180–200 g + pasta secca 60 g oppure riso 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g oppure whey 30 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g oppure pane 50–60 g o polenta 200–250 g + olio EVO 10 g']),
+  day(4,'Upper B · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + noodles/pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Uova 2 + albumi 200 g oppure carne magra 180 g + riso 60–65 g o patate 300 g + verdure 300 g']),
+  day(5,'Lower B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + pasta secca 70 g + verdure 300 g + pecorino/grana 20 g','Yogurt greco 200 g + whey 20 g + frutta 200 g','Pollo 180–200 g + polenta cotta 250–300 g o patate 300 g + verdure 300 g + olio EVO 10 g']),
+  day(6,'Upper C · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + banana 100–120 g o fragole 300 g','Manzo magro 180 g oppure pollo 200 g + pasta 60 g oppure polenta cotta 250–300 g + verdure 300 g']),
+  day(7,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino 180–200 g + patate 250–300 g + verdure 300 g + olio EVO 10 g','Whey 30 g oppure yogurt greco 200 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + pane 50–60 g oppure polenta 200–250 g + olio EVO 10 g']),
+  day(8,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Carne magra 180–200 g + riso 60–65 g oppure patate 300 g + verdure 300 g']),
+  day(9,'Lower A · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + riso secco 70–75 g o polenta cotta 300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200 g','Pollo 200 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
+  day(10,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Uova 2 + albumi 200 g oppure pollo 180 g + pasta secca 60 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g o whey 30 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + patate 200–250 g + olio EVO 10 g']),
+  day(11,'Upper B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + noodles o pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Manzo magro 180 g o pollo 200 g + riso 60–65 g + verdure 300 g']),
+  day(12,'Lower B · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Tacchino 180–200 g + pasta secca 70 g + verdure 300 g + grana/pecorino 20–25 g','Yogurt greco 200 g + whey 20 g + frutta 200 g','Pollo 180–200 g + patate 300 g o polenta cotta 250–300 g + verdure 300 g + olio EVO 10 g']),
+  day(13,'Upper C · circa 2000 kcal',true,['Yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + fragole 300 g o banana 100–120 g','Proteina magra 180–200 g + pasta secca 60 g o polenta 250–300 g + verdure 300 g']),
+  day(14,'Riposo · 1850–1950 kcal',false,['Yogurt greco 250 g + whey 30 g + pane 40 g + frutta 200 g','Pollo/tacchino/uova+albumi 180–200 g + riso secco 60 g o patate 250–300 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g oppure whey 30 g + frutta 150–250 g','Proteina magra 180–200 g + verdure 300–400 g + pane 50–60 g o polenta 200–250 g + olio EVO 10 g'])
 ];
 function day(n,focus,sweet,meals){ return {n,focus,sweet,meals}; }
 
@@ -240,7 +241,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=11').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=11.1').catch(()=>{}); }
 }
 
 function bindNavigation(){
