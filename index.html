@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
-  <title>Coach Tascabile</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css?v=7.1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Coach Tascabile v9</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <div class="app-shell">
@@ -14,7 +17,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 7.1 · tracking serie e reps</p>
+        <p class="sub">Versione 9 · serie guidate, dieta flessibile, extra opzionali</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -24,13 +27,13 @@
         <div class="hero-card glass">
           <div class="hero-copy">
             <span class="pill">Obiettivo 15% BF</span>
-            <h2>Scheda aggiornata con recupero, dettagli e tracking ripetizioni</h2>
-            <p>Segui la scheda, apri i dettagli, avvia i recuperi e segna ogni serie con ruote a spicchi.</p>
+            <h2>Fase focus petto con tracking semplificato per serie</h2>
+            <p>La scheda principale resta concentrata su dimagrimento, forza e petto. Avambracci e collo sono ora una scheda extra separata, da fare solo quando vuoi.</p>
           </div>
           <div class="hero-badges">
             <div class="metric"><span>Giorni</span><strong>5</strong></div>
-            <div class="metric"><span>Esercizi</span><strong id="metricExercises">39</strong></div>
-            <div class="metric"><span>Metodo</span><strong>DP+</strong></div>
+            <div class="metric"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="metric"><span>Extra</span><strong>Opz.</strong></div>
           </div>
         </div>
 
@@ -39,97 +42,107 @@
             <p class="mini">Allenamento del giorno</p>
             <h3 id="todayTitle">Upper A</h3>
           </div>
-          <select id="dayPicker"></select>
+          <select id="dayPicker" aria-label="Seleziona giornata"></select>
         </div>
 
         <div class="quick-row">
           <button class="quick-card quick-nav" data-targettab="workouts">
             <span class="quick-icon">🏋️</span>
-            <span class="quick-title">Vai alla scheda</span>
-            <span class="quick-sub">Piano base + extra</span>
+            <span class="quick-title">Scheda</span>
+            <span class="quick-sub">5 giorni base</span>
           </button>
-          <button class="quick-card quick-nav" data-targettab="exercises">
-            <span class="quick-icon">🧠</span>
-            <span class="quick-title">Tecnica</span>
-            <span class="quick-sub">Esercizi illustrati e guide</span>
-          </button>
-          <button class="quick-card quick-nav" data-targettab="timer">
-            <span class="quick-icon">⏱️</span>
-            <span class="quick-title">Timer</span>
-            <span class="quick-sub">Recuperi rapidi</span>
+          <button class="quick-card quick-nav" data-targettab="extra">
+            <span class="quick-icon">🧩</span>
+            <span class="quick-title">Extra</span>
+            <span class="quick-sub">Avambracci/collo opz.</span>
           </button>
           <button class="quick-card quick-nav" data-targettab="diet">
             <span class="quick-icon">🍽️</span>
             <span class="quick-title">Dieta</span>
-            <span class="quick-sub">14 giorni</span>
+            <span class="quick-sub">Alternative grammi</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="timer">
+            <span class="quick-icon">⏱️</span>
+            <span class="quick-title">Timer</span>
+            <span class="quick-sub">Recupero + suono</span>
           </button>
         </div>
 
-        <div id="todayWorkout" class="today-list"></div>
-
-        <div class="tips-grid">
-          <div class="info-card soft">
-            <h4>Regole rapide</h4>
-            <ul>
-              <li>Multiarticolari: 90–120 sec.</li>
-              <li>Isolamento/addome: 45–75 sec.</li>
-              <li>Lascia 1–2 reps in riserva.</li><li>Extra collo/avambracci: 2 volte a settimana.</li>
-              <li>Aumenta il carico solo con tecnica pulita.</li>
-            </ul>
-          </div>
-          <div class="info-card soft">
-            <h4>Doppia progressione</h4>
-            <ol>
-              <li>Parti dal peso iniziale.</li>
-              <li>Aumenta le ripetizioni.</li>
-              <li>Raggiungi il tetto del range.</li>
-              <li>Alza il carico e riparti dal range basso.</li><li>Se hai poco tempo, fai gli extra come finisher da 8–12 min.</li>
-            </ol>
+        <div class="chest-focus-card">
+          <h3>Focus petto — 8 settimane</h3>
+          <p>Petto all’inizio di Upper A e Upper C. Volume diretto controllato: circa 17 serie reali a settimana, senza spingere subito oltre 20 serie.</p>
+          <div class="focus-grid">
+            <div class="focus-stat"><span>Volume petto</span><strong>17 serie</strong></div>
+            <div class="focus-stat"><span>Target panca</span><strong>22 kg × 8–12</strong></div>
+            <div class="focus-stat"><span>Extra braccia</span><strong>non obbl.</strong></div>
           </div>
         </div>
+
+        <div id="todayWorkout" class="today-list"></div>
       </section>
 
       <section id="tab-workouts" class="tab">
         <div class="section-head stacked">
           <div>
-            <p class="mini">Programma</p>
+            <p class="mini">Programma principale</p>
             <h2>Scheda settimanale</h2>
           </div>
-          <p class="muted">Ogni card mostra serie, ripetizioni, recupero e accesso alla guida tecnica.</p>
+          <p class="muted">Ogni esercizio ha Dettagli, Recupero, Segna e Serie guidata. Il tracker ora conta le serie completate, non le singole ripetizioni.</p>
         </div>
         <div id="workoutDays"></div>
+      </section>
+
+      <section id="tab-extra" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Scheda separata</p>
+            <h2>Extra avambracci e collo</h2>
+          </div>
+          <p class="muted">Non è urgente: falla solo se hai tempo, recuperi bene e non senti la zona braccio/avambraccio già troppo carica.</p>
+        </div>
+        <div class="warning-card">
+          <h3>Regola pratica</h3>
+          <p>Per ora tieni gli extra leggeri: massimo 1 volta a settimana, 10–18 minuti. Evita farmer hold pesanti, hammer curl pesanti e reverse curl pesanti se vuoi evitare di aumentare ancora il volume visivo dell’avambraccio.</p>
+        </div>
+        <div id="extraPlans" class="extra-grid"></div>
       </section>
 
       <section id="tab-exercises" class="tab">
         <div class="section-head stacked">
           <div>
-            <p class="mini">Libreria</p>
-            <h2>Esercizi illustrati e guide</h2>
+            <p class="mini">Libreria tecnica</p>
+            <h2>Esercizi e guide</h2>
           </div>
-          <p class="muted">Cerca per nome e apri la scheda completa. In alto trovi anche le guide riassuntive per avambracci e collo.</p>
+          <p class="muted">Cerca un esercizio e apri la guida tecnica con immagine schematica, note e errori da evitare.</p>
         </div>
         <div class="search-wrap">
-          <input id="searchExercises" class="search" type="search" placeholder="Cerca un esercizio...">
+          <input id="searchExercises" class="search" type="search" placeholder="Cerca panca, push-up, squat..." />
         </div>
-        <div id="guideHighlights" class="library-grid"></div><div id="exerciseLibrary" class="library-grid"></div>
+        <div id="exerciseLibrary" class="library-grid"></div>
       </section>
 
       <section id="tab-timer" class="tab">
         <div class="timer-screen glass">
           <p class="mini center">Timer recupero</p>
-          <h2 class="center">Recupero</h2>
+          <h2 id="timerTitle" class="center">Recupero</h2>
           <div class="timer-ring"><div id="timerDisplay">01:30</div></div>
+          <p id="timerHint" class="timer-hint">Scegli il recupero e premi Avvia. Con schermo bloccato il browser può sospendere l’app: usa “Tieni schermo acceso” quando disponibile.</p>
           <div class="timer-presets">
-            <button class="preset" data-seconds="45">45</button>
-            <button class="preset" data-seconds="60">60</button>
-            <button class="preset active" data-seconds="90">90</button>
-            <button class="preset" data-seconds="120">120</button>
-            <button class="preset" data-seconds="180">180</button>
+            <button class="preset" data-seconds="45">45s</button>
+            <button class="preset" data-seconds="60">60s</button>
+            <button class="preset active" data-seconds="90">90s</button>
+            <button class="preset" data-seconds="120">120s</button>
+            <button class="preset" data-seconds="180">180s</button>
           </div>
           <div class="timer-actions">
             <button id="startTimer">Avvia</button>
             <button id="pauseTimer" class="secondary">Pausa</button>
             <button id="resetTimer" class="secondary">Reset</button>
+          </div>
+          <div class="timer-options">
+            <button id="wakeLockBtn" class="ghost small">Tieni schermo acceso</button>
+            <button id="soundTestBtn" class="ghost small">Prova suono</button>
+            <button id="notifyBtn" class="ghost small">Notifiche</button>
           </div>
         </div>
       </section>
@@ -137,15 +150,38 @@
       <section id="tab-diet" class="tab">
         <div class="section-head stacked">
           <div>
-            <p class="mini">Alimentazione</p>
-            <h2>Dieta 14 giorni</h2>
+            <p class="mini">Alimentazione flessibile</p>
+            <h2>Dieta + alternative</h2>
           </div>
-          <p class="muted">Schema pratico orientativo: proteine alte, carboidrati controllati, legumi inclusi, poca carne e niente pesce obbligatorio.</p>
+          <p class="muted">Schema indicativo: scegli il giorno, poi usa il convertitore per scambiare riso, pasta, patate, polenta, pane o noodles senza stravolgere le calorie.</p>
         </div>
+
+        <div class="diet-tool glass">
+          <div>
+            <p class="mini">Scambia carboidrati</p>
+            <h3>Convertitore porzioni</h3>
+            <p class="muted">Valori approssimativi: pesa pasta/riso/noodles a crudo; patate e polenta già cotti, salvo dove indicato.</p>
+          </div>
+          <div class="swap-form">
+            <label>Ho nel piano
+              <select id="swapFrom"></select>
+            </label>
+            <label>Grammi
+              <input id="swapGrams" type="number" min="1" step="1" value="80" />
+            </label>
+            <label>Voglio mangiare
+              <select id="swapTo"></select>
+            </label>
+          </div>
+          <div id="swapResult" class="swap-result"></div>
+          <div id="quickCarbTable" class="quick-carb-table"></div>
+        </div>
+
         <div class="diet-controls">
           <button class="diet-filter active" data-dietfilter="all">Tutti</button>
           <button class="diet-filter" data-dietfilter="week1">Settimana 1</button>
           <button class="diet-filter" data-dietfilter="week2">Settimana 2</button>
+          <button class="diet-filter" data-dietfilter="sweet">Colazioni/merende dolci</button>
         </div>
         <div id="dietList" class="diet-list"></div>
       </section>
@@ -156,15 +192,15 @@
             <p class="mini">Diario</p>
             <h2>Progressi</h2>
           </div>
-          <p class="muted">Carichi, progressione automatica, misure corporee e cronologia allenamenti.</p>
+          <p class="muted">Carichi, misure corporee, cronologia allenamenti e serie completate.</p>
         </div>
 
         <div class="dashboard-grid">
           <div class="info-card soft">
             <h4>Misure corporee</h4>
             <div class="measure-form">
-              <input id="measureWeight" type="number" step="0.1" placeholder="Peso kg">
-              <input id="measureWaist" type="number" step="0.1" placeholder="Girovita cm">
+              <input id="measureWeight" type="number" step="0.1" placeholder="Peso kg" />
+              <input id="measureWaist" type="number" step="0.1" placeholder="Girovita cm" />
               <button id="addMeasure">Aggiungi</button>
             </div>
             <canvas id="measureChart" height="170"></canvas>
@@ -175,7 +211,7 @@
             <h4>Cronologia allenamenti</h4>
             <div class="history-form">
               <select id="historyDay"></select>
-              <input id="historyNotes" type="text" placeholder="Note: energia, carichi, fatica...">
+              <input id="historyNotes" type="text" placeholder="Note: energia, carichi, fatica..." />
               <button id="addHistory">Registra allenamento</button>
             </div>
             <div id="historyList" class="mini-list"></div>
@@ -188,17 +224,18 @@
               <p class="mini">Carichi</p>
               <h3>Progressione esercizi</h3>
             </div>
-            <p class="muted">Spunta “range alto completato” quando hai chiuso tutte le serie al limite alto con tecnica pulita.</p>
+            <p class="muted">Quando completi tutte le serie al limite alto del range con tecnica pulita, valuta un piccolo aumento.</p>
           </div>
           <div id="progressTable"></div>
         </div>
-        <button id="resetProgress" class="danger full">Azzera carichi salvati</button>
+        <button id="resetProgress" class="danger full">Azzera dati locali</button>
       </section>
     </main>
 
     <nav class="bottom-nav glass">
       <button class="nav-btn active" data-tab="home"><span>🏠</span><small>Home</small></button>
       <button class="nav-btn" data-tab="workouts"><span>📋</span><small>Scheda</small></button>
+      <button class="nav-btn" data-tab="extra"><span>🧩</span><small>Extra</small></button>
       <button class="nav-btn" data-tab="exercises"><span>🖼️</span><small>Esercizi</small></button>
       <button class="nav-btn" data-tab="timer"><span>⏱️</span><small>Timer</small></button>
       <button class="nav-btn" data-tab="diet"><span>🍽️</span><small>Dieta</small></button>
@@ -218,6 +255,18 @@
     <div id="modalContent"></div>
   </dialog>
 
-  <script src="app.js?v=7.1"></script>
+  <dialog id="guidedModal" class="sheet-modal guided-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-top">
+      <div>
+        <p class="mini" id="guidedEyebrow">Serie guidata</p>
+        <h3 id="guidedTitle"></h3>
+      </div>
+      <button id="closeGuided" class="icon-btn">✕</button>
+    </div>
+    <div id="guidedContent"></div>
+  </dialog>
+
+  <script src="app.js?v=9"></script>
 </body>
 </html>

@@ -1,301 +1,562 @@
-const exercises = {
-  pullup:{name:'Trazioni presa prona', short:'Trazioni', image:'assets/trazioni.png', setup:'Scapole attive, addome contratto, gambe ferme.', grip:'Presa prona, poco più larga delle spalle.', concentric:'Tira il petto verso la sbarra e porta il mento sopra la barra.', eccentric:'Scendi lentamente fino a quasi distendere i gomiti mantenendo controllo.', startWeight:'Corpo libero', rest:'120 sec', tip:'Se chiudi 4x10 con controllo, prova micro-progressioni o fermo in alto.'},
-  dbBench:{name:'Panca piana con manubri', short:'Panca piana', image:'assets/panca_piana.png', setup:'Scapole addotte, petto alto, piedi ben piantati.', grip:'Presa neutra o semi-pronata, polsi dritti.', concentric:'Spingi i manubri verso l’alto.', eccentric:'Scendi lentamente fino a sentire allungamento sul petto.', startWeight:'16 kg per mano', rest:'90 sec', tip:'Se arrivi a 4x12 pulito, sali di 1–2 kg per mano.'},
-  row1:{name:'Rematore 1 braccio', short:'Rematore 1 braccio', image:'assets/rematore1.png', setup:'Un ginocchio e una mano sulla panca, schiena neutra.', grip:'Presa neutra.', concentric:'Tira il gomito verso il fianco.', eccentric:'Abbassa il manubrio in controllo fino ad allungare il dorsale.', startWeight:'18 kg', rest:'90 sec'},
-  pushup:{name:'Push-up', short:'Push-up', image:'assets/pushup.png', setup:'Corpo in linea, addome e glutei contratti.', grip:'Mani poco oltre la larghezza delle spalle.', concentric:'Spingi il pavimento e torna su.', eccentric:'Scendi lentamente portando il petto verso il pavimento.', startWeight:'Corpo libero', rest:'75 sec'},
-  lateralRaise:{name:'Alzate laterali', short:'Alzate laterali', image:'assets/alzate_laterali.png', setup:'Busto fermo, spalle basse, addome attivo.', grip:'Presa neutra, gomiti leggermente piegati.', concentric:'Alza le braccia fino circa alla linea delle spalle.', eccentric:'Scendi lentamente senza slancio.', startWeight:'6 kg per mano', rest:'60 sec'},
-  ropePushdown:{name:'Pushdown tricipiti con fune', short:'Pushdown tricipiti', image:'assets/pushdown_tricipiti.png', setup:'Gomiti vicini al busto, petto aperto, spalle basse.', grip:'Presa neutra sulla fune.', concentric:'Spingi la fune verso il basso distendendo i gomiti.', eccentric:'Risali lentamente fino a riportare gli avambracci verso il petto.', startWeight:'12–18 kg sul tuo setup', rest:'60 sec'},
-  kneeRaise:{name:'Hanging knee raise', short:'Knee raise', image:'assets/hanging_knee_raise.png', setup:'Appenditi senza dondolare, scapole attive.', grip:'Presa comoda sulla sbarra.', concentric:'Porta le ginocchia verso il petto arrotolando il bacino.', eccentric:'Distendi lentamente le gambe evitando slancio.', startWeight:'Corpo libero', rest:'60 sec'},
-  gobletSquat:{name:'Goblet squat', short:'Goblet squat', image:'assets/goblet_squat.png', setup:'Piedi poco oltre le spalle, punte leggermente fuori.', grip:'Manubrio stretto al petto.', concentric:'Spingi il pavimento e risali.', eccentric:'Scendi con anche indietro e ginocchia in linea con i piedi.', startWeight:'24 kg', rest:'90 sec'},
-  bulgarian:{name:'Bulgarian split squat', short:'Bulgarian split squat', image:'assets/bulgarian_split_squat.png', setup:'Piede posteriore su panca, busto leggermente inclinato.', grip:'Corpo libero o manubri ai lati.', concentric:'Spingi con il piede anteriore e risali.', eccentric:'Scendi in controllo.', startWeight:'8 kg per mano', rest:'90 sec'},
-  rdl:{name:'Romanian deadlift con manubri', short:'RDL', image:'assets/rdl.png', setup:'Schiena neutra, ginocchia morbide, anche indietro.', grip:'Presa neutra ai lati delle cosce.', concentric:'Spingi le anche avanti e torna in alto.', eccentric:'Scendi facendo hip hinge con i manubri vicino alle gambe.', startWeight:'18 kg per mano', rest:'120 sec'},
-  reverseLunge:{name:'Affondi indietro', short:'Affondi indietro', image:'assets/affondi_indietro.png', setup:'Petto alto, busto stabile.', grip:'Manubri ai lati o corpo libero.', concentric:'Spingi con il piede anteriore e torna in piedi.', eccentric:'Fai un passo indietro e scendi in controllo.', startWeight:'8 kg per mano', rest:'75 sec'},
-  calfRaise:{name:'Calf raise', short:'Calf raise', image:'assets/calf_raise.png', setup:'Appoggio stabile, ginocchia morbide.', grip:'Eventuale manubrio in una mano, sostegno con l’altra.', concentric:'Sali sulle punte con pausa in alto.', eccentric:'Scendi lentamente fino al massimo allungamento.', startWeight:'Corpo libero o 16 kg', rest:'45 sec'},
-  plank:{name:'Plank', short:'Plank', image:'assets/plank.png', setup:'Corpo in linea, addome e glutei attivi.', grip:'Avambracci o mani a terra.', concentric:'Mantieni tensione e respira.', eccentric:'Non cedere con bacino o spalle.', startWeight:'Corpo libero', rest:'45 sec'},
-  pulldown:{name:'Lat machine / Pulldown', short:'Pulldown', image:'assets/lat_machine_pulldown.png', setup:'Petto alto, leggera inclinazione indietro.', grip:'Presa prona o neutra comoda.', concentric:'Tira la barra verso la parte alta del petto.', eccentric:'Rilascia lentamente fino ad allungare il dorsale.', startWeight:'20–30 kg sul tuo setup', rest:'90 sec'},
-  cableRow:{name:'Rematore al cavo basso', short:'Low row', image:'assets/rematore_cavo_basso.png', setup:'Schiena neutra, petto aperto.', grip:'Presa stretta o neutra.', concentric:'Tira il manico verso l’ombelico.', eccentric:'Ritorno controllato in proiezione avanti.', startWeight:'20–30 kg sul tuo setup', rest:'75 sec'},
-  shoulderPress:{name:'Shoulder press', short:'Shoulder press', image:'assets/shoulder_press.png', setup:'Glutei e addome contratti, polsi neutri.', grip:'Presa neutra o leggermente prona.', concentric:'Spingi i manubri sopra la testa.', eccentric:'Scendi lentamente fino all’altezza delle spalle.', startWeight:'9 kg per mano', rest:'90 sec'},
-  facePull:{name:'Face pull', short:'Face pull', image:'assets/face_pull.png', setup:'Petto alto, spalle basse.', grip:'Presa neutra sulla fune.', concentric:'Tira la fune verso il viso aprendo i gomiti.', eccentric:'Ritorna lentamente senza perdere postura.', startWeight:'8–12 kg sul tuo setup', rest:'60 sec'},
-  curl:{name:'Curl con barra corta', short:'Curl barra corta', image:'assets/curl_barra_corta.png', setup:'Gomiti fermi, petto alto.', grip:'Presa supina sulla barra corta.', concentric:'Fletti i gomiti e solleva la barra.', eccentric:'Scendi lentamente fino quasi a distendere le braccia.', startWeight:'10–14 kg totali', rest:'60 sec'},
-  rearDelt:{name:'Rear delt fly', short:'Rear delt fly', image:'assets/rear_delt_fly.png', setup:'Busto inclinato, schiena neutra.', grip:'Presa neutra.', concentric:'Apri le braccia in fuori stringendo dietro le spalle.', eccentric:'Ritorna lentamente alla posizione iniziale.', startWeight:'4–6 kg per mano', rest:'60 sec'},
-  hipThrust:{name:'Hip thrust / Glute bridge', short:'Hip thrust', image:'assets/hip_thrust.png', setup:'Spalle appoggiate, piedi alla larghezza delle anche.', grip:'Eventuale peso sul bacino.', concentric:'Spingi con i talloni e porta il bacino in alto.', eccentric:'Scendi lentamente mantenendo tensione sui glutei.', startWeight:'24 kg', rest:'90 sec'},
-  stepUp:{name:'Step-up su panca', short:'Step-up', image:'assets/step_up_panca.png', setup:'Piede ben appoggiato sulla panca, busto alto.', grip:'Manubri ai lati o corpo libero.', concentric:'Spingi con la gamba sopra la panca e sali.', eccentric:'Scendi lentamente senza lasciarti cadere.', startWeight:'8 kg per mano', rest:'75 sec'},
-  legCurl:{name:'Sliding leg curl', short:'Sliding leg curl', image:'assets/sliding_leg_curl.png', setup:'Supino, talloni su sliders o asciugamani.', grip:'Mani a terra per stabilità.', concentric:'Porta i talloni verso i glutei sollevando il bacino.', eccentric:'Distendi lentamente le gambe senza perdere il ponte.', startWeight:'Corpo libero', rest:'60 sec'},
-  cableCrunch:{name:'Cable crunch', short:'Cable crunch', image:'assets/cable_crunch.png', setup:'In ginocchio al cavo alto, bacino fermo.', grip:'Mani alla fune vicino alla testa.', concentric:'Fletti la colonna portando il torace verso il basso.', eccentric:'Ritorna lentamente all’estensione controllata.', startWeight:'12–18 kg sul tuo setup', rest:'45 sec'},
-  pallof:{name:'Pallof press', short:'Pallof press', image:'assets/pallof_press.png', setup:'In piedi laterale al cavo, addome forte.', grip:'Due mani sulla maniglia.', concentric:'Spingi le mani avanti senza ruotare il busto.', eccentric:'Riporta le mani al petto lentamente.', startWeight:'6–10 kg sul tuo setup', rest:'45 sec'},
-  inclineBench:{name:'Panca inclinata 30° manubri', short:'Panca inclinata', image:'assets/panca_piana.png', setup:'Panca a 30°, scapole addotte, petto alto.', grip:'Presa neutra o semi-pronata.', concentric:'Spingi i manubri verso l’alto.', eccentric:'Scendi lentamente senza perdere assetto.', startWeight:'14 kg per mano', rest:'90 sec'},
-  dips:{name:'Dip alle parallele', short:'Dip', image:'assets/dip.png', setup:'Spalle depresse, petto aperto, busto leggermente avanti.', grip:'Presa neutra sulle parallele.', concentric:'Spingi sulle parallele e distendi i gomiti.', eccentric:'Scendi lentamente finché mantieni il controllo.', startWeight:'Corpo libero / assistito', rest:'90 sec'},
-  hammerCurl:{name:'Hammer curl con manubri', short:'Hammer curl', image:'assets/hammer_curl.png', setup:'In piedi, petto alto, gomiti vicini al busto.', grip:'Presa neutra, pollici verso l’alto.', concentric:'Fletti i gomiti e solleva i manubri senza slancio.', eccentric:'Scendi lentamente fino a quasi distendere le braccia.', startWeight:'8–10 kg per mano', rest:'60 sec', tip:'Ottimo per brachioradiale e presa. Quando chiudi 3x12, aumenta di 1–2 kg.'},
-  wristCurl:{name:'Wrist curl seduto', short:'Wrist curl', image:'assets/wrist_curl.png', setup:'Avambracci ben appoggiati, muovi solo i polsi.', grip:'Presa supina con manubri leggeri.', concentric:'Chiudi i polsi verso l’alto.', eccentric:'Riporta lentamente i polsi in basso.', startWeight:'4–6 kg per mano', rest:'45 sec', tip:'Movimento piccolo e controllato, niente slancio.'},
-  reverseWristCurl:{name:'Reverse wrist curl', short:'Reverse wrist curl', image:'assets/reverse_wrist_curl.png', setup:'Avambracci appoggiati, gomiti stabili.', grip:'Presa prona con carico leggero.', concentric:'Estendi i polsi verso l’alto.', eccentric:'Scendi lentamente in controllo.', startWeight:'2–4 kg per mano', rest:'45 sec', tip:'Usa carichi leggeri: la qualità conta più del peso.'},
-  farmerHold:{name:'Farmer hold', short:'Farmer hold', image:'assets/farmer_hold.png', setup:'In piedi, petto alto, scapole basse, addome attivo.', grip:'Presa neutra forte sui manubri.', concentric:'Solleva i manubri e mantieni la posizione stringendo forte.', eccentric:'Abbassa i manubri in controllo.', startWeight:'18–24 kg per mano', rest:'60 sec', tip:'Se la presa cede troppo presto, spezza in blocchi da 20–30 sec e costruisci da lì.'},
-  reverseCurlBar:{name:'Reverse curl con barra corta', short:'Reverse curl', image:'assets/reverse_curl_bar.png', setup:'In piedi, gomiti vicini al corpo, niente slancio.', grip:'Presa prona sulla barra corta.', concentric:'Fletti i gomiti e porta la barra verso il petto.', eccentric:'Scendi lentamente fino quasi a distendere le braccia.', startWeight:'8–12 kg totali', rest:'60 sec', tip:'Tieni i polsi stabili: il focus è su avambraccio e brachioradiale.'},
-  pronationSupination:{name:'Prono-supinazione con manubrio', short:'Prono-supinazione', image:'assets/prono_supinazione.png', setup:'Gomito a 90°, vicino al busto, movimento lento.', grip:'Manubrio leggero tenuto da un’estremità.', concentric:'Ruota l’avambraccio fino a portare il palmo in su.', eccentric:'Torna lentamente al palmo in giù.', startWeight:'2–4 kg', rest:'45 sec', tip:'Lavora soprattutto in controllo: è un esercizio di qualità e stabilità.'},
-  deadHang:{name:'Dead hang alla sbarra', short:'Dead hang', image:'assets/dead_hang.png', setup:'Appenditi con scapole attive e addome contratto.', grip:'Presa comoda sulla sbarra.', concentric:'Porta il corpo in sospensione attiva e mantieni la presa.', eccentric:'Termina la tenuta e scendi in controllo.', startWeight:'Corpo libero', rest:'60 sec', tip:'Non andare sempre al cedimento: lascia 5–10 sec di margine nelle prime settimane.'},
-  fingerExtensions:{name:'Estensioni dita con elastico', short:'Estensioni dita', image:'assets/finger_extensions.png', setup:'Polso neutro, dita raccolte dentro l’elastico.', grip:'Elastico leggero attorno alle dita.', concentric:'Apri le dita contro la resistenza dell’elastico.', eccentric:'Ritorna lentamente alla chiusura.', startWeight:'Elastico leggero', rest:'30–45 sec', tip:'Ottimo per bilanciare tutto il lavoro di presa.'},
-  chinTuck:{name:'Chin tuck', short:'Chin tuck', image:'assets/chin_tuck.png', setup:'Colonna lunga, sguardo orizzontale, spalle rilassate.', grip:'Nessuna impugnatura.', concentric:'Porta delicatamente il mento indietro senza guardare in basso.', eccentric:'Torna lentamente alla posizione neutra.', startWeight:'Corpo libero', rest:'30 sec', tip:'È un movimento piccolo: pensa a fare un “doppio mento” leggero e controllato.'},
-  neckIsoFront:{name:'Isometria frontale del collo', short:'Iso collo frontale', image:'assets/neck_iso_front.png', setup:'Collo neutro, spalle basse, addome attivo.', grip:'Mano appoggiata sulla fronte.', concentric:'Spingi la testa in avanti contro la mano senza muoverti.', eccentric:'Rilascia lentamente la pressione.', startWeight:'30–60% della tua forza', rest:'30 sec', tip:'Deve essere una pressione moderata, non massimale.'},
-  neckIsoRear:{name:'Isometria posteriore del collo', short:'Iso collo posteriore', image:'assets/neck_iso_rear.png', setup:'Collo neutro, petto alto, spalle rilassate.', grip:'Mani dietro la testa.', concentric:'Spingi la testa indietro contro le mani senza estendere il collo.', eccentric:'Rilascia lentamente la pressione.', startWeight:'30–60% della tua forza', rest:'30 sec', tip:'Mantieni il mento neutro: non iperestendere il collo.'},
-  neckIsoSide:{name:'Isometria laterale del collo', short:'Iso collo laterale', image:'assets/neck_iso_side.png', setup:'Testa dritta, busto fermo.', grip:'Mano sul lato della testa.', concentric:'Spingi la testa contro la mano senza inclinarti.', eccentric:'Rilascia lentamente e ripeti dall’altro lato.', startWeight:'30–60% della tua forza', rest:'30 sec', tip:'Eseguila su entrambi i lati con la stessa durata.'},
-  shrug:{name:'Shrug con manubri', short:'Shrug', image:'assets/shrug.png', setup:'In piedi, petto alto, braccia distese.', grip:'Presa neutra sui manubri.', concentric:'Solleva le spalle verso l’alto e mantieni 1 secondo.', eccentric:'Scendi lentamente senza ruotare le spalle.', startWeight:'18–24 kg per mano', rest:'60 sec', tip:'Pensa a salire dritto verso l’alto, non a fare cerchi con le spalle.'}
+const VERSION = '9';
+const STORE = {
+  sets: 'coach_v9_sets',
+  measures: 'coach_v9_measures',
+  history: 'coach_v9_history',
+  loads: 'coach_v9_loads'
 };
 
-const guideCards = [
-  {id:'guideForearmsA', type:'guide', name:'Guida avambracci A', short:'Hammer curl · Wrist curl · Reverse wrist curl', image:'assets/guida_avambracci_a_full.png', category:'Guida riassuntiva', setup:'Mini routine A per gli avambracci.', grip:'2 volte a settimana, come finisher di 8–12 minuti.', concentric:'Hammer curl 3x10–12, Wrist curl 2–3x15–20, Reverse wrist curl 2–3x15–20.', eccentric:'Chiudi con Farmer hold 3x30–45 secondi.', tip:'Se hai poco tempo, fai Hammer curl + Farmer hold.'},
-  {id:'guideForearmsB', type:'guide', name:'Guida avambracci B', short:'Farmer hold · Reverse curl · Prono-supinazione', image:'assets/guida_avambracci_b_full.png', category:'Guida riassuntiva', setup:'Mini routine B per gli avambracci.', grip:'2 volte a settimana, in un giorno upper diverso dalla routine A.', concentric:'Reverse curl 3x10–15, Prono-supinazione 2x12–15/lato.', eccentric:'Chiudi con Dead hang 3x20–40 sec e Estensioni dita 2x20–30.', tip:'Questa routine punta molto su presa e rotatori dell’avambraccio.'},
-  {id:'guideNeckA', type:'guide', name:'Guida collo base', short:'Dead hang · Estensioni dita · Chin tuck', image:'assets/guida_deadhang_chintuck_full.png', category:'Guida riassuntiva', setup:'Poster con dead hang, estensioni dita e chin tuck.', grip:'Usalo come guida rapida per la tecnica.', concentric:'Il chin tuck è l’esercizio base di controllo cervicale.', eccentric:'Non usare il collo fino al dolore.', tip:'Il collo va allenato con gradualità.'},
-  {id:'guideNeckIso', type:'guide', name:'Guida isometrie collo', short:'Frontale · Posteriore · Laterale', image:'assets/guida_collo_isometrie_full.png', category:'Guida riassuntiva', setup:'Poster delle isometrie per il collo.', grip:'2 volte a settimana.', concentric:'2–3 serie da 10–20 sec per direzione.', eccentric:'Intensità 30–60%, niente massimali.', tip:'Interrompi se compaiono dolore, vertigini o formicolio.'},
-  {id:'guideSummary', type:'guide', name:'Riepilogo avambracci e collo', short:'Routine A/B e routine collo', image:'assets/guida_riepilogo_avambracci_collo_full.png', category:'Guida riassuntiva', setup:'Poster riepilogativo con routine complete.', grip:'Ottimo da consultare rapidamente sul telefono.', concentric:'Riassume giorni, serie e ripetizioni.', eccentric:'Usalo come promemoria settimanale.', tip:'È il poster più pratico da tenere aperto durante l’allenamento.'}
-];
-
 const workouts = [
-  {id:'Upper A', summary:'Petto / dorso + avambracci A', note:'Giornata base upper con finisher avambracci. Se il tempo è poco, fai almeno Hammer curl + Farmer hold.', exercises:[
-    {id:'pullup',sets:'4',reps:'6–10',rest:120,block:'main'}, {id:'dbBench',sets:'4',reps:'8–12',rest:90,block:'main'}, {id:'row1',sets:'4',reps:'8–12 / lato',rest:90,block:'main'}, {id:'pushup',sets:'3',reps:'8–15',rest:75,block:'main'}, {id:'lateralRaise',sets:'4',reps:'12–20',rest:60,block:'main'}, {id:'ropePushdown',sets:'3',reps:'10–15',rest:60,block:'main'}, {id:'kneeRaise',sets:'3',reps:'8–15',rest:60,block:'main'},
-    {id:'hammerCurl',sets:'3',reps:'10–12',rest:60,block:'extra',label:'Extra avambracci A'}, {id:'wristCurl',sets:'2–3',reps:'15–20',rest:45,block:'extra',label:'Extra avambracci A'}, {id:'reverseWristCurl',sets:'2–3',reps:'15–20',rest:45,block:'extra',label:'Extra avambracci A'}, {id:'farmerHold',sets:'3',reps:'30–45 sec',rest:60,block:'extra',label:'Extra avambracci A'}]},
-  {id:'Lower A', summary:'Gambe + collo A', note:'Il blocco collo A è breve: eseguilo con pressione moderata e tecnica pulita.', exercises:[
-    {id:'gobletSquat',sets:'4',reps:'10–15',rest:90,block:'main'}, {id:'bulgarian',sets:'4',reps:'8–12 / gamba',rest:90,block:'main'}, {id:'rdl',sets:'4',reps:'8–12',rest:120,block:'main'}, {id:'reverseLunge',sets:'3',reps:'10 / gamba',rest:75,block:'main'}, {id:'calfRaise',sets:'4',reps:'12–20',rest:45,block:'main'}, {id:'plank',sets:'3',reps:'45–75 sec',rest:45,block:'main'},
-    {id:'chinTuck',sets:'2–3',reps:'10 reps con tenuta 3–5 sec',rest:30,block:'extra',label:'Extra collo A'}, {id:'neckIsoFront',sets:'2–3',reps:'10–20 sec',rest:30,block:'extra',label:'Extra collo A'}, {id:'neckIsoRear',sets:'2–3',reps:'10–20 sec',rest:30,block:'extra',label:'Extra collo A'}, {id:'neckIsoSide',sets:'2–3',reps:'10–20 sec / lato',rest:30,block:'extra',label:'Extra collo A'}]},
-  {id:'Upper B', summary:'Dorso / spalle / braccia', note:'Giornata upper più classica, senza extra collo: concentra qui il lavoro base.', exercises:[
-    {id:'pullup',sets:'5',reps:'5–8',rest:120,block:'main'}, {id:'pulldown',sets:'4',reps:'10–15',rest:90,block:'main'}, {id:'cableRow',sets:'4',reps:'10–15',rest:75,block:'main'}, {id:'shoulderPress',sets:'4',reps:'8–12',rest:90,block:'main'}, {id:'facePull',sets:'3–4',reps:'12–20',rest:60,block:'main'}, {id:'curl',sets:'3',reps:'10–15',rest:60,block:'main'}, {id:'rearDelt',sets:'3',reps:'12–20',rest:60,block:'main'}]},
-  {id:'Lower B', summary:'Posterior chain / core + collo B', note:'Ripeti il collo 2 volte a settimana. Qui aggiungi anche gli shrug per trapezi e aspetto collo-spalle.', exercises:[
-    {id:'hipThrust',sets:'4',reps:'8–12',rest:90,block:'main'}, {id:'stepUp',sets:'4',reps:'8–12 / gamba',rest:75,block:'main'}, {id:'legCurl',sets:'3',reps:'10–15',rest:60,block:'main'}, {id:'gobletSquat',sets:'3',reps:'12–15',rest:90,block:'main'}, {id:'calfRaise',sets:'4',reps:'12–20',rest:45,block:'main'}, {id:'cableCrunch',sets:'3',reps:'12–20',rest:45,block:'main'}, {id:'pallof',sets:'3',reps:'10–15 / lato',rest:45,block:'main'},
-    {id:'chinTuck',sets:'2',reps:'10 reps con tenuta 3–5 sec',rest:30,block:'extra',label:'Extra collo B'}, {id:'neckIsoFront',sets:'2',reps:'10–20 sec',rest:30,block:'extra',label:'Extra collo B'}, {id:'neckIsoRear',sets:'2',reps:'10–20 sec',rest:30,block:'extra',label:'Extra collo B'}, {id:'neckIsoSide',sets:'2',reps:'10–20 sec / lato',rest:30,block:'extra',label:'Extra collo B'}, {id:'shrug',sets:'3',reps:'10–15',rest:60,block:'extra',label:'Extra collo B'}]},
-  {id:'Upper C', summary:'Petto / spalle + avambracci B', note:'Se vuoi introdurre i dip, usali assistiti. Il finisher avambracci B è ottimo per presa e rotazioni.', exercises:[
-    {id:'inclineBench',sets:'4',reps:'8–12',rest:90,block:'main'}, {id:'dips',sets:'3',reps:'5–8 assistite o controllate',rest:90,block:'main'}, {id:'pulldown',sets:'4',reps:'8–12',rest:90,block:'main'}, {id:'cableRow',sets:'4',reps:'10–12',rest:75,block:'main'}, {id:'shoulderPress',sets:'3',reps:'8–12',rest:90,block:'main'}, {id:'facePull',sets:'3',reps:'12–20',rest:60,block:'main'}, {id:'ropePushdown',sets:'3',reps:'10–15',rest:60,block:'main'},
-    {id:'reverseCurlBar',sets:'3',reps:'10–15',rest:60,block:'extra',label:'Extra avambracci B'}, {id:'pronationSupination',sets:'2',reps:'12–15 / lato',rest:45,block:'extra',label:'Extra avambracci B'}, {id:'deadHang',sets:'3',reps:'20–40 sec',rest:60,block:'extra',label:'Extra avambracci B'}, {id:'fingerExtensions',sets:'2',reps:'20–30',rest:30,block:'extra',label:'Extra avambracci B'}]}
+  {
+    id:'upper-a', name:'Upper A — priorità petto pesante', focus:'Petto + schiena controllata', meta:'Petto all’inizio. Dorso ridotto per liberare recupero.',
+    exercises:[
+      ex('panca-piana-manubri','Panca piana manubri','petto','4','8–12','90–120s','16 kg/mano','Scapole addotte e depresse, petto alto, discesa 2–3 sec, fermo leggero in basso.'),
+      ex('push-up','Push-up','petto','3','8–15','75–90s','corpo libero','Fermati con 1–2 reps in riserva. Quando fai 3×15 pulite, aggiungi zaino leggero o una serie.'),
+      ex('croci-cavo-manubri','Croci al cavo o manubri','petto','2','12–20','60–75s','leggero','Allungamento controllato, gomiti morbidi, chiudi senza perdere il petto alto.'),
+      ex('rematore-manubrio','Rematore manubrio 1 braccio','dorso','3','8–12/lato','90s','18–20 kg','Gomito vicino al fianco, busto stabile, non ruotare per tirare più peso.'),
+      ex('trazioni-prone','Trazioni prone / pulldown','dorso','3','6–10','120s','BW o 25–35 kg cavo','Petto verso la barra, scapole attive, ROM pulita prima della zavorra.'),
+      ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Movimento pulito, no slancio. Polso neutro e stop circa a spalle orizzontali.'),
+      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa, non spingere con le spalle.'),
+      ex('hanging-knee-raise','Hanging knee raise','core','3','8–15','60s','corpo libero','Bacino in retroversione, evita dondolio e slancio.')
+    ]
+  },
+  {
+    id:'lower-a', name:'Lower A — gambe + core', focus:'Quadricipiti/glutei', meta:'Seduta gambe solida, senza extra collo integrati.',
+    exercises:[
+      ex('goblet-squat','Goblet squat','gambe','4','10–15','90–120s','24 kg','Discesa controllata 3 sec se il carico è facile, busto alto, ginocchia stabili.'),
+      ex('bulgarian-split-squat','Bulgarian split squat','gambe','4','8–12/gamba','90s','8–10 kg/mano','Prima stabilità e profondità, poi carico. Spingi con tutta la pianta del piede.'),
+      ex('rdl-manubri','Romanian deadlift manubri','posteriori','4','8–12','120s','18–20 kg/mano','Anche indietro, schiena neutra, senti femorali e glutei.'),
+      ex('affondi-indietro','Affondi indietro','gambe','3','10/gamba','75–90s','6–8 kg/mano','Passo controllato, ginocchio stabile, niente rimbalzi.'),
+      ex('calf-raise','Calf raise 1 gamba','polpacci','4','12–20','60s','BW + 16–24 kg','Pausa in alto e allungamento in basso.'),
+      ex('plank','Plank','core','3','45–75s','60s','corpo libero','Addome contratto, glutei attivi, non collassare con la lombare.')
+    ]
+  },
+  {
+    id:'upper-b', name:'Upper B — dorso/spalle/braccia', focus:'Schiena + spalle', meta:'Giornata senza volume petto diretto: aiuta recupero e postura.',
+    exercises:[
+      ex('pulldown','Lat machine / pulldown','dorso','4','10–15','90s','25–35 kg cavo','Tira i gomiti verso il basso, non dietro al collo. Petto alto.'),
+      ex('rematore-cavo','Rematore al cavo basso','dorso','4','10–15','90s','20–30 kg cavo','Scapole indietro, petto alto, niente slancio lombare.'),
+      ex('shoulder-press','Shoulder press manubri','spalle','4','8–12','90s','9 kg/mano','Chiudi sopra la testa senza iperestendere la schiena.'),
+      ex('face-pull','Face pull','spalle','3','12–20','60s','5–10 kg cavo','Tira verso fronte/occhi, gomiti alti, lento.'),
+      ex('rear-delt-fly','Rear delt fly','spalle','3','12–20','60s','3–5 kg/mano','Braccia quasi tese, scapole stabili, niente slancio.'),
+      ex('curl-barra','Curl barra corta/manubri','bicipiti','3','8–12','60–75s','12–18 kg','Polsi neutri, gomiti fermi, evita swing.'),
+      ex('estensioni-tricipiti','Estensioni tricipiti al cavo','tricipiti','2','10–15','60s','leggero/mod.','Controlla la fase eccentrica e non aprire i gomiti.')
+    ]
+  },
+  {
+    id:'lower-b', name:'Lower B — posterior chain + core', focus:'Femorali/glutei/addome', meta:'Catena posteriore, core e stabilità.',
+    exercises:[
+      ex('rdl-pesante','Romanian deadlift pesante','posteriori','4','8–12','120s','18–22 kg/mano','Priorità alla tecnica: anche indietro, schiena neutra, peso vicino alle gambe.'),
+      ex('hip-thrust','Hip thrust / glute bridge','glutei','4','10–15','90s','24 kg','Pausa 1 sec in alto. Se facile usa zaino o manubrio più stabile.'),
+      ex('step-up','Step-up su panca','gambe','3','8–12/gamba','75–90s','6–8 kg/mano','Sali controllando il ginocchio, non spingere troppo con la gamba a terra.'),
+      ex('sliding-curl','Sliding leg curl','posteriori','3','8–12','75–90s','corpo libero','Bacino alto, estendi lentamente, richiama coi femorali.'),
+      ex('calf-raise','Calf raise 1 gamba','polpacci','4','12–20','60s','BW + 16–24 kg','Pausa in alto e allungamento in basso.'),
+      ex('cable-crunch','Cable crunch','core','3','12–20','60s','12–20 kg cavo','Chiudi costole verso bacino, non tirare solo con le braccia.'),
+      ex('pallof-press','Pallof press','core','3','10–15/lato','45–60s','elastico/cavo','Resisti alla rotazione, bacino fermo, addome attivo.')
+    ]
+  },
+  {
+    id:'upper-c', name:'Upper C — priorità petto alto + volume', focus:'Petto alto + spalle/braccia', meta:'Seconda seduta petto. Volume diretto settimanale totale circa 17 serie.',
+    exercises:[
+      ex('panca-inclinata','Panca inclinata 30° manubri','petto','4','8–12','90–120s','14–16 kg/mano','Petto alto, scapole stabili, non trasformare in shoulder press.'),
+      ex('push-up-rialzati','Push-up piedi rialzati','petto','2','8–15','75–90s','corpo libero','Spingi controllato, busto rigido, fermati prima che la tecnica crolli.'),
+      ex('dip-assistiti','Dip assistiti/controllati','petto','2','6–10','90s','assistiti/BW','Inclinati leggermente avanti, spalle basse, ROM senza fastidio.'),
+      ex('pulldown-stretto','Pulldown presa stretta','dorso','3','10–12','90s','25–35 kg cavo','Movimento controllato, gomiti verso il basso, petto alto.'),
+      ex('rematore-cavo-leggero','Rematore cavo leggero','dorso','2','12–15','75–90s','medio','Solo mantenimento dorso: non trasformarlo in una seduta schiena pesante.'),
+      ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Meglio leggere e pulite che pesanti e sporche.'),
+      ex('curl-inclinato','Curl manubri o cavo','bicipiti','2','8–12','60s','moderato','Gomiti stabili, fase negativa controllata.'),
+      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa.')
+    ]
+  }
 ];
 
-const progressKey = 'coach-tascabile-v6-progress';
-const measureKey = 'coach-tascabile-v6-measures';
-const historyKey = 'coach-tascabile-v6-history';
-let progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
-let measures = JSON.parse(localStorage.getItem(measureKey) || '[]');
-let historyLog = JSON.parse(localStorage.getItem(historyKey) || '[]');
-const trackKey = 'coach-tascabile-v7-workout-tracking';
-let workoutTracking = JSON.parse(localStorage.getItem(trackKey) || '{}');
-const trackItems = {};
+function ex(id,name,group,sets,reps,rest,load,note){ return {id,name,group,sets:Number(sets),reps,rest,restSeconds:parseRest(rest),load,note}; }
+function parseRest(rest){ const m=String(rest).match(/(\d+)/g); if(!m) return 90; return Number(m[Math.min(1,m.length-1)]) || Number(m[0]); }
+
+const extraPlans = [
+  {
+    title:'Extra leggero A — equilibrio avambracci/collo', time:'10–14 min', frequency:'0–1 volta/settimana',
+    items:[
+      'Estensioni dita con elastico — 2×20–30',
+      'Reverse wrist curl leggero — 2×15–20',
+      'Prono-supinazione leggera — 2×12–15 per lato',
+      'Chin tuck — 2×8–12 lente',
+      'Isometria collo frontale/laterale — 2×15–20 sec'
+    ],
+    note:'Scopo: salute articolare e controllo, non aumentare volume.'
+  },
+  {
+    title:'Extra B — solo se recuperi benissimo', time:'12–18 min', frequency:'massimo 1 volta/settimana',
+    items:[
+      'Dead hang moderato — 2×20–40 sec',
+      'Shrug manubri — 2×12–15 controllate',
+      'Reverse wrist curl leggero — 2×15–20',
+      'Isometria posteriore collo — 2×15–20 sec',
+      'Mobilità polso + collo — 2 min'
+    ],
+    note:'Evita carichi massimali. Se avambraccio si congestiona molto, salta la seduta.'
+  }
+];
 
 const dietPlan = [
- {day:1,week:'week1',kcal:'2100–2200',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + pane 60 g + frutta + caffè.'],['Pranzo','Pasta 80 g con ceci 120 g, poco pecorino 10–15 g.'],['Spuntino','Frutta + yogurt greco 150 g.'],['Cena','Uova 2 + albumi 150 g, riso 70 g secco o patate 300 g.']]},
- {day:2,week:'week1',kcal:'2100–2200',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + avena 40 g + banana.'],['Pranzo','Riso 90 g secco con lenticchie 150 g e pecorino 10 g.'],['Spuntino','Pane 50 g + yogurt greco 170 g.'],['Cena','Pollo 170 g oppure tofu 220 g + polenta 300 g cotta + frutta.']]},
- {day:3,week:'week1',kcal:'2100–2300',protein:'155–170 g', meals:[['Colazione','Yogurt greco 250 g + pane 70 g + miele 10 g.'],['Pranzo','Pasta 80 g con ricotta magra o yogurt greco salato, pecorino 10 g.'],['Spuntino','Frutta + 20 g frutta secca.'],['Cena','Ceci 180 g + riso 70 g secco + 2 uova o albumi 200 g.']]},
- {day:4,week:'week1',kcal:'2100–2200',protein:'160 g', meals:[['Colazione','Yogurt greco 300 g + avena 35 g + mela.'],['Pranzo','Pasta 75 g con ceci 150 g e pecorino 15 g.'],['Spuntino','Pane 50 g + yogurt greco 150 g.'],['Cena','Tacchino o pollo 160 g, patate 350 g, frutta.']]},
- {day:5,week:'week1',kcal:'2100–2300',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + pane 60 g + frutta.'],['Pranzo','Riso 90 g secco con fagioli/ceci 150 g, olio 5 g, pecorino 10 g.'],['Spuntino','Yogurt greco 170 g + banana.'],['Cena','Omelette: 2 uova + albumi 200 g, polenta 300 g cotta.']]},
- {day:6,week:'week1',kcal:'2200 circa',protein:'155–165 g', meals:[['Colazione','Yogurt greco 300 g + avena 40 g + frutta.'],['Pranzo','Pasta 90 g con ceci 120 g, pecorino 15 g.'],['Spuntino','Pane 60 g + yogurt greco 150 g.'],['Cena','Manzo magro 150 g o seitan 200 g + riso 70 g secco + frutta.']]},
- {day:7,week:'week1',kcal:'2000–2150',protein:'155 g', meals:[['Colazione','Yogurt greco 250 g + pane 60 g + frutta.'],['Pranzo','Insalata di riso 80 g secco con ceci 150 g, mais poco, pecorino 10 g.'],['Spuntino','Frutta + yogurt.'],['Cena','Uova 2 + albumi 200 g + patate 300 g.']]},
- {day:8,week:'week2',kcal:'2100–2200',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + avena 40 g + banana.'],['Pranzo','Pasta 80 g con lenticchie 150 g e pecorino 10–15 g.'],['Spuntino','Pane 50 g + yogurt greco 170 g.'],['Cena','Pollo/tacchino 160 g o tofu 220 g + riso 70 g secco.']]},
- {day:9,week:'week2',kcal:'2100–2200',protein:'160 g', meals:[['Colazione','Yogurt greco 300 g + pane 60 g + frutta.'],['Pranzo','Riso 90 g secco con ceci 150 g, spezie, pecorino 10 g.'],['Spuntino','Frutta + yogurt greco 150 g.'],['Cena','Omelette albumi 250 g + 1 uovo + polenta 300 g cotta.']]},
- {day:10,week:'week2',kcal:'2100–2300',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + avena 45 g + mela.'],['Pranzo','Pasta 85 g con ceci 120 g e pecorino 15 g.'],['Spuntino','Pane 50 g + frutta.'],['Cena','Legumi 180 g + riso 70 g secco + yogurt greco salato o uova.']]},
- {day:11,week:'week2',kcal:'2100–2200',protein:'155–165 g', meals:[['Colazione','Yogurt greco 300 g + pane 50–60 g.'],['Pranzo','Pasta 75 g con sugo semplice e pecorino 15 g + yogurt a lato.'],['Spuntino','Frutta + yogurt greco 150 g.'],['Cena','Tacchino 160 g o seitan 200 g + patate 350 g.']]},
- {day:12,week:'week2',kcal:'2200 circa',protein:'160 g', meals:[['Colazione','Yogurt greco 250 g + avena 40 g + banana.'],['Pranzo','Riso 90 g secco con ceci/lenticchie 150 g.'],['Spuntino','Pane 60 g + yogurt greco 170 g.'],['Cena','Uova 2 + albumi 200 g + polenta 300 g cotta.']]},
- {day:13,week:'week2',kcal:'2100–2300',protein:'160 g', meals:[['Colazione','Yogurt greco 300 g + pane 60 g + frutta.'],['Pranzo','Pasta 90 g con ceci 120 g, pecorino 15 g.'],['Spuntino','Frutta + 20 g frutta secca.'],['Cena','Pollo 160 g o tofu 220 g + riso 70 g secco.']]},
- {day:14,week:'week2',kcal:'2000–2150',protein:'155 g', meals:[['Colazione','Yogurt greco 250 g + avena 35 g + frutta.'],['Pranzo','Riso o pasta 80 g con legumi 150 g e pecorino 10 g.'],['Spuntino','Yogurt greco 170 g + frutta.'],['Cena','Omelette 2 uova + albumi 200 g + patate 300 g.']]}];
+  day(1,'Upper A',true,['Yogurt greco 250 g + whey 30 g + pane 60 g con eritritolo/cannella','Pasta 75 g + pollo/tacchino 160 g + verdure + pecorino 10 g','Merenda: yogurt 70 g + whey 30 g + uovo cotto/pastorizzato con eritritolo','Riso 80 g crudo oppure alternativa + uova/albumi o carne magra + verdure']),
+  day(2,'Lower A',true,['Crêpe dolce: farina 50 g + albumi 200 g + latte/ acqua + eritritolo','Riso 80 g + manzo magro 150 g o seitan 180 g + verdure','Yogurt greco 200 g + frutta','Patate 300 g + pollo 170 g + verdure + olio 10 g']),
+  day(3,'Recupero',false,['Yogurt greco 250 g + frutta + pane 40–60 g','Pasta 70 g + 2 uova + albumi 150 g + verdure','Whey 30 g + banana o pane 50 g','Polenta cotta 300 g + tacchino 170 g + verdure']),
+  day(4,'Upper B',true,['Pane 80 g + yogurt greco 250 g + cacao amaro/eritritolo','Noodles 75 g crudi + pollo 170 g + verdure saltate','Merenda dolce proteica: yogurt 70 g + whey + uovo cotto/pastorizzato','Riso 80 g + uova/albumi o carne magra + verdure']),
+  day(5,'Lower B',false,['Crêpe dolce proteica oppure yogurt + pane','Pasta 80 g + tacchino 170 g + pecorino 10 g + verdure','Whey 30 g + frutta','Patate 300–350 g + pollo 170–200 g + verdure']),
+  day(6,'Upper C',true,['Yogurt greco 250–300 g + pane 60 g + miele/eritritolo se vuoi dolce','Riso 80 g + pollo 170 g + verdure','Merenda: whey + yogurt oppure uovo cotto/pastorizzato','Pasta 70 g o polenta 300 g + proteina magra + verdure']),
+  day(7,'Recupero',false,['Colazione dolce leggera: yogurt + frutta + pane 40 g','Piatto libero controllato: carbo equivalente + proteina 150–180 g','Yogurt greco 200 g o whey','Cena semplice: patate/polenta + uova/albumi + verdure']),
+  day(8,'Upper A',true,['Yogurt greco 250 g + whey + pane 60 g','Pasta 75 g + pollo 170 g + verdure','Merenda proteica dolce','Riso 80 g o patate 300 g + tacchino/uova + verdure']),
+  day(9,'Lower A',true,['Crêpe dolce proteica','Riso 80 g + carne magra 150–180 g o seitan','Yogurt + frutta','Polenta cotta 300–350 g + pollo/tacchino + verdure']),
+  day(10,'Recupero',false,['Yogurt greco 250 g + pane 50 g','Pasta 70 g + uova/albumi + verdure','Whey 30 g','Patate 300 g + proteina magra']),
+  day(11,'Upper B',true,['Pane 70–80 g + yogurt greco 250 g','Noodles 75 g crudi + pollo/tacchino + verdure','Merenda yogurt+whey oppure uovo cotto/pastorizzato','Riso 80 g + proteina magra + verdure']),
+  day(12,'Lower B',false,['Crêpe dolce o yogurt + pane','Pasta 80 g + tacchino + pecorino 10 g','Whey + frutta','Patate 300–350 g + pollo 170–200 g']),
+  day(13,'Upper C',true,['Yogurt greco + whey + pane','Riso 80 g + pollo 170 g + verdure','Merenda dolce proteica','Polenta 300 g o pasta 70 g + uova/albumi']),
+  day(14,'Recupero',false,['Colazione dolce controllata','Carbo equivalente + proteina + verdure','Yogurt greco o whey','Cena semplice e leggera con patate/polenta/riso equivalente'])
+];
+function day(n,focus,sweet,meals){ return {n,focus,sweet,meals}; }
 
-function getRecord(id){ if(!progress[id]) progress[id]={weight:'',notes:'',topRange:false}; return progress[id]; }
-function saveProgress(){ localStorage.setItem(progressKey, JSON.stringify(progress)); }
-function saveMeasures(){ localStorage.setItem(measureKey, JSON.stringify(measures)); }
-function saveHistory(){ localStorage.setItem(historyKey, JSON.stringify(historyLog)); }
-function rangeHighFromReps(str){ const nums=(str||'').match(/\d+/g); return nums?nums[nums.length-1]:''; }
-function formatBadge(v){ return `<span class="badge">${v}</span>`; }
-function makeTrackKey(dayId, index, item){
-  return `${dayId.replace(/\s+/g,'_')}__${index}__${item.id}`;
-}
-function registerTrackItem(dayId, index, item){
-  const key = makeTrackKey(dayId, index, item);
-  trackItems[key] = {dayId, index, item};
-  return key;
-}
-function parseHighNumber(str){
-  const nums = String(str||'').match(/\d+/g);
-  return nums ? Number(nums[nums.length-1]) : 1;
-}
-function parseFirstNumber(str){
-  const nums = String(str||'').match(/\d+/g);
-  return nums ? Number(nums[0]) : 1;
-}
-function parseSetCount(sets){
-  return Math.max(1, parseHighNumber(sets));
-}
-function parseRepTarget(reps){
-  const s = String(reps||'').toLowerCase();
-  if(s.includes('sec') && !s.includes('reps')){
-    const sec = parseHighNumber(s);
-    return {target: Math.max(1, Math.ceil(sec/5)), unit:'blocchi da 5 sec', display:`${sec} sec`};
-  }
-  const target = s.includes('reps') ? parseFirstNumber(s) : parseHighNumber(s);
-  return {target: Math.max(1, target), unit:'ripetizioni', display:`${target} reps`};
-}
-function getTrackRecord(key){
-  const meta = trackItems[key];
-  if(!meta) return {sets:[]};
-  const setCount = parseSetCount(meta.item.sets);
-  if(!workoutTracking[key]) workoutTracking[key] = {sets: Array(setCount).fill(0)};
-  if(!Array.isArray(workoutTracking[key].sets)) workoutTracking[key].sets = Array(setCount).fill(0);
-  while(workoutTracking[key].sets.length < setCount) workoutTracking[key].sets.push(0);
-  if(workoutTracking[key].sets.length > setCount) workoutTracking[key].sets = workoutTracking[key].sets.slice(0,setCount);
-  return workoutTracking[key];
-}
-function saveTracking(){
-  localStorage.setItem(trackKey, JSON.stringify(workoutTracking));
-}
-function isTrackComplete(key){
-  const meta = trackItems[key];
-  if(!meta) return false;
-  const rec = getTrackRecord(key);
-  const repInfo = parseRepTarget(meta.item.reps);
-  return rec.sets.length > 0 && rec.sets.every(v => Number(v) >= repInfo.target);
-}
-function actionButtonsHTML(key, item){
-  const complete = isTrackComplete(key);
-  return `<div class="today-actions">
-    <button class="detail-btn" data-open="${item.id}">Dettagli</button>
-    <button class="rest-btn" data-rest="${item.rest}">Recupero</button>
-    <button class="track-btn ${complete?'complete':''}" data-track="${key}">${complete?'Completo':'Segna'}</button>
-  </div>`;
-}
-function exerciseCardHTML(item, showButtons=true, dayId='Giorno', index=0){
-  const ex = exercises[item.id];
-  const key = registerTrackItem(dayId, index, item);
-  return `<article class="today-item"><div class="today-top"><img class="thumb" src="${ex.image}" alt="${ex.name}"><div class="today-meta"><h4>${ex.name}</h4><div class="exercise-meta">${formatBadge(`${item.sets} serie`)}${formatBadge(item.reps)}${formatBadge(`${item.rest} sec`)}</div></div></div>${showButtons?actionButtonsHTML(key,item):''}</article>`;
-}
-function groupWorkoutExercises(exList){ const groups=[]; exList.forEach(it=>{ const key=it.block||'main'; let grp=groups.find(g=>g.key===key && g.label===(it.label||'')); if(!grp){ grp={key,label:it.label||'',items:[]}; groups.push(grp);} grp.items.push(it); }); return groups; }
-function renderTodayWorkout(workout){
-  const wrap = document.getElementById('todayWorkout');
-  let globalIndex = 0;
-  wrap.innerHTML = groupWorkoutExercises(workout.exercises).map(g=>`<section><div class="block-label ${g.key==='main'?'main':'extra'}">${g.key==='main'?'Blocco base':(g.label||'Extra')}</div><div class="today-list">${g.items.map(it=>exerciseCardHTML(it, true, workout.id, globalIndex++)).join('')}</div></section>`).join('') + `<p class="workout-note">${workout.note||''}</p>`;
-}
-function renderWorkoutDays(){
-  const wrap=document.getElementById('workoutDays');
-  wrap.innerHTML=workouts.map(day=>{
-    let globalIndex = 0;
-    return `<section class="workout-shell"><div class="section-head"><div><p class="mini">${day.summary}</p><h3>${day.id}</h3></div></div>${groupWorkoutExercises(day.exercises).map(g=>`<div class="block-label ${g.key==='main'?'main':'extra'}">${g.key==='main'?'Blocco base':(g.label||'Extra')}</div><div class="workout-day-list">${g.items.map(it=>{ const key=registerTrackItem(day.id, globalIndex++, it); const ex=exercises[it.id]; return `<article class="exercise-card"><h4>${ex.name}</h4><div class="exercise-meta">${formatBadge(`${it.sets} serie`)}${formatBadge(it.reps)}${formatBadge(`${it.rest} sec`)}</div><div class="actions"><button class="detail-btn" data-open="${it.id}">Dettagli</button><button class="rest-btn" data-rest="${it.rest}">Recupero</button><button class="track-btn ${isTrackComplete(key)?'complete':''}" data-track="${key}">${isTrackComplete(key)?'Completo':'Segna'}</button></div></article>`; }).join('')}</div>`).join('')}<p class="workout-note">${day.note||''}</p></section>`;
-  }).join('');
-}
-function renderGuideHighlights(){ const wrap=document.getElementById('guideHighlights'); if(!wrap) return; wrap.innerHTML=guideCards.map(g=>`<article class="library-card guide"><img src="${g.image}" alt="${g.name}"><div class="library-head"><div class="library-title"><p class="mini">Guida</p><h3>${g.name}</h3><p>${g.short}</p></div></div><div class="actions"><button class="detail-btn" data-open-guide="${g.id}">Apri poster</button></div></article>`).join(''); }
-function renderExerciseLibrary(filter=''){ const wrap=document.getElementById('exerciseLibrary'); const f=filter.trim().toLowerCase(); const list=Object.entries(exercises).filter(([id,ex])=>`${ex.name} ${ex.short}`.toLowerCase().includes(f)||!f); wrap.innerHTML=list.map(([id,ex])=>`<article class="library-card"><img src="${ex.image}" alt="${ex.name}"><div class="library-head"><div class="library-title"><p>Recupero ${ex.rest}</p><h3>${ex.name}</h3><p>Peso iniziale: ${ex.startWeight}</p></div></div><div class="exercise-chip-row"><span class="badge">${ex.short}</span><span class="badge">${ex.rest}</span></div><div class="actions"><button class="detail-btn" data-open="${id}">Scheda completa</button></div></article>`).join(''); }
-function openExerciseModal(id){ const ex=exercises[id]; if(!ex) return; document.getElementById('modalEyebrow').textContent='Esercizio'; document.getElementById('modalTitle').textContent=ex.name; document.getElementById('modalContent').innerHTML=`<div class="modal-grid"><img src="${ex.image}" alt="${ex.name}"><div class="exercise-chip-row"><span class="badge">Peso iniziale: ${ex.startWeight}</span><span class="badge">Recupero: ${ex.rest}</span></div><div class="detail-grid"><div class="detail-card"><h4>Impostazione</h4><p>${ex.setup}</p></div><div class="detail-card"><h4>Impugnatura</h4><p>${ex.grip}</p></div><div class="detail-card"><h4>Concentrica</h4><p>${ex.concentric}</p></div><div class="detail-card"><h4>Eccentrica</h4><p>${ex.eccentric}</p></div></div><div class="note-card"><h4>Nota coach</h4><p>${ex.tip || 'Usa tecnica pulita e progressione graduale.'}</p></div></div>`; document.getElementById('exerciseModal').showModal(); }
-function openGuideModal(id){ const g=guideCards.find(x=>x.id===id); if(!g) return; document.getElementById('modalEyebrow').textContent='Poster guida'; document.getElementById('modalTitle').textContent=g.name; document.getElementById('modalContent').innerHTML=`<div class="modal-grid"><img class="guide-full" src="${g.image}" alt="${g.name}"><div class="exercise-chip-row"><span class="badge">${g.category}</span><span class="badge">${g.short}</span></div><div class="detail-grid"><div class="detail-card"><h4>Uso consigliato</h4><p>${g.setup}</p></div><div class="detail-card"><h4>Frequenza</h4><p>${g.grip}</p></div><div class="detail-card"><h4>Contenuto</h4><p>${g.concentric}</p></div><div class="detail-card"><h4>Chiusura</h4><p>${g.eccentric}</p></div></div><div class="note-card"><h4>Nota coach</h4><p>${g.tip}</p></div></div>`; document.getElementById('exerciseModal').showModal(); }
+const carbs = [
+  {id:'riso-crudo', name:'Riso crudo', kcal:360, note:'peso a crudo'},
+  {id:'pasta-cruda', name:'Pasta cruda', kcal:350, note:'peso a crudo'},
+  {id:'noodles-crudi', name:'Noodles crudi', kcal:360, note:'peso a crudo'},
+  {id:'pane', name:'Pane', kcal:270, note:'peso pronto'},
+  {id:'patate-cotte', name:'Patate cotte/lesse', kcal:85, note:'peso cotto'},
+  {id:'polenta-cotta', name:'Polenta cotta', kcal:85, note:'peso cotto'},
+  {id:'farina-polenta', name:'Farina per polenta secca', kcal:360, note:'peso a crudo'},
+  {id:'avena', name:'Avena', kcal:380, note:'peso a crudo'}
+];
 
-function polarToCartesian(cx, cy, r, angleDeg){
-  const a = (angleDeg - 90) * Math.PI / 180;
-  return {x: cx + r * Math.cos(a), y: cy + r * Math.sin(a)};
+const exerciseGuides = {
+  'panca-piana-manubri': guide('Panca piana manubri','petto',['Scapole addotte e depresse','Piedi stabili, petto alto','Discesa lenta 2–3 secondi','Gomiti circa 45–60°'],['Non rimbalzare in basso','Non perdere le scapole','Non trasformarla in spinta di spalle']),
+  'panca-inclinata': guide('Panca inclinata 30° manubri','petto',['Inclinazione moderata, circa 30°','Petto alto e scapole stabili','Manubri scendono verso alto petto'],['Inclinazione troppo alta','Gomiti troppo larghi','Spinta corta senza controllo']),
+  'push-up': guide('Push-up','petto',['Corpo rigido','Mani sotto/al poco fuori le spalle','Scendi controllato','Spingi via il pavimento'],['Bacino che crolla','Mezze ripetizioni','Testa in avanti']),
+  'push-up-rialzati': guide('Push-up piedi rialzati','petto',['Piedi su rialzo stabile','Linea corpo compatta','Scendi verso alto petto'],['Rialzo troppo alto','Spalle che salgono alle orecchie']),
+  'croci-cavo-manubri': guide('Croci al cavo o manubri','petto',['Braccia morbide','Allungamento controllato','Chiudi davanti al petto senza sbattere'],['Carico troppo alto','Gomiti che cambiano angolo a ogni rep']),
+  'dip-assistiti': guide('Dip assistiti/controllati','petto',['Spalle basse','Leggera inclinazione avanti','ROM senza dolore','Risalita controllata'],['Scendere troppo se dà fastidio','Spalle chiuse in avanti','Rimbalzo in basso']),
+  'rematore-manubrio': guide('Rematore manubrio','dorso',['Schiena neutra','Gomito verso fianco','Pausa breve in chiusura'],['Rotazione del busto','Tirare solo con bicipite']),
+  'trazioni-prone': guide('Trazioni / pulldown','dorso',['Scapole attive','Petto verso la barra','Controllo in discesa'],['Mezze reps','Collo in avanti','Slancio eccessivo']),
+  'pulldown': guide('Pulldown','dorso',['Gomiti verso il basso','Petto alto','Presa comoda'],['Tirare dietro il collo','Schiena che dondola']),
+  'pulldown-stretto': guide('Pulldown presa stretta','dorso',['Gomiti stretti','Tira verso alto petto','Scapole depresse'],['Inclinarsi troppo indietro','Usare solo le braccia']),
+  'rematore-cavo': guide('Rematore cavo','dorso',['Petto alto','Scapole chiudono','Fase negativa controllata'],['Strappare con lombare','Spalle alle orecchie']),
+  'rematore-cavo-leggero': guide('Rematore cavo leggero','dorso',['Esecuzione pulita','Volume di mantenimento','Non cercare record'],['Carico troppo alto','Perdere recupero del petto']),
+  'goblet-squat': guide('Goblet squat','gambe',['Manubrio vicino al petto','Ginocchia seguono piedi','Discesa controllata'],['Talloni che si alzano','Schiena che si chiude']),
+  'bulgarian-split-squat': guide('Bulgarian split squat','gambe',['Piede davanti stabile','Scendi verticale','Controlla ginocchio'],['Passo troppo corto','Rimbalzo in basso']),
+  'rdl-manubri': guide('Romanian deadlift','posteriori',['Anche indietro','Schiena neutra','Manubri vicini alle gambe'],['Piegare troppo le ginocchia','Arrotondare la schiena']),
+  'rdl-pesante': guide('Romanian deadlift pesante','posteriori',['Tecnica prima del carico','Tensione femorali','Core attivo'],['Cercare profondità perdendo schiena','Carico che scappa in avanti']),
+  'affondi-indietro': guide('Affondi indietro','gambe',['Passo indietro controllato','Ginocchio stabile','Spingi con piede davanti'],['Rimbalzo','Crollo laterale del ginocchio']),
+  'calf-raise': guide('Calf raise','polpacci',['Pausa in alto','Allungamento in basso','ROM completa'],['Saltellare','Mezze ripetizioni veloci']),
+  'plank': guide('Plank','core',['Costole giù','Glutei attivi','Respira corto e controllato'],['Lombare che cede','Spalle passive']),
+  'hip-thrust': guide('Hip thrust','glutei',['Pausa in alto','Mento leggermente rientrato','Spingi con talloni'],['Iperestendere la schiena','Piedi troppo lontani']),
+  'step-up': guide('Step-up','gambe',['Panca stabile','Controlla salita e discesa','Ginocchio allineato'],['Spinta eccessiva con gamba sotto','Cadere in discesa']),
+  'sliding-curl': guide('Sliding leg curl','posteriori',['Bacino alto','Estendi lento','Richiama coi femorali'],['Bacino che cade','Tirare con lombare']),
+  'cable-crunch': guide('Cable crunch','core',['Costole verso bacino','Bacino stabile','Braccia ferme'],['Tirare solo con braccia','Sedersi indietro']),
+  'pallof-press': guide('Pallof press','core',['Resisti alla rotazione','Braccia avanti','Bacino fermo'],['Ruotare il busto','Spalle contratte']),
+  'shoulder-press': guide('Shoulder press','spalle',['Core attivo','Traiettoria verticale','Scendi controllato'],['Iperestensione lombare','Spinta asimmetrica']),
+  'face-pull': guide('Face pull','spalle',['Tira verso occhi','Gomiti alti','Extraruota leggero'],['Carico eccessivo','Tirare al petto']),
+  'rear-delt-fly': guide('Rear delt fly','spalle',['Braccia quasi tese','Movimento piccolo e pulito','Pausa in apertura'],['Slancio','Trapezio dominante']),
+  'alzate-laterali': guide('Alzate laterali','spalle',['Gomito morbido','Stop a livello spalle','Controllo totale'],['Dondolare','Polsi troppo alti']),
+  'curl-barra': guide('Curl barra/manubri','bicipiti',['Gomiti fermi','Polsi neutri','Negativa lenta'],['Swing con schiena','Spalle avanti']),
+  'curl-inclinato': guide('Curl manubri/cavo','bicipiti',['Allungamento controllato','Gomiti fermi','Carico gestibile'],['Accorciare ROM','Slancio']),
+  'pushdown-fune': guide('Pushdown fune','tricipiti',['Gomiti fermi','Apri la fune in basso','Controlla ritorno'],['Spalle avanti','Dondolio']),
+  'estensioni-tricipiti': guide('Estensioni tricipiti','tricipiti',['Gomiti controllati','Negativa lenta','Estendi senza dolore'],['Aprire troppo i gomiti','Carico fuori controllo']),
+  'hanging-knee-raise': guide('Hanging knee raise','core',['Bacino in retroversione','Movimento controllato','Scapole attive'],['Dondolare','Sollevare solo le gambe']),
+};
+function guide(name,kind,cues,errors){ return {name,kind,cues,errors}; }
+
+let state = {
+  selectedDay: 0,
+  timerSeconds: 90,
+  timerRemaining: 90,
+  timerEnd: null,
+  timerId: null,
+  timerRunning: false,
+  timerPaused: false,
+  audioReady: false,
+  audioCtx: null,
+  wakeLock: null,
+  guided: null
+};
+
+const $ = (s,root=document)=>root.querySelector(s);
+const $$ = (s,root=document)=>Array.from(root.querySelectorAll(s));
+const save = (k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const load = (k,fb)=>{ try{return JSON.parse(localStorage.getItem(k)) ?? fb}catch{return fb} };
+
+function init(){
+  registerServiceWorker();
+  bindNavigation();
+  bindTimer();
+  bindDiet();
+  bindProgress();
+  renderAll();
+  setupInstallPrompt();
+  document.addEventListener('visibilitychange', handleVisibility);
 }
-function describeArc(cx, cy, r, startAngle, endAngle){
-  const start = polarToCartesian(cx, cy, r, endAngle);
-  const end = polarToCartesian(cx, cy, r, startAngle);
-  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-  return `M ${cx} ${cy} L ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y} Z`;
+
+function registerServiceWorker(){
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=9').catch(()=>{}); }
 }
-function repPieHTML(key, setIndex, value, target, unit){
-  const slices = [];
-  const cx=50, cy=50, r=47;
-  for(let i=0;i<target;i++){
-    const start = i * 360 / target;
-    const end = (i+1) * 360 / target;
-    const done = i < value;
-    slices.push(`<path class="rep-slice ${done?'done':'todo'}" data-pie="${key}" data-set="${setIndex}" data-rep="${i+1}" d="${describeArc(cx,cy,r,start,end)}"></path>`);
-  }
-  return `<svg class="rep-pie" viewBox="0 0 100 100" role="button" aria-label="Serie ${setIndex+1}: ${value} di ${target}">
-    ${slices.join('')}
-    <circle cx="50" cy="50" r="25" fill="#fff" stroke="rgba(148,163,184,.25)"></circle>
-    <text class="pie-center" x="50" y="45">${value}/${target}</text>
-    <text class="pie-sub" x="50" y="58">${unit.includes('sec')?'tempo':'reps'}</text>
-  </svg>`;
+
+function bindNavigation(){
+  $$('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>showTab(btn.dataset.tab)));
+  $$('.quick-nav').forEach(btn=>btn.addEventListener('click',()=>showTab(btn.dataset.targettab)));
+  $('#dayPicker').addEventListener('change',e=>{state.selectedDay=Number(e.target.value); renderToday();});
+  $('#searchExercises').addEventListener('input',renderLibrary);
+  $('#closeModal').addEventListener('click',()=>$('#exerciseModal').close());
+  $('#closeGuided').addEventListener('click',()=>$('#guidedModal').close());
 }
-function openTrackingModal(key){
-  const meta = trackItems[key];
-  if(!meta) return;
-  const ex = exercises[meta.item.id];
-  const rec = getTrackRecord(key);
-  const repInfo = parseRepTarget(meta.item.reps);
-  document.getElementById('modalEyebrow').textContent = 'Segna serie';
-  document.getElementById('modalTitle').textContent = ex.name;
-  const complete = isTrackComplete(key);
-  document.getElementById('modalContent').innerHTML = `<div class="track-overview">
-    <div class="track-head-card">
-      <p class="rep-note"><strong>${meta.dayId}</strong> · ${meta.item.sets} serie · target: ${meta.item.reps}</p>
-      <div class="exercise-chip-row"><span class="badge">Clicca uno spicchio per segnare le ripetizioni</span><span class="badge">${repInfo.unit}</span></div>
+function showTab(tab){
+  $$('.tab').forEach(s=>s.classList.remove('active'));
+  $(`#tab-${tab}`)?.classList.add('active');
+  $$('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderAll(){
+  const picker=$('#dayPicker');
+  const historyDay=$('#historyDay');
+  picker.innerHTML=workouts.map((d,i)=>`<option value="${i}">${d.name}</option>`).join('');
+  historyDay.innerHTML=workouts.map(d=>`<option value="${d.name}">${d.name}</option>`).join('');
+  renderToday(); renderWorkouts(); renderExtra(); renderLibrary(); renderDiet(); renderCarbTool(); renderProgress();
+}
+function renderToday(){
+  const day=workouts[state.selectedDay];
+  $('#todayTitle').textContent=day.name;
+  $('#todayWorkout').innerHTML=day.exercises.map(e=>exerciseCard(e,day.id)).join('');
+  bindExerciseButtons($('#todayWorkout'));
+}
+function renderWorkouts(){
+  $('#workoutDays').innerHTML=workouts.map(day=>`
+    <article class="day-card">
+      <p class="mini">${day.focus}</p>
+      <h3>${day.name}</h3>
+      <div class="day-meta">${day.meta}</div>
+      <div class="day-exercises">${day.exercises.map(e=>exerciseCard(e,day.id)).join('')}</div>
+    </article>`).join('');
+  bindExerciseButtons($('#workoutDays'));
+}
+function exerciseCard(e,dayId){
+  const done = getDoneSets(dayId,e.id);
+  const allDone = done.length >= e.sets;
+  return `<article class="exercise-card" data-ex="${e.id}" data-day="${dayId}">
+    <div class="exercise-main">
+      <div>
+        <h4>${e.name}</h4>
+        <div class="exercise-meta">
+          <span class="tag">${e.sets}×${e.reps}</span>
+          <span class="tag green">${e.rest}</span>
+          <span class="tag warn">${e.load}</span>
+        </div>
+      </div>
+      <div class="series-tracker" aria-label="Serie completate">${seriesDots(dayId,e.id,e.sets)}</div>
     </div>
-    ${complete?'<div class="track-complete-banner">Esercizio completato ✅</div>':''}
-    <div class="track-grid">
-      ${rec.sets.map((v,i)=>`<div class="set-card"><div class="set-top"><h4>Serie ${i+1}</h4><small>${v}/${repInfo.target} ${repInfo.unit}</small></div><div class="pie-wrap">${repPieHTML(key,i,Number(v),repInfo.target,repInfo.unit)}<div class="rep-controls"><p class="rep-note">Tocca uno spicchio: gli spicchi fino a quel punto diventano verdi.</p><div class="mini-actions"><button class="secondary" data-adjust="${key}" data-set="${i}" data-delta="-1">-1</button><button data-adjust="${key}" data-set="${i}" data-delta="1">+1</button><button class="secondary" data-fillset="${key}" data-set="${i}">Serie completa</button></div></div></div></div>`).join('')}
+    <p class="exercise-note">${e.note}</p>
+    <div class="exercise-actions">
+      <button class="details-btn" data-ex="${e.id}">Dettagli</button>
+      <button class="rest-btn" data-seconds="${e.restSeconds}">Recupero</button>
+      <button class="mark-btn ${allDone?'complete':''}" data-day="${dayId}" data-ex="${e.id}">${allDone?'Completo':'Segna serie'}</button>
+      <button class="primary guide-btn" data-day="${dayId}" data-ex="${e.id}">Serie guidata</button>
     </div>
-    <div class="track-summary"><strong>Stato:</strong> ${complete?'completo':'in corso'} · quando tutte le ruote sono verdi il pulsante diventa “Completo”.</div>
-  </div>`;
-  document.getElementById('exerciseModal').showModal();
+  </article>`;
 }
-function updateSetValue(key, setIndex, value){
-  const meta = trackItems[key];
-  if(!meta) return;
-  const rec = getTrackRecord(key);
-  const target = parseRepTarget(meta.item.reps).target;
-  rec.sets[setIndex] = Math.max(0, Math.min(target, value));
-  saveTracking();
-  openTrackingModal(key);
-  renderTodayWorkout(workouts.find(w=>w.id===meta.dayId)||workouts[0]);
-  renderWorkoutDays();
+function seriesDots(dayId,exId,sets){
+  const done = getDoneSets(dayId,exId);
+  return Array.from({length:sets},(_,i)=>`<button class="series-dot small ${done.includes(i)?'done':''}" data-day="${dayId}" data-ex="${exId}" data-set="${i}" aria-label="Serie ${i+1}">${i+1}</button>`).join('');
 }
-function initTrackingEvents(){
-  document.body.addEventListener('click', e=>{
-    const slice = e.target.closest('[data-pie]');
-    if(slice){
-      updateSetValue(slice.dataset.pie, Number(slice.dataset.set), Number(slice.dataset.rep));
-    }
-    const adj = e.target.closest('[data-adjust]');
-    if(adj){
-      const key=adj.dataset.adjust, set=Number(adj.dataset.set), delta=Number(adj.dataset.delta);
-      const rec=getTrackRecord(key);
-      updateSetValue(key,set,Number(rec.sets[set]||0)+delta);
-    }
-    const fill = e.target.closest('[data-fillset]');
-    if(fill){
-      const key=fill.dataset.fillset, set=Number(fill.dataset.set);
-      const meta=trackItems[key];
-      updateSetValue(key,set,parseRepTarget(meta.item.reps).target);
-    }
-  });
+function bindExerciseButtons(root=document){
+  $$('.details-btn',root).forEach(b=>b.addEventListener('click',()=>openExercise(b.dataset.ex)));
+  $$('.rest-btn',root).forEach(b=>b.addEventListener('click',()=>{showTab('timer'); setTimer(Number(b.dataset.seconds)); startTimer();}));
+  $$('.mark-btn',root).forEach(b=>b.addEventListener('click',()=>markNextSet(b.dataset.day,b.dataset.ex)));
+  $$('.guide-btn',root).forEach(b=>b.addEventListener('click',()=>openGuided(b.dataset.day,b.dataset.ex)));
+  $$('.series-dot',root).forEach(b=>b.addEventListener('click',()=>toggleSet(b.dataset.day,b.dataset.ex,Number(b.dataset.set))));
+}
+function getSetStore(){ return load(STORE.sets,{}); }
+function getDoneSets(dayId,exId){ return getSetStore()[`${dayId}:${exId}`] || []; }
+function setDoneSets(dayId,exId,sets){ const s=getSetStore(); s[`${dayId}:${exId}`]=sets.sort((a,b)=>a-b); save(STORE.sets,s); }
+function toggleSet(dayId,exId,setIndex){
+  const done=getDoneSets(dayId,exId);
+  const next=done.includes(setIndex)?done.filter(x=>x!==setIndex):[...done,setIndex];
+  setDoneSets(dayId,exId,next); refreshWorkoutRenders();
+}
+function markNextSet(dayId,exId){
+  const exercise=findExercise(exId); const done=getDoneSets(dayId,exId);
+  const nextIndex=Array.from({length:exercise.sets},(_,i)=>i).find(i=>!done.includes(i));
+  if(nextIndex===undefined){ setDoneSets(dayId,exId,[]); toast('Serie azzerate per questo esercizio.'); }
+  else { setDoneSets(dayId,exId,[...done,nextIndex]); toast(`Serie ${nextIndex+1} completata.`); }
+  refreshWorkoutRenders();
+}
+function refreshWorkoutRenders(){ renderToday(); renderWorkouts(); if(state.guided) updateGuidedContent(); }
+function findExercise(id){ return workouts.flatMap(d=>d.exercises).find(e=>e.id===id) || workouts[0].exercises[0]; }
+function findDay(id){ return workouts.find(d=>d.id===id) || workouts[0]; }
+
+function renderExtra(){
+  $('#extraPlans').innerHTML=extraPlans.map((p,idx)=>`
+    <article class="extra-card">
+      <p class="mini">${p.frequency}</p>
+      <h3>${p.title}</h3>
+      <span class="tag green">${p.time}</span>
+      <ol>${p.items.map(i=>`<li>${i}</li>`).join('')}</ol>
+      <p class="exercise-note">${p.note}</p>
+      <div class="exercise-actions"><button class="primary" onclick="toast('Extra ${idx+1} segnato come promemoria: fai solo se recuperi bene.')">Segna promemoria</button></div>
+    </article>`).join('');
 }
 
-function initOpeners(){
-  document.body.addEventListener('click',e=>{
-    const btn=e.target.closest('[data-open]');
-    const gbtn=e.target.closest('[data-open-guide]');
-    const trackBtn=e.target.closest('[data-track]');
-    const restBtn=e.target.closest('[data-rest]');
-    if(btn) openExerciseModal(btn.dataset.open);
-    if(gbtn) openGuideModal(gbtn.dataset.openGuide);
-    if(trackBtn) openTrackingModal(trackBtn.dataset.track);
-    if(restBtn){
-      timerSeconds = timerRemaining = Number(restBtn.dataset.rest);
-      updateTimerDisplay();
-      document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('active', Number(b.dataset.seconds)===timerSeconds));
-      activateTab('timer');
-      if(timerInt){ clearInterval(timerInt); timerInt=null; }
-      document.getElementById('startTimer').click();
-    }
-    const nav=e.target.closest('.nav-btn');
-    if(nav) activateTab(nav.dataset.tab);
-    const qnav=e.target.closest('.quick-nav');
-    if(qnav) activateTab(qnav.dataset.targettab);
-  });
+function renderLibrary(){
+  const q=($('#searchExercises').value||'').toLowerCase().trim();
+  const seen=new Map();
+  workouts.flatMap(d=>d.exercises).forEach(e=>{ if(!seen.has(e.id)) seen.set(e.id,e); });
+  const list=[...seen.values()].filter(e=>!q || `${e.name} ${e.group} ${e.note}`.toLowerCase().includes(q));
+  $('#exerciseLibrary').innerHTML=list.map(e=>`
+    <article class="library-card">
+      <h4>${e.name}</h4>
+      <p>${e.group} · ${e.sets}×${e.reps} · recupero ${e.rest}</p>
+      <div class="exercise-actions"><button class="details-btn" data-ex="${e.id}">Apri guida</button></div>
+    </article>`).join('');
+  bindExerciseButtons($('#exerciseLibrary'));
 }
-function activateTab(tab){ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id===`tab-${tab}`)); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); window.scrollTo({top:0,behavior:'smooth'}); }
-function initDayPicker(){ const picker=document.getElementById('dayPicker'); picker.innerHTML=workouts.map(w=>`<option value="${w.id}">${w.id}</option>`).join(''); const current=workouts[0]; document.getElementById('todayTitle').textContent=current.id; renderTodayWorkout(current); picker.addEventListener('change',()=>{ const workout=workouts.find(w=>w.id===picker.value)||workouts[0]; document.getElementById('todayTitle').textContent=workout.id; renderTodayWorkout(workout); }); }
-function initSearch(){ const input=document.getElementById('searchExercises'); input.addEventListener('input',()=>renderExerciseLibrary(input.value)); }
-let timerSeconds=90, timerRemaining=90, timerInt=null; function formatTime(sec){ const m=String(Math.floor(sec/60)).padStart(2,'0'); const s=String(sec%60).padStart(2,'0'); return `${m}:${s}`; } function updateTimerDisplay(){ document.getElementById('timerDisplay').textContent=formatTime(timerRemaining); }
-function initTimer(){ document.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',()=>{ document.querySelectorAll('.preset').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); timerSeconds=timerRemaining=Number(btn.dataset.seconds); updateTimerDisplay(); })); document.getElementById('startTimer').onclick=()=>{ if(timerInt) return; timerInt=setInterval(()=>{ timerRemaining--; updateTimerDisplay(); if(timerRemaining<=0){ clearInterval(timerInt); timerInt=null; timerRemaining=0; updateTimerDisplay(); } },1000); }; document.getElementById('pauseTimer').onclick=()=>{ clearInterval(timerInt); timerInt=null; }; document.getElementById('resetTimer').onclick=()=>{ clearInterval(timerInt); timerInt=null; timerRemaining=timerSeconds; updateTimerDisplay(); }; updateTimerDisplay(); }
-function adviceForRecord(rec){ return rec.topRange ? ['up','Aumenta peso'] : ['keep','Mantieni']; }
-function renderProgress(){ const wrap=document.getElementById('progressTable'); wrap.innerHTML=Object.entries(exercises).map(([id,ex])=>{ const rec=getRecord(id); const related=workouts.flatMap(w=>w.exercises).find(e=>e.id===id); const high=related?rangeHighFromReps(related.reps):''; const [cls,txt]=adviceForRecord(rec); return `<div class="progress-row v5"><div><strong>${ex.short}</strong><div class="small">Target iniziale: ${ex.startWeight}${high?` · range alto: ${high}`:''}</div></div><input data-field="weight" data-id="${id}" value="${rec.weight||''}" aria-label="Peso ${ex.name}"><input data-field="notes" data-id="${id}" value="${rec.notes||''}" placeholder="note / reps"><div><label class="check-line"><input type="checkbox" data-field="topRange" data-id="${id}" ${rec.topRange?'checked':''}> range alto completato</label><span class="advice ${cls}">${txt}</span></div></div>`; }).join(''); wrap.querySelectorAll('input').forEach(inp=>inp.onchange=()=>{ const rec=getRecord(inp.dataset.id); rec[inp.dataset.field]=inp.type==='checkbox'?inp.checked:inp.value; saveProgress(); }); }
-function renderDiet(filter='all'){ const wrap=document.getElementById('dietList'); const list=dietPlan.filter(d=>filter==='all'||d.week===filter); wrap.innerHTML=list.map(d=>`<article class="diet-card"><h3>Giorno ${d.day}</h3><div class="meal-grid">${d.meals.map(m=>`<div class="meal"><strong>${m[0]}</strong>${m[1]}</div>`).join('')}</div><div class="diet-summary"><span>${d.kcal}</span><span>${d.protein}</span></div></article>`).join(''); }
-function bindDietFilters(){ document.querySelectorAll('.diet-filter').forEach(btn=>btn.onclick=()=>{ document.querySelectorAll('.diet-filter').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderDiet(btn.dataset.dietfilter); }); }
-function renderMeasurements(){ const list=document.getElementById('measureList'); const canvas=document.getElementById('measureChart'); list.innerHTML=measures.slice(-5).reverse().map(m=>`<div class="mini-row"><div><strong>${m.weight} kg</strong> · ${m.waist} cm</div><small>${m.date}</small></div>`).join('') || '<p class="muted">Aggiungi la prima misurazione.</p>'; const ctx=canvas.getContext('2d'); canvas.width=canvas.clientWidth*devicePixelRatio; canvas.height=170*devicePixelRatio; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); ctx.clearRect(0,0,canvas.clientWidth,170); ctx.fillStyle='#f8fbff'; ctx.fillRect(0,0,canvas.clientWidth,170); const data=measures.slice(-10); ctx.strokeStyle='rgba(148,163,184,.35)'; ctx.lineWidth=1; for(let y=30;y<160;y+=32){ ctx.beginPath(); ctx.moveTo(12,y); ctx.lineTo(canvas.clientWidth-12,y); ctx.stroke(); } if(data.length<2){ ctx.fillStyle='#64748b'; ctx.font='14px system-ui'; ctx.fillText('Servono almeno 2 misurazioni per il grafico.',18,88); return; } const weights=data.map(d=>Number(d.weight)), waists=data.map(d=>Number(d.waist)); function draw(vals,color,label,offset){ const min=Math.min(...vals), max=Math.max(...vals), pad=max===min?1:(max-min)*.15; ctx.strokeStyle=color; ctx.lineWidth=3; ctx.beginPath(); vals.forEach((v,i)=>{ const x=18+i*(canvas.clientWidth-36)/(vals.length-1); const y=145-((v-(min-pad))/(max-min+pad*2))*115; if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.stroke(); ctx.fillStyle=color; ctx.font='12px system-ui'; ctx.fillText(label,18,18+offset); } draw(weights,'#2563eb','Peso',0); draw(waists,'#7c3aed','Girovita',16); }
-function addMeasure(){ const w=document.getElementById('measureWeight'), waist=document.getElementById('measureWaist'); if(!w.value||!waist.value){ alert('Inserisci peso e girovita.'); return; } measures.push({date:new Date().toLocaleDateString('it-IT'), weight:Number(w.value), waist:Number(waist.value)}); saveMeasures(); w.value=''; waist.value=''; renderMeasurements(); }
-function renderHistory(){ const day=document.getElementById('historyDay'), list=document.getElementById('historyList'); if(day.options.length===0) day.innerHTML=workouts.map(w=>`<option value="${w.id}">${w.id}</option>`).join(''); list.innerHTML=historyLog.slice(-8).reverse().map(h=>`<div class="mini-row"><div><strong>${h.day}</strong><br><small>${h.notes||'Allenamento registrato'}</small></div><small>${h.date}</small></div>`).join('') || '<p class="muted">Nessun allenamento registrato.</p>'; }
-function addHistory(){ const d=document.getElementById('historyDay'), n=document.getElementById('historyNotes'); historyLog.push({date:new Date().toLocaleDateString('it-IT'), day:d.value, notes:n.value}); saveHistory(); n.value=''; renderHistory(); }
-function initProgressExtras(){ document.getElementById('addMeasure').onclick=addMeasure; document.getElementById('addHistory').onclick=addHistory; document.getElementById('resetProgress').onclick=()=>{ if(confirm('Vuoi azzerare i carichi salvati?')){ progress={}; saveProgress(); renderProgress(); } }; renderMeasurements(); renderHistory(); }
-function initModal(){ document.getElementById('closeModal').onclick=()=>document.getElementById('exerciseModal').close(); document.getElementById('exerciseModal').addEventListener('click',e=>{ const rect=e.currentTarget.getBoundingClientRect(); if(e.clientY<rect.top||e.clientY>rect.bottom||e.clientX<rect.left||e.clientX>rect.right){ e.currentTarget.close(); } }); }
-function initInstall(){ let deferredPrompt=null; const btn=document.getElementById('installBtn'); window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredPrompt=e; btn.classList.remove('hidden'); }); btn.onclick=async()=>{ if(!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; btn.classList.add('hidden'); }; }
-function registerSW(){ if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js').catch(()=>{}); } }
-function initMetrics(){ const metric=document.getElementById('metricExercises'); if(metric) metric.textContent=Object.keys(exercises).length; }
-function init(){ initTrackingEvents(); initMetrics(); initDayPicker(); renderWorkoutDays(); renderGuideHighlights(); renderExerciseLibrary(); initSearch(); initOpeners(); initTimer(); renderProgress(); renderDiet(); bindDietFilters(); initProgressExtras(); initModal(); initInstall(); registerSW(); }
-document.addEventListener('DOMContentLoaded', init);
+function openExercise(id){
+  const e=findExercise(id); const g=exerciseGuides[id] || guide(e.name,e.group,['Controlla la tecnica','Mantieni 1–2 reps in riserva'],['Non forzare se senti dolore']);
+  $('#modalTitle').textContent=g.name;
+  $('#modalEyebrow').textContent=g.kind;
+  $('#modalContent').innerHTML=`
+    <div class="tech-figure">${svgFigure(g.kind)}</div>
+    <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>
+    <p class="guided-sub">${e.note}</p>
+    <div class="modal-section"><h4>Cose da fare</h4><ul>${g.cues.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="modal-section"><h4>Errori da evitare</h4><ul>${g.errors.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="exercise-actions"><button class="primary" onclick="openGuided('${currentDayForExercise(id)}','${id}')">Avvia serie guidata</button></div>`;
+  $('#exerciseModal').showModal();
+}
+function currentDayForExercise(exId){ return workouts.find(d=>d.exercises.some(e=>e.id===exId))?.id || workouts[state.selectedDay].id; }
+function svgFigure(kind){
+  const color='currentColor';
+  const base=`<svg viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="${color}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".9">`;
+  const end='</g></svg>';
+  if(kind==='petto') return base+`<path d="M68 118h164"/><path d="M90 118c18-42 101-42 120 0"/><circle cx="116" cy="76" r="18"/><circle cx="184" cy="76" r="18"/><path d="M116 94v42M184 94v42"/><path d="M86 139h128"/>`+end;
+  if(kind==='dorso') return base+`<path d="M150 35v105"/><path d="M80 58c36 24 104 24 140 0"/><path d="M94 78c20 38 92 38 112 0"/><path d="M110 136h80"/>`+end;
+  if(kind==='gambe'||kind==='posteriori'||kind==='glutei') return base+`<circle cx="150" cy="35" r="14"/><path d="M150 50v52"/><path d="M150 102l-42 48"/><path d="M150 102l52 45"/><path d="M118 151h-28M202 148h28"/><path d="M130 76h40"/>`+end;
+  if(kind==='spalle') return base+`<circle cx="150" cy="44" r="17"/><path d="M150 62v66"/><path d="M102 88l48-16 48 16"/><path d="M102 88l-30 36M198 88l30 36"/>`+end;
+  if(kind==='core') return base+`<path d="M78 110h144"/><path d="M102 90h96"/><circle cx="150" cy="56" r="17"/><path d="M150 73v58"/><path d="M112 132h76"/>`+end;
+  return base+`<circle cx="150" cy="42" r="17"/><path d="M150 60v78"/><path d="M104 82h92"/><path d="M124 144h52"/>`+end;
+}
+
+function openGuided(dayId,exId){
+  if ($('#exerciseModal').open) $('#exerciseModal').close();
+  state.guided={dayId,exId};
+  updateGuidedContent();
+  $('#guidedModal').showModal();
+}
+function updateGuidedContent(){
+  if(!state.guided) return;
+  const {dayId,exId}=state.guided; const e=findExercise(exId); const done=getDoneSets(dayId,exId);
+  const next=Array.from({length:e.sets},(_,i)=>i).find(i=>!done.includes(i));
+  const complete=next===undefined;
+  $('#guidedTitle').textContent=e.name;
+  $('#guidedEyebrow').textContent=findDay(dayId).name;
+  $('#guidedContent').innerHTML=`
+    <div class="guided-box">
+      <div class="guided-dots">${Array.from({length:e.sets},(_,i)=>`<span class="series-dot ${done.includes(i)?'done':''}">${i+1}</span>`).join('')}</div>
+      <p class="guided-sub">${complete?'Tutte le serie completate.':`Prossima serie: ${next+1} di ${e.sets}. Range consigliato: ${e.reps}. Recupero: ${e.rest}.`}</p>
+      <div class="guided-count">${complete?'✓':`${next+1}/${e.sets}`}</div>
+      <p class="guided-sub">${e.note}</p>
+      ${complete?`<button class="guided-primary" onclick="finishGuided()">Chiudi esercizio</button>`:`<button class="guided-primary" onclick="completeGuidedSet()">Serie completata</button>`}
+    </div>`;
+}
+function completeGuidedSet(){
+  if(!state.guided) return;
+  const {dayId,exId}=state.guided; const e=findExercise(exId); const done=getDoneSets(dayId,exId);
+  const next=Array.from({length:e.sets},(_,i)=>i).find(i=>!done.includes(i));
+  if(next===undefined){ updateGuidedContent(); return; }
+  setDoneSets(dayId,exId,[...done,next]);
+  refreshWorkoutRenders();
+  const after=getDoneSets(dayId,exId);
+  if(after.length>=e.sets){ beep(); toast('Esercizio completato.'); updateGuidedContent(); return; }
+  $('#guidedModal').close();
+  showTab('timer');
+  $('#timerTitle').textContent=`Recupero — ${e.name}`;
+  $('#timerHint').textContent='Quando il recupero termina, torni automaticamente alla schermata dell’esercizio.';
+  setTimer(e.restSeconds);
+  startTimer(()=>{ openGuided(dayId,exId); $('#timerTitle').textContent='Recupero'; $('#timerHint').textContent='Scegli il recupero e premi Avvia. Con schermo bloccato il browser può sospendere l’app: usa “Tieni schermo acceso” quando disponibile.'; });
+}
+function finishGuided(){ state.guided=null; $('#guidedModal').close(); }
+
+function bindTimer(){
+  $$('.preset').forEach(btn=>btn.addEventListener('click',()=>{ setTimer(Number(btn.dataset.seconds)); $$('.preset').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }));
+  $('#startTimer').addEventListener('click',()=>startTimer());
+  $('#pauseTimer').addEventListener('click',pauseTimer);
+  $('#resetTimer').addEventListener('click',()=>resetTimer());
+  $('#soundTestBtn').addEventListener('click',()=>{ unlockAudio(); beep(); toast('Suono attivato.'); });
+  $('#notifyBtn').addEventListener('click',requestNotifications);
+  $('#wakeLockBtn').addEventListener('click',toggleWakeLock);
+  updateTimerDisplay();
+}
+function setTimer(sec){ state.timerSeconds=sec; state.timerRemaining=sec; state.timerEnd=null; updateTimerDisplay(); }
+function startTimer(onDone){
+  unlockAudio();
+  if(state.timerRunning) return;
+  state.timerRunning=true; state.timerPaused=false; state.timerEnd=Date.now()+state.timerRemaining*1000; state.onTimerDone=onDone || null;
+  requestWakeLock(false);
+  tickTimer();
+}
+function pauseTimer(){
+  if(!state.timerRunning) return;
+  state.timerRunning=false; state.timerPaused=true; clearTimeout(state.timerId);
+  if(state.timerEnd) state.timerRemaining=Math.max(0,Math.ceil((state.timerEnd-Date.now())/1000));
+  updateTimerDisplay();
+}
+function resetTimer(sec=state.timerSeconds){
+  state.timerRunning=false; state.timerPaused=false; clearTimeout(state.timerId); state.timerRemaining=sec; state.timerEnd=null; updateTimerDisplay();
+}
+function tickTimer(){
+  clearTimeout(state.timerId);
+  if(!state.timerRunning || !state.timerEnd) return;
+  state.timerRemaining=Math.max(0,Math.ceil((state.timerEnd-Date.now())/1000));
+  updateTimerDisplay();
+  if(state.timerRemaining<=0){
+    state.timerRunning=false; beep(); vibrate(); showDoneNotification();
+    const cb=state.onTimerDone; state.onTimerDone=null;
+    if(cb) setTimeout(cb,450);
+    return;
+  }
+  state.timerId=setTimeout(tickTimer,250);
+}
+function updateTimerDisplay(){
+  const m=String(Math.floor(state.timerRemaining/60)).padStart(2,'0');
+  const s=String(state.timerRemaining%60).padStart(2,'0');
+  $('#timerDisplay').textContent=`${m}:${s}`;
+  const pct=state.timerSeconds?((state.timerSeconds-state.timerRemaining)/state.timerSeconds)*100:0;
+  $('.timer-ring')?.style.setProperty('--progress',`${pct}%`);
+}
+function handleVisibility(){
+  if(state.timerRunning && state.timerEnd){ tickTimer(); }
+  if(document.visibilityState==='visible' && state.wakeLock){ requestWakeLock(false); }
+}
+function unlockAudio(){
+  try{
+    if(!state.audioCtx) state.audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    if(state.audioCtx.state==='suspended') state.audioCtx.resume();
+    state.audioReady=true;
+  }catch{}
+}
+function beep(){
+  try{
+    unlockAudio(); const ctx=state.audioCtx; if(!ctx) return;
+    [0,.18,.36].forEach((offset)=>{
+      const osc=ctx.createOscillator(); const gain=ctx.createGain();
+      osc.type='sine'; osc.frequency.setValueAtTime(880,ctx.currentTime+offset);
+      gain.gain.setValueAtTime(.0001,ctx.currentTime+offset);
+      gain.gain.exponentialRampToValueAtTime(.32,ctx.currentTime+offset+.02);
+      gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+offset+.13);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(ctx.currentTime+offset); osc.stop(ctx.currentTime+offset+.14);
+    });
+  }catch{}
+}
+function vibrate(){ if(navigator.vibrate) navigator.vibrate([220,80,220]); }
+function requestNotifications(){
+  if(!('Notification' in window)){ toast('Notifiche non supportate da questo browser.'); return; }
+  Notification.requestPermission().then(p=>toast(p==='granted'?'Notifiche attivate.':'Notifiche non autorizzate.'));
+}
+function showDoneNotification(){
+  if('Notification' in window && Notification.permission==='granted'){
+    try{ new Notification('Recupero finito', {body:'Torna alla serie successiva.', icon:'assets/icon-192.png'}); }catch{}
+  }
+}
+async function requestWakeLock(showToast=true){
+  try{
+    if(!('wakeLock' in navigator)){ if(showToast) toast('Wake Lock non disponibile su questo browser.'); return; }
+    state.wakeLock=await navigator.wakeLock.request('screen');
+    state.wakeLock.addEventListener('release',()=>{});
+    $('#wakeLockBtn').textContent='Schermo attivo';
+    if(showToast) toast('Schermo mantenuto acceso finché l’app resta aperta.');
+  }catch(err){ if(showToast) toast('Non posso impedire il blocco schermo su questo dispositivo.'); }
+}
+async function toggleWakeLock(){
+  if(state.wakeLock && !state.wakeLock.released){ await state.wakeLock.release(); state.wakeLock=null; $('#wakeLockBtn').textContent='Tieni schermo acceso'; toast('Wake Lock disattivato.'); }
+  else requestWakeLock(true);
+}
+
+function bindDiet(){
+  $$('.diet-filter').forEach(btn=>btn.addEventListener('click',()=>{ $$('.diet-filter').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderDiet(btn.dataset.dietfilter); }));
+}
+function renderDiet(filter='all'){
+  const list=dietPlan.filter(d=>filter==='all'||(filter==='week1'?d.n<=7:filter==='week2'?d.n>7:d.sweet));
+  $('#dietList').innerHTML=list.map(d=>`
+    <article class="diet-day">
+      <p class="mini">Giorno ${d.n} · ${d.focus}</p><h3>${d.sweet?'Allenamento':'Recupero'} ${d.sweet?'· più carbo attorno alla seduta':''}</h3>
+      ${['Colazione','Pranzo','Merenda','Cena'].map((meal,i)=>`<div class="meal"><strong>${meal}</strong><p>${d.meals[i]}</p></div>`).join('')}
+    </article>`).join('');
+}
+function bindCarbInputs(){ ['swapFrom','swapTo','swapGrams'].forEach(id=>$('#'+id).addEventListener('input',renderSwap)); }
+function renderCarbTool(){
+  const opts=carbs.map(c=>`<option value="${c.id}">${c.name} (${c.note})</option>`).join('');
+  $('#swapFrom').innerHTML=opts; $('#swapTo').innerHTML=opts;
+  $('#swapFrom').value='riso-crudo'; $('#swapTo').value='pasta-cruda'; $('#swapGrams').value='80';
+  bindCarbInputs(); renderSwap(); renderQuickCarbTable();
+}
+function renderSwap(){
+  const from=carbs.find(c=>c.id===$('#swapFrom').value); const to=carbs.find(c=>c.id===$('#swapTo').value);
+  const grams=Number($('#swapGrams').value)||0; const kcal=grams*from.kcal/100; const toGrams=kcal/(to.kcal/100);
+  $('#swapResult').innerHTML=`<strong>${grams} g di ${from.name}</strong> ≈ <strong>${Math.round(toGrams)} g di ${to.name}</strong><br><span class="muted">Energia stimata: circa ${Math.round(kcal)} kcal. ${from.note} → ${to.note}.</span>`;
+}
+function renderQuickCarbTable(){
+  const rows=[
+    ['Riso crudo 80 g','Pasta cruda 80–85 g','Patate cotte 330–350 g','Polenta cotta 330–350 g','Farina polenta 80 g'],
+    ['Pasta cruda 70 g','Riso crudo 68–72 g','Patate cotte 285–300 g','Polenta cotta 285–300 g','Pane 90 g'],
+    ['Patate cotte 300 g','Pasta cruda 70–75 g','Riso crudo 70 g','Polenta cotta 300 g','Noodles crudi 70 g'],
+    ['Polenta cotta 300 g','Pasta cruda 70–75 g','Riso crudo 70 g','Patate cotte 300 g','Farina polenta 60–65 g secca']
+  ];
+  $('#quickCarbTable').innerHTML=`<table><thead><tr><th>Nel piano</th><th colspan="4">Alternative pratiche</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+
+function bindProgress(){
+  $('#addMeasure').addEventListener('click',addMeasure);
+  $('#addHistory').addEventListener('click',addHistory);
+  $('#resetProgress').addEventListener('click',()=>{ if(confirm('Azzero misure, cronologia, carichi e serie completate?')){ Object.values(STORE).forEach(k=>localStorage.removeItem(k)); renderAll(); toast('Dati azzerati.'); } });
+}
+function addMeasure(){
+  const weight=Number($('#measureWeight').value); const waist=Number($('#measureWaist').value);
+  if(!weight&&!waist){ toast('Inserisci peso o girovita.'); return; }
+  const list=load(STORE.measures,[]); list.unshift({date:new Date().toLocaleDateString('it-IT'),weight,waist}); save(STORE.measures,list.slice(0,30));
+  $('#measureWeight').value=''; $('#measureWaist').value=''; renderProgress(); toast('Misura salvata.');
+}
+function addHistory(){
+  const day=$('#historyDay').value; const notes=$('#historyNotes').value.trim();
+  const list=load(STORE.history,[]); list.unshift({date:new Date().toLocaleDateString('it-IT'),day,notes}); save(STORE.history,list.slice(0,40)); $('#historyNotes').value=''; renderProgress(); toast('Allenamento registrato.');
+}
+function renderProgress(){
+  const measures=load(STORE.measures,[]); const history=load(STORE.history,[]); const loads=load(STORE.loads,{});
+  $('#measureList').innerHTML=measures.slice(0,8).map(m=>`<div class="mini-item">${m.date} · Peso ${m.weight||'-'} kg · Vita ${m.waist||'-'} cm</div>`).join('') || '<div class="mini-item">Nessuna misura salvata.</div>';
+  $('#historyList').innerHTML=history.slice(0,8).map(h=>`<div class="mini-item">${h.date} · ${h.day}${h.notes?' · '+escapeHtml(h.notes):''}</div>`).join('') || '<div class="mini-item">Nessun allenamento registrato.</div>';
+  renderChart(measures);
+  const unique=[...new Map(workouts.flatMap(d=>d.exercises).map(e=>[e.id,e])).values()];
+  $('#progressTable').innerHTML=`<table class="progress-table"><thead><tr><th>Esercizio</th><th>Carico attuale</th><th>Range alto?</th></tr></thead><tbody>${unique.map(e=>`
+    <tr><td>${e.name}<br><span class="muted">${e.sets}×${e.reps}</span></td><td><input value="${loads[e.id]||''}" placeholder="es. 16 kg" data-loadid="${e.id}" /></td><td><button class="ghost small" data-high="${e.id}">Completato</button></td></tr>`).join('')}</tbody></table>`;
+  $$('[data-loadid]').forEach(inp=>inp.addEventListener('change',()=>{ const l=load(STORE.loads,{}); l[inp.dataset.loadid]=inp.value; save(STORE.loads,l); toast('Carico salvato.'); }));
+  $$('[data-high]').forEach(btn=>btn.addEventListener('click',()=>toast('Se hai chiuso tutte le serie al limite alto con tecnica pulita, aumenta poco il carico la prossima volta.')));
+}
+function renderChart(measures){
+  const canvas=$('#measureChart'); const ctx=canvas.getContext('2d'); const w=canvas.width=canvas.clientWidth*devicePixelRatio; const h=canvas.height=170*devicePixelRatio; ctx.clearRect(0,0,w,h);
+  ctx.scale(devicePixelRatio,devicePixelRatio); const W=canvas.clientWidth,H=170;
+  ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=1; for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(0,i*H/4);ctx.lineTo(W,i*H/4);ctx.stroke();}
+  const pts=measures.slice(0,12).reverse().filter(m=>m.weight);
+  if(pts.length<2){ ctx.fillStyle='rgba(255,255,255,.45)'; ctx.font='13px system-ui'; ctx.fillText('Inserisci almeno 2 pesate per vedere il grafico.',14,86); return; }
+  const vals=pts.map(p=>p.weight); const min=Math.min(...vals)-1,max=Math.max(...vals)+1;
+  ctx.strokeStyle='#38bdf8'; ctx.lineWidth=3; ctx.beginPath();
+  pts.forEach((p,i)=>{ const x=14+i*(W-28)/(pts.length-1); const y=H-18-((p.weight-min)/(max-min))*(H-36); if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y); }); ctx.stroke();
+}
+function escapeHtml(str){ return str.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+
+function setupInstallPrompt(){
+  let deferred;
+  window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferred=e; $('#installBtn').classList.remove('hidden'); });
+  $('#installBtn').addEventListener('click',async()=>{ if(!deferred) return; deferred.prompt(); await deferred.userChoice; deferred=null; $('#installBtn').classList.add('hidden'); });
+}
+function toast(msg){
+  const old=$('.toast'); if(old) old.remove();
+  const el=document.createElement('div'); el.className='toast'; el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(),2600);
+}
+
+window.openGuided=openGuided; window.completeGuidedSet=completeGuidedSet; window.finishGuided=finishGuided; window.toast=toast;
+window.addEventListener('load',init);
