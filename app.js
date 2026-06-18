@@ -1,9 +1,9 @@
-const VERSION = '9';
+const VERSION = '10';
 const STORE = {
-  sets: 'coach_v9_sets',
-  measures: 'coach_v9_measures',
-  history: 'coach_v9_history',
-  loads: 'coach_v9_loads'
+  sets: 'coach_v10_sets',
+  measures: 'coach_v10_measures',
+  history: 'coach_v10_history',
+  loads: 'coach_v10_loads'
 };
 
 const workouts = [
@@ -127,6 +127,51 @@ const carbs = [
   {id:'avena', name:'Avena', kcal:380, note:'peso a crudo'}
 ];
 
+
+const exerciseImages = {
+  'panca-piana-manubri':'assets/panca_piana.png',
+  'panca-inclinata':'assets/panca_piana.png',
+  'push-up':'assets/pushup.png',
+  'push-up-rialzati':'assets/pushup.png',
+  'croci-cavo-manubri':'assets/panca_piana.png',
+  'dip-assistiti':'assets/dip.png',
+  'rematore-manubrio':'assets/rematore1.png',
+  'trazioni-prone':'assets/trazioni.png',
+  'pulldown':'assets/lat_machine_pulldown.png',
+  'pulldown-stretto':'assets/lat_machine_pulldown.png',
+  'rematore-cavo':'assets/rematore_cavo_basso.png',
+  'rematore-cavo-leggero':'assets/rematore_cavo_basso.png',
+  'goblet-squat':'assets/goblet_squat.png',
+  'bulgarian-split-squat':'assets/bulgarian_split_squat.png',
+  'rdl-manubri':'assets/rdl.png',
+  'rdl-pesante':'assets/rdl.png',
+  'affondi-indietro':'assets/affondi_indietro.png',
+  'calf-raise':'assets/calf_raise.png',
+  'plank':'assets/plank.png',
+  'hip-thrust':'assets/hip_thrust.png',
+  'step-up':'assets/step_up_panca.png',
+  'sliding-curl':'assets/sliding_leg_curl.png',
+  'cable-crunch':'assets/cable_crunch.png',
+  'pallof-press':'assets/pallof_press.png',
+  'shoulder-press':'assets/shoulder_press.png',
+  'face-pull':'assets/face_pull.png',
+  'rear-delt-fly':'assets/rear_delt_fly.png',
+  'alzate-laterali':'assets/alzate_laterali.png',
+  'curl-barra':'assets/curl_barra_corta.png',
+  'curl-inclinato':'assets/curl_barra_corta.png',
+  'pushdown-fune':'assets/pushdown_tricipiti.png',
+  'estensioni-tricipiti':'assets/pushdown_tricipiti.png',
+  'hanging-knee-raise':'assets/hanging_knee_raise.png'
+};
+
+const posterGuides = [
+  {id:'guideForearmsA', name:'Guida avambracci A', short:'Hammer curl · Wrist curl · Reverse wrist curl', image:'assets/guida_avambracci_a_full.png', area:'avambracci', use:'Mini routine A per gli avambracci.', frequency:'0–1 volta/settimana', content:'Hammer curl 3×10–12, Wrist curl 2–3×15–20, Reverse wrist curl 2–3×15–20, chiusura con Farmer hold 3×30–45 sec.', tip:'Usala solo se vuoi un richiamo tecnico: non serve spingere forte in questa fase.'},
+  {id:'guideForearmsB', name:'Guida avambracci B', short:'Farmer hold · Reverse curl · Prono-supinazione', image:'assets/guida_avambracci_b_full.png', area:'avambracci', use:'Mini routine B per presa e controllo.', frequency:'0–1 volta/settimana', content:'Reverse curl 3×10–15, Prono-supinazione 2×12–15/lato, Dead hang 3×20–40 sec, Estensioni dita 2×20–30.', tip:'Se senti l’avambraccio già grosso o affaticato, meglio tenerla molto leggera o saltarla.'},
+  {id:'guideNeckA', name:'Guida collo base', short:'Dead hang · Estensioni dita · Chin tuck', image:'assets/guida_deadhang_chintuck_full.png', area:'collo', use:'Poster rapido con i fondamentali leggeri per postura e controllo.', frequency:'quando vuoi', content:'Chin tuck, dead hang moderato ed estensioni dita come richiamo di equilibrio.', tip:'Il collo non va forzato: intensità moderata e stop immediato se compare fastidio.'},
+  {id:'guideNeckIso', name:'Guida isometrie collo', short:'Frontale · Posteriore · Laterale', image:'assets/guida_collo_isometrie_full.png', area:'collo', use:'Poster delle isometrie del collo.', frequency:'0–1 volta/settimana', content:'2–3 serie da 10–20 sec per direzione, intensità 30–60%.', tip:'Ottimo come riferimento visivo, non come lavoro urgente da inserire sempre.'},
+  {id:'guideSummary', name:'Riepilogo avambracci e collo', short:'Routine A/B e routine collo', image:'assets/guida_riepilogo_avambracci_collo_full.png', area:'extra', use:'Poster riepilogativo con routine complete.', frequency:'consultazione libera', content:'Riassume giorni, serie e progressioni leggere per avambracci e collo.', tip:'Tieni aperto questo poster se vuoi un colpo d’occhio unico su tutta la parte extra.'}
+];
+
 const exerciseGuides = {
   'panca-piana-manubri': guide('Panca piana manubri','petto',['Scapole addotte e depresse','Piedi stabili, petto alto','Discesa lenta 2–3 secondi','Gomiti circa 45–60°'],['Non rimbalzare in basso','Non perdere le scapole','Non trasformarla in spinta di spalle']),
   'panca-inclinata': guide('Panca inclinata 30° manubri','petto',['Inclinazione moderata, circa 30°','Petto alto e scapole stabili','Manubri scendono verso alto petto'],['Inclinazione troppo alta','Gomiti troppo larghi','Spinta corta senza controllo']),
@@ -195,7 +240,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=9').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=10').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -290,16 +335,43 @@ function refreshWorkoutRenders(){ renderToday(); renderWorkouts(); if(state.guid
 function findExercise(id){ return workouts.flatMap(d=>d.exercises).find(e=>e.id===id) || workouts[0].exercises[0]; }
 function findDay(id){ return workouts.find(d=>d.id===id) || workouts[0]; }
 
+function exerciseImage(id){ return exerciseImages[id] || ''; }
+function posterGuide(id){ return posterGuides.find(p=>p.id===id); }
+function mediaFigure(id,kind,name,cls='exercise-visual'){ const img=exerciseImage(id); return img ? `<img class="${cls}" src="${img}" alt="${name}" loading="lazy" />` : `<div class="tech-figure">${svgFigure(kind)}</div>`; }
+
 function renderExtra(){
-  $('#extraPlans').innerHTML=extraPlans.map((p,idx)=>`
-    <article class="extra-card">
-      <p class="mini">${p.frequency}</p>
-      <h3>${p.title}</h3>
-      <span class="tag green">${p.time}</span>
-      <ol>${p.items.map(i=>`<li>${i}</li>`).join('')}</ol>
-      <p class="exercise-note">${p.note}</p>
-      <div class="exercise-actions"><button class="primary" onclick="toast('Extra ${idx+1} segnato come promemoria: fai solo se recuperi bene.')">Segna promemoria</button></div>
-    </article>`).join('');
+  $('#extraPlans').innerHTML=`
+    <div class="extra-grid">
+      ${extraPlans.map((p,idx)=>`
+        <article class="extra-card">
+          <p class="mini">${p.frequency}</p>
+          <h3>${p.title}</h3>
+          <span class="tag green">${p.time}</span>
+          <ol>${p.items.map(i=>`<li>${i}</li>`).join('')}</ol>
+          <p class="exercise-note">${p.note}</p>
+          <div class="exercise-actions"><button class="primary" onclick="toast('Extra ${idx+1} segnato come promemoria: fai solo se recuperi bene.')">Segna promemoria</button></div>
+        </article>`).join('')}
+    </div>
+    <div class="extra-posters-block">
+      <div class="section-head compact">
+        <div>
+          <p class="mini">Poster illustrati</p>
+          <h3>Guide visive ripristinate</h3>
+        </div>
+        <p class="muted">Le immagini della v8 sono state re-inserite qui nella v10.</p>
+      </div>
+      <div class="library-grid poster-grid">
+        ${posterGuides.map(g=>`
+          <article class="library-card poster-card">
+            <img class="library-thumb" src="${g.image}" alt="${g.name}" loading="lazy" />
+            <h4>${g.name}</h4>
+            <p>${g.short}</p>
+            <div class="exercise-meta"><span class="tag">${g.area}</span><span class="tag green">${g.frequency}</span></div>
+            <div class="exercise-actions"><button class="poster-btn" data-poster="${g.id}">Apri poster</button></div>
+          </article>`).join('')}
+      </div>
+    </div>`;
+  $$('.poster-btn', $('#extraPlans')).forEach(b=>b.addEventListener('click',()=>openPoster(b.dataset.poster)));
 }
 
 function renderLibrary(){
@@ -309,6 +381,7 @@ function renderLibrary(){
   const list=[...seen.values()].filter(e=>!q || `${e.name} ${e.group} ${e.note}`.toLowerCase().includes(q));
   $('#exerciseLibrary').innerHTML=list.map(e=>`
     <article class="library-card">
+      ${mediaFigure(e.id,e.group,e.name,'library-thumb')}
       <h4>${e.name}</h4>
       <p>${e.group} · ${e.sets}×${e.reps} · recupero ${e.rest}</p>
       <div class="exercise-actions"><button class="details-btn" data-ex="${e.id}">Apri guida</button></div>
@@ -320,12 +393,25 @@ function openExercise(id){
   $('#modalTitle').textContent=g.name;
   $('#modalEyebrow').textContent=g.kind;
   $('#modalContent').innerHTML=`
-    <div class="tech-figure">${svgFigure(g.kind)}</div>
+    ${mediaFigure(id,g.kind,g.name,'modal-hero-image')}
     <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>
     <p class="guided-sub">${e.note}</p>
     <div class="modal-section"><h4>Cose da fare</h4><ul>${g.cues.map(x=>`<li>${x}</li>`).join('')}</ul></div>
     <div class="modal-section"><h4>Errori da evitare</h4><ul>${g.errors.map(x=>`<li>${x}</li>`).join('')}</ul></div>
     <div class="exercise-actions"><button class="primary" onclick="openGuided('${currentDayForExercise(id)}','${id}')">Avvia serie guidata</button></div>`;
+  $('#exerciseModal').showModal();
+}
+function openPoster(id){
+  const g=posterGuide(id); if(!g) return;
+  $('#modalTitle').textContent=g.name;
+  $('#modalEyebrow').textContent='Poster illustrato';
+  $('#modalContent').innerHTML=`
+    <img class="modal-hero-image poster-hero" src="${g.image}" alt="${g.name}" loading="lazy" />
+    <div class="exercise-meta"><span class="tag">${g.area}</span><span class="tag green">${g.frequency}</span></div>
+    <p class="guided-sub">${g.short}</p>
+    <div class="modal-section"><h4>Uso consigliato</h4><p>${g.use}</p></div>
+    <div class="modal-section"><h4>Contenuto</h4><p>${g.content}</p></div>
+    <div class="modal-section"><h4>Nota coach</h4><p>${g.tip}</p></div>`;
   $('#exerciseModal').showModal();
 }
 function currentDayForExercise(exId){ return workouts.find(d=>d.exercises.some(e=>e.id===exId))?.id || workouts[state.selectedDay].id; }
@@ -558,5 +644,5 @@ function toast(msg){
   const el=document.createElement('div'); el.className='toast'; el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(),2600);
 }
 
-window.openGuided=openGuided; window.completeGuidedSet=completeGuidedSet; window.finishGuided=finishGuided; window.toast=toast;
+window.openGuided=openGuided; window.completeGuidedSet=completeGuidedSet; window.finishGuided=finishGuided; window.openPoster=openPoster; window.toast=toast;
 window.addEventListener('load',init);
