@@ -1,9 +1,9 @@
-const VERSION = '10';
+const VERSION = '11';
 const STORE = {
-  sets: 'coach_v10_sets',
-  measures: 'coach_v10_measures',
-  history: 'coach_v10_history',
-  loads: 'coach_v10_loads'
+  sets: 'coach_v11_sets',
+  measures: 'coach_v11_measures',
+  history: 'coach_v11_history',
+  loads: 'coach_v11_loads'
 };
 
 const workouts = [
@@ -240,7 +240,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=10').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=11').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -284,19 +284,25 @@ function renderWorkouts(){
 function exerciseCard(e,dayId){
   const done = getDoneSets(dayId,e.id);
   const allDone = done.length >= e.sets;
-  return `<article class="exercise-card" data-ex="${e.id}" data-day="${dayId}">
-    <div class="exercise-main">
-      <div>
+  const img = exerciseImage(e.id);
+  return `<article class="exercise-card has-preview" data-ex="${e.id}" data-day="${dayId}">
+    <div class="exercise-main with-preview">
+      ${img ? `<img class="exercise-preview" src="${img}" alt="${e.name}" loading="lazy" />` : ''}
+      <div class="exercise-info">
         <h4>${e.name}</h4>
         <div class="exercise-meta">
-          <span class="tag">${e.sets}×${e.reps}</span>
+          <span class="tag">${e.sets} serie</span>
+          <span class="tag">${e.reps}</span>
           <span class="tag green">${e.rest}</span>
-          <span class="tag warn">${e.load}</span>
         </div>
+        <p class="exercise-load">Peso iniziale: ${e.load}</p>
       </div>
-      <div class="series-tracker" aria-label="Serie completate">${seriesDots(dayId,e.id,e.sets)}</div>
     </div>
     <p class="exercise-note">${e.note}</p>
+    <div class="series-row">
+      <span class="series-label">Serie completate</span>
+      <div class="series-tracker" aria-label="Serie completate">${seriesDots(dayId,e.id,e.sets)}</div>
+    </div>
     <div class="exercise-actions">
       <button class="details-btn" data-ex="${e.id}">Dettagli</button>
       <button class="rest-btn" data-seconds="${e.restSeconds}">Recupero</button>

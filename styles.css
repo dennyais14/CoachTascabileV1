@@ -97,3 +97,20 @@ button{cursor:pointer;color:inherit}
   .library-thumb{aspect-ratio:5/4}
   .modal-hero-image{max-height:280px}
 }
+
+
+.exercise-card.has-preview{padding:16px}
+.exercise-main.with-preview{display:grid;grid-template-columns:92px 1fr;align-items:start;gap:14px}
+.exercise-preview{width:92px;height:92px;object-fit:cover;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);display:block;flex-shrink:0}
+.exercise-info{min-width:0}
+.exercise-info h4{margin:0 0 8px;line-height:1.15}
+.exercise-load{margin:0;color:var(--muted);font-size:14px;line-height:1.35}
+.series-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
+.series-label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.series-row .series-tracker{justify-content:flex-end}
+@media (max-width:640px){
+  .exercise-main.with-preview{grid-template-columns:76px 1fr;gap:12px}
+  .exercise-preview{width:76px;height:76px;border-radius:16px}
+  .series-row{align-items:flex-start;flex-direction:column}
+  .series-row .series-tracker{justify-content:flex-start}
+}

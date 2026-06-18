@@ -1,9 +1,9 @@
-const CACHE_NAME = 'coach-tascabile-v10-20260618';
+const CACHE_NAME = 'coach-tascabile-v11-20260618';
 const ASSETS = [
   './',
-  './index.html?v=10',
-  './styles.css?v=10',
-  './app.js?v=10',
+  './index.html?v=11',
+  './styles.css?v=11',
+  './app.js?v=11',
   './manifest.json',
   './assets/affondi_indietro.png',
   './assets/alzate_laterali.png',
@@ -66,6 +66,6 @@ self.addEventListener('fetch', event => {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => {});
       return response;
-    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=10')))
+    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=11')))
   );
 });

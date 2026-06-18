@@ -1,15 +1,14 @@
-COACH TASCABILE V10
+COACH TASCABILE V11
 Novità principali:
-- mantenute le modifiche della v9 (extra avambracci/collo separati, dieta flessibile, serie guidate, tracker per serie)
-- ripristinate le immagini esercizi e i poster illustrati della v8
-- sezione Esercizi con anteprime immagine
-- sezione Extra con poster illustrati avambracci/collo
-- aggiornato manifest e service worker per cache v10
+- mantenute le modifiche della v10
+- aggiunte le anteprime immagine direttamente nelle card degli esercizi, come richiesto sul modello della vecchia v5
+- mantenute le immagini nella libreria esercizi e nei poster extra
+- aggiornato manifest e service worker per cache v11
 
 Come aggiornare GitHub Pages:
-1) Decomprimi coach_tascabile_app_v10.zip.
-2) Entra nella cartella coach_tascabile_v10.
+1) Decomprimi coach_tascabile_app_v11.zip.
+2) Entra nella cartella coach_tascabile_v11.
 3) Carica su GitHub il contenuto interno della cartella, non la cartella intera.
 4) index.html deve stare nella root del repository.
-5) Dopo l’upload apri il sito con ?v=10 per evitare cache Safari.
+5) Dopo l’upload apri il sito con ?v=11 per evitare cache Safari.
 6) Se Safari mostra ancora la vecchia versione, elimina i dati sito di github.io e riapri l’icona Home.
