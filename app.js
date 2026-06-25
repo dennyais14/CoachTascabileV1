@@ -1,4 +1,4 @@
-const VERSION = '14';
+const VERSION = '14.1';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -172,6 +172,7 @@ const exerciseImages = {
   'estensioni-tricipiti':'assets/pushdown_tricipiti.png',
   'hanging-knee-raise':'assets/hanging_knee_raise.png',
   'overhead-triceps':'assets/overhead_triceps_extension.png',
+  'overhead-triceps-cable':'assets/overhead_triceps_cable.png',
   'ring-row':'assets/ring_row.png',
   'ring-pushup':'assets/ring_pushup.png',
   'ring-support-hold':'assets/ring_support_hold.png',
@@ -221,7 +222,8 @@ const exerciseGuides = {
   'pushdown-fune': guide('Pushdown fune','tricipiti',['Gomiti fermi','Apri la fune in basso','Controlla ritorno'],['Spalle avanti','Dondolio']),
   'estensioni-tricipiti': guide('Estensioni tricipiti','tricipiti',['Gomiti controllati','Negativa lenta','Estendi senza dolore'],['Aprire troppo i gomiti','Carico fuori controllo']),
   'hanging-knee-raise': guide('Hanging knee raise','core',['Bacino in retroversione','Movimento controllato','Scapole attive'],['Dondolare','Sollevare solo le gambe']),
-  'overhead-triceps': guide('Estensioni tricipiti sopra la testa','tricipiti',['Braccia sopra la testa','Gomiti stretti e fermi','Scendi lentamente in allungamento','Estendi senza inarcare la schiena'],['Carico troppo alto','Gomiti che si aprono','Dolore al gomito o alla spalla']),
+  'overhead-triceps': guide('Estensioni tricipiti sopra la testa con manubrio','tricipiti',['Braccia sopra la testa','Gomiti stretti e fermi','Scendi lentamente in allungamento','Estendi senza inarcare la schiena'],['Carico troppo alto','Gomiti che si aprono','Dolore al gomito o alla spalla']),
+  'overhead-triceps-cable': guide('Estensioni tricipiti sopra la testa al cavo','tricipiti',['Usa la fune e stai stabile','Gomiti stretti vicino alla testa','Allunga dietro la testa con controllo','Estendi senza slanci del busto'],['Carico eccessivo','Aprire i gomiti','Compensare con la schiena']),
   'ring-row': guide('Ring row agli anelli','dorso',['Corpo rigido','Tira gli anelli al petto','Scapole indietro e basse','Regola difficoltà inclinando il corpo'],['Bacino che cade','Tirare solo con bicipiti','Spalle alle orecchie']),
   'ring-pushup': guide('Ring push-up','petto',['Anelli bassi e stabili','Corpo in linea','Scendi controllato','Spingi senza perdere scapole'],['Profondità eccessiva subito','Gomiti troppo larghi','Bacino che crolla']),
   'ring-support-hold': guide('Support hold agli anelli','stabilità',['Braccia tese','Spalle depresse','Anelli vicini al corpo','Respira e resta fermo'],['Spalle alle orecchie','Gomiti piegati','Oscillare troppo']),
@@ -261,7 +263,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=14').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=14.1').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -440,6 +442,19 @@ function openExercise(id){
   const e=findExercise(id); const g=exerciseGuides[id] || guide(e.name,e.group,['Controlla la tecnica','Mantieni 1–2 reps in riserva'],['Non forzare se senti dolore']);
   $('#modalTitle').textContent=g.name;
   $('#modalEyebrow').textContent=g.kind;
+  if(id==='overhead-triceps'){
+    $('#modalContent').innerHTML=`
+      <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>
+      <p class="guided-sub">Puoi scegliere la variante che preferisci: manubrio o cavo con fune. Entrambe lavorano bene il capo lungo del tricipite, soprattutto perché il braccio resta sopra la testa.</p>
+      ${dualGuideBlock('overhead-triceps','overhead-triceps-cable')}
+      <div class="modal-section"><h4>Quando scegliere il manubrio</h4><p>Usalo se vuoi una variante semplice da fare in casa, con setup rapido e buon allungamento del capo lungo.</p></div>
+      <div class="modal-section"><h4>Quando scegliere il cavo</h4><p>Usalo se hai la carrucola: la tensione resta più continua e spesso è più facile controllare la fase eccentrica con la fune.</p></div>
+      <div class="modal-section"><h4>Cose da fare in entrambe</h4><ul>${[...new Set([...(exerciseGuides['overhead-triceps']?.cues||[]), ...(exerciseGuides['overhead-triceps-cable']?.cues||[])])].slice(0,6).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="modal-section"><h4>Errori da evitare in entrambe</h4><ul>${[...new Set([...(exerciseGuides['overhead-triceps']?.errors||[]), ...(exerciseGuides['overhead-triceps-cable']?.errors||[])])].map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="exercise-actions"><button class="primary" onclick="openGuided('${currentDayForExercise(id)}','${id}')">Avvia serie guidata</button></div>`;
+    $('#exerciseModal').showModal();
+    return;
+  }
   if(id==='ring-pushup'){
     $('#modalContent').innerHTML=`
       <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>

@@ -1,9 +1,9 @@
-const CACHE_NAME = 'coach-tascabile-v14-20260625';
+const CACHE_NAME = 'coach-tascabile-v14-1-20260625';
 const ASSETS = [
   './',
-  './index.html?v=14',
-  './styles.css?v=14',
-  './app.js?v=14',
+  './index.html?v=14.1',
+  './styles.css?v=14.1',
+  './app.js?v=14.1',
   './manifest.json',
   './assets/affondi_indietro.png',
   './assets/alzate_laterali.png',
@@ -32,6 +32,7 @@ const ASSETS = [
   './assets/neck_iso_front.png',
   './assets/neck_iso_rear.png',
   './assets/neck_iso_side.png',
+  './assets/overhead_triceps_cable.png',
   './assets/overhead_triceps_extension.png',
   './assets/pallof_press.png',
   './assets/panca_piana.png',
@@ -70,6 +71,6 @@ self.addEventListener('fetch', event => {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => {});
       return response;
-    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=14')))
+    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=14.1')))
   );
 });
