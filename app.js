@@ -1,4 +1,4 @@
-const VERSION = '13';
+const VERSION = '14';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -261,7 +261,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=13').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=14').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -367,6 +367,26 @@ function exerciseImage(id){ return exerciseImages[id] || ''; }
 function posterGuide(id){ return posterGuides.find(p=>p.id===id); }
 function mediaFigure(id,kind,name,cls='exercise-visual'){ const img=exerciseImage(id); return img ? `<img class="${cls}" src="${img}" alt="${name}" loading="lazy" />` : `<div class="tech-figure">${svgFigure(kind)}</div>`; }
 
+function dualGuideBlock(primaryId, secondaryId){
+  const primary = exerciseGuides[primaryId] || {name: primaryId, cues:[], errors:[]};
+  const secondary = exerciseGuides[secondaryId] || {name: secondaryId, cues:[], errors:[]};
+  return `
+    <div class="dual-guide-grid">
+      <article class="dual-guide-card">
+        <p class="mini">Opzione senza anelli</p>
+        <h4>${primary.name}</h4>
+        ${mediaFigure(primaryId,'petto',primary.name,'modal-hero-image inline-guide-image')}
+        <ul class="tight-list">${primary.cues.slice(0,4).map(x=>`<li>${x}</li>`).join('')}</ul>
+      </article>
+      <article class="dual-guide-card">
+        <p class="mini">Opzione con anelli</p>
+        <h4>${secondary.name}</h4>
+        ${mediaFigure(secondaryId,'petto',secondary.name,'modal-hero-image inline-guide-image')}
+        <ul class="tight-list">${secondary.cues.slice(0,4).map(x=>`<li>${x}</li>`).join('')}</ul>
+      </article>
+    </div>`;
+}
+
 function renderExtra(){
   $('#extraPlans').innerHTML=`
     <div class="extra-grid">
@@ -420,6 +440,18 @@ function openExercise(id){
   const e=findExercise(id); const g=exerciseGuides[id] || guide(e.name,e.group,['Controlla la tecnica','Mantieni 1–2 reps in riserva'],['Non forzare se senti dolore']);
   $('#modalTitle').textContent=g.name;
   $('#modalEyebrow').textContent=g.kind;
+  if(id==='ring-pushup'){
+    $('#modalContent').innerHTML=`
+      <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>
+      <p class="guided-sub">Puoi scegliere la variante che preferisci: se fai push-up classici guarda la guida push-up; se usi gli anelli guarda la guida ring push-up.</p>
+      ${dualGuideBlock('push-up','ring-pushup')}
+      <div class="modal-section"><h4>Quando scegliere il push-up classico</h4><p>Usalo se non monti gli anelli, se vuoi una variante più semplice o se vuoi concentrarti sulla tecnica base.</p></div>
+      <div class="modal-section"><h4>Quando scegliere il ring push-up</h4><p>Usalo se hai gli anelli e vuoi più instabilità, più controllo scapolare e un lavoro più impegnativo per petto e tricipiti.</p></div>
+      <div class="modal-section"><h4>Errori da evitare in entrambe</h4><ul>${[...new Set([...(exerciseGuides['push-up']?.errors||[]), ...(exerciseGuides['ring-pushup']?.errors||[])])].map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="exercise-actions"><button class="primary" onclick="openGuided('${currentDayForExercise(id)}','${id}')">Avvia serie guidata</button></div>`;
+    $('#exerciseModal').showModal();
+    return;
+  }
   $('#modalContent').innerHTML=`
     ${mediaFigure(id,g.kind,g.name,'modal-hero-image')}
     <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>
