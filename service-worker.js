@@ -1,9 +1,9 @@
-const CACHE_NAME = 'coach-tascabile-v12-20260618';
+const CACHE_NAME = 'coach-tascabile-v13-20260618';
 const ASSETS = [
   './',
-  './index.html?v=12',
-  './styles.css?v=12',
-  './app.js?v=12',
+  './index.html?v=13',
+  './styles.css?v=13',
+  './app.js?v=13',
   './manifest.json',
   './assets/affondi_indietro.png',
   './assets/alzate_laterali.png',
@@ -32,6 +32,7 @@ const ASSETS = [
   './assets/neck_iso_front.png',
   './assets/neck_iso_rear.png',
   './assets/neck_iso_side.png',
+  './assets/overhead_triceps_extension.png',
   './assets/pallof_press.png',
   './assets/panca_piana.png',
   './assets/plank.png',
@@ -44,12 +45,15 @@ const ASSETS = [
   './assets/rematore_cavo_basso.png',
   './assets/reverse_curl_bar.png',
   './assets/reverse_wrist_curl.png',
+  './assets/ring_pushup.png',
+  './assets/ring_row.png',
+  './assets/ring_support_hold.png',
   './assets/shoulder_press.png',
   './assets/shrug.png',
   './assets/sliding_leg_curl.png',
   './assets/step_up_panca.png',
   './assets/trazioni.png',
-  './assets/wrist_curl.png',
+  './assets/wrist_curl.png'
 ];
 self.addEventListener('install', event => {
   self.skipWaiting();
@@ -66,6 +70,6 @@ self.addEventListener('fetch', event => {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => {});
       return response;
-    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=12')))
+    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=13')))
   );
 });

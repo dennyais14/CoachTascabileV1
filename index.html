@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Coach Tascabile v12</title>
+  <title>Coach Tascabile v13</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="stylesheet" href="styles.css?v=12" />
+  <link rel="stylesheet" href="styles.css?v=13" />
 </head>
 <body>
   <div class="app-shell">
@@ -17,7 +17,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 12 · dieta smart 2000 kcal, alternative economiche</p>
+        <p class="sub">Versione 13 · focus braccia, anelli e dieta smart</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -71,7 +71,7 @@
 
         <div class="chest-focus-card">
           <h3>Focus petto + spalle + braccia — 8 settimane</h3>
-          <p>Petto all’inizio di Upper A e Upper C, ma con dorso, spalle e braccia sufficienti per costruire un fisico più atletico e a V. Volume controllato: petto circa 17 serie settimanali, spalle/dorso ben mantenuti, braccia in crescita graduale.</p>
+          <p>Petto all’inizio di Upper A e Upper C, ma con dorso, spalle e braccia sufficienti per costruire un fisico più atletico e a V. Volume controllato: petto circa 17 serie settimanali, dorso e spalle mantenuti forti, bicipiti e tricipiti in specializzazione moderata per 8 settimane. Il capo lungo del tricipite ha ora lavoro diretto sopra la testa.</p>
           <div class="focus-grid">
             <div class="focus-stat"><span>Petto</span><strong>17 serie</strong></div>
             <div class="focus-stat"><span>Focus extra</span><strong>Spalle/Braccia</strong></div>
@@ -104,13 +104,13 @@
         </div>
 
         <div class="chest-focus-card volume-card">
-          <h3>Volume settimanale V11.1</h3>
+          <h3>Volume settimanale V13</h3>
           <div class="focus-grid volume-grid">
             <div class="focus-stat"><span>Petto</span><strong>17 serie</strong></div>
             <div class="focus-stat"><span>Dorso</span><strong>16 serie</strong></div>
             <div class="focus-stat"><span>Spalle</span><strong>14–15 serie</strong></div>
-            <div class="focus-stat"><span>Bicipiti</span><strong>6 dirette</strong></div>
-            <div class="focus-stat"><span>Tricipiti</span><strong>9 + spinte</strong></div>
+            <div class="focus-stat"><span>Bicipiti</span><strong>10 dirette</strong></div>
+            <div class="focus-stat"><span>Tricipiti</span><strong>12 dirette + spinte</strong></div>
             <div class="focus-stat"><span>Core</span><strong>9 serie</strong></div>
             <div class="focus-stat"><span>Gambe</span><strong>mantenimento completo</strong></div>
           </div>
@@ -126,6 +126,7 @@
             <h2>Scheda settimanale</h2>
           </div>
           <p class="muted">Ogni esercizio ha Dettagli, Recupero, Segna e Serie guidata. Il tracker ora conta le serie completate, non le singole ripetizioni.</p>
+          <button id="resetWeeklySets" class="ghost small">Reset settimanale serie</button>
         </div>
         <div id="workoutDays"></div>
       </section>
@@ -188,7 +189,7 @@
       <section id="tab-diet" class="tab">
         <div class="section-head stacked">
           <div>
-            <p class="mini">Alimentazione flessibile · V12</p>
+            <p class="mini">Alimentazione flessibile · V13</p>
             <h2>Dieta 2000 kcal smart</h2>
           </div>
           <p class="muted">Schema indicativo da circa 2000 kcal/giorno. Obiettivo: perdere pancia mantenendo massa muscolare, con alternative pratiche ed economiche: tonno, pesce economico, latticini light e burger vegetariani. Non è una prescrizione medica: le calorie reali cambiano in base a marca, peso sgocciolato, cottura e prodotto.</p>
@@ -212,6 +213,7 @@
             <div class="accordion-grid">
               <article class="mini-diet-box"><h4>Colazione — opzione A</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>250 g</td></tr><tr><td>Proteine in polvere</td><td>30 g</td></tr><tr><td>Pane integrale/comune</td><td>50 g</td></tr><tr><td>Frutta</td><td>200 g</td></tr></tbody></table></div><p class="muted">Se usi yogurt greco intero: fai 200 g invece di 250 g, oppure togli 5 g di olio più avanti.</p></article>
               <article class="mini-diet-box"><h4>Colazione alternativa</h4><div class="quick-carb-table"><table><tbody><tr><td>Pane</td><td>70 g</td></tr><tr><td>Uova intere</td><td>2, circa 110–120 g</td></tr><tr><td>Yogurt greco 0–2%</td><td>150 g</td></tr><tr><td>Frutta</td><td>150–200 g</td></tr></tbody></table></div><p class="muted">Questa sostituisce la colazione A: non si aggiunge.</p></article>
+              <article class="mini-diet-box"><h4>Colazione senza yogurt greco</h4><div class="quick-carb-table"><table><tbody><tr><td>Latte parzialmente scremato</td><td>250 ml</td></tr><tr><td>Proteine whey</td><td>20–30 g</td></tr><tr><td>Fiocchi d’avena</td><td>35–45 g</td></tr><tr><td>Frutta</td><td>150–200 g</td></tr></tbody></table></div><p class="muted">Alternativa dolce e pratica quando non hai yogurt greco. Se usi 30 g whey e 45 g avena, resta più saziante; se vuoi stare più leggero usa 20 g whey e 35 g avena.</p></article>
               <article class="mini-diet-box"><h4>Pranzo</h4><div class="quick-carb-table"><table><tbody><tr><td>Proteina principale</td><td>vedi tabella alternative</td></tr><tr><td>Pasta secca</td><td>70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article>
               <article class="mini-diet-box"><h4>Cena</h4><div class="quick-carb-table"><table><tbody><tr><td>Proteina principale</td><td>vedi alternative proteiche</td></tr><tr><td>Patate</td><td>300 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article>
             </div>
@@ -359,6 +361,7 @@
           </div>
           <div id="progressTable"></div>
         </div>
+        <button id="resetWeeklySets" class="ghost full">Reset settimanale solo serie schede</button>
         <button id="resetProgress" class="danger full">Azzera dati locali</button>
       </section>
     </main>
@@ -398,6 +401,6 @@
     <div id="guidedContent"></div>
   </dialog>
 
-  <script src="app.js?v=12"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>

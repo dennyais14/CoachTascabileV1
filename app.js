@@ -1,4 +1,4 @@
-const VERSION = '12';
+const VERSION = '13';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -8,15 +8,16 @@ const STORE = {
 
 const workouts = [
   {
-    id:'upper-a', name:'Upper A — petto forza + schiena', focus:'Petto forza + schiena', meta:'Petto all’inizio, ma dorso e spalle restano presenti per un fisico atletico e bilanciato.',
+    id:'upper-a', name:'Upper A — petto forza + schiena + tricipite', focus:'Petto forza + schiena + capo lungo tricipite', meta:'Petto all’inizio, dorso mantenuto e tricipite più completo con lavoro sopra la testa.',
     exercises:[
       ex('panca-piana-manubri','Panca piana manubri','petto','4','8–12','90–120s','16 kg/mano','Scapole addotte e depresse, petto alto, discesa 2–3 secondi, fermo leggero in basso.'),
-      ex('push-up','Push-up','petto','3','8–15','75–90s','corpo libero','Quando arrivi a 3×15 pulite, aggiungi zaino leggero o aumenta difficoltà.'),
+      ex('ring-pushup','Ring push-up / Push-up','petto/tricipiti','3','8–12','75–90s','corpo libero/anelli','Se hai gli anelli usa ring push-up controllati; altrimenti push-up classici. Quando chiudi 3×12 pulite, aumenta difficoltà.'),
       ex('croci-cavo-manubri','Croci al cavo o manubri','petto','2','12–20','60–75s','leggero','Allungamento controllato, gomiti morbidi, non usare carico eccessivo.'),
       ex('rematore-manubrio','Rematore manubrio 1 braccio','dorso','3','8–12/lato','90s','18–20 kg','Gomito vicino al fianco, busto stabile, non ruotare per tirare più peso.'),
       ex('trazioni-prone','Trazioni prone / pulldown','dorso','3','6–10','120s','BW o 25–35 kg cavo','Petto verso la barra, scapole attive, ROM pulita prima della zavorra.'),
       ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Movimento pulito, no slancio. Sono importanti per spalle più larghe.'),
-      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','3','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa, non spingere con le spalle.'),
+      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa, non spingere con le spalle.'),
+      ex('overhead-triceps','Estensioni tricipiti sopra la testa','tricipiti capo lungo','2','12–15','60–75s','manubrio/cavo leggero','Focus capo lungo: braccia sopra la testa, gomiti stretti, allungamento controllato senza dolore al gomito.'),
       ex('hanging-knee-raise','Hanging knee raise','core','3','8–15','60s','corpo libero','Bacino in retroversione, evita dondolio e slancio.')
     ]
   },
@@ -32,23 +33,26 @@ const workouts = [
     ]
   },
   {
-    id:'upper-b', name:'Upper B — dorso/spalle/braccia', focus:'Schiena + spalle + braccia', meta:'Giornata chiave per postura, spalle larghe e fisico a V.',
+    id:'upper-b', name:'Upper B — dorso/spalle/braccia', focus:'Schiena + spalle + braccia', meta:'Giornata chiave per postura, spalle larghe, fisico a V e sviluppo diretto di bicipiti/tricipiti.',
     exercises:[
       ex('pulldown','Lat machine / pulldown','dorso','4','10–15','90s','25–35 kg cavo','Tira i gomiti verso il basso, non dietro al collo. Petto alto.'),
-      ex('rematore-cavo','Rematore al cavo basso','dorso','4','10–15','90s','20–30 kg cavo','Scapole indietro, petto alto, niente slancio lombare.'),
-      ex('shoulder-press','Shoulder press manubri','spalle','3','8–12','90s','9 kg/mano','Chiudi sopra la testa senza iperestendere la schiena. Volume ridotto a 3 serie per recuperare meglio.'),
+      ex('rematore-cavo','Rematore al cavo basso','dorso','3','10–15','90s','20–30 kg cavo','Scapole indietro, petto alto, niente slancio lombare.'),
+      ex('ring-row','Ring row agli anelli','dorso/bicipiti','2','8–15','75–90s','corpo libero/anelli','Se hai gli anelli, usa questo come richiamo tecnico: corpo rigido e tira gli anelli al petto.'),
+      ex('shoulder-press','Shoulder press manubri','spalle','3','8–12','90s','9 kg/mano','Chiudi sopra la testa senza iperestendere la schiena.'),
       ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Fondamentali per spalle più larghe: leggere, controllate, senza slancio.'),
       ex('face-pull','Face pull','spalle posteriori','3','12–20','60s','5–10 kg cavo','Tira verso fronte/occhi, gomiti alti, lento.'),
       ex('rear-delt-fly','Rear delt fly','spalle posteriori','2','12–20','60s','3–5 kg/mano','Braccia quasi tese, scapole stabili, niente slancio.'),
       ex('curl-barra','Curl barra corta/manubri','bicipiti','3','8–12','60–75s','12–18 kg','Polsi neutri, gomiti fermi, evita swing.'),
-      ex('estensioni-tricipiti','Estensioni tricipiti al cavo','tricipiti','3','10–15','60s','leggero/mod.','Controlla la fase eccentrica e non aprire i gomiti.')
+      ex('hammer-curl','Hammer curl manubri','bicipiti/brachiale','2','10–12','60s','8–12 kg/mano','Presa neutra, gomiti fermi: utile per braccio più pieno e brachiale.'),
+      ex('estensioni-tricipiti','Estensioni tricipiti al cavo','tricipiti','2','10–15','60s','leggero/mod.','Controlla la fase eccentrica e non aprire i gomiti.'),
+      ex('overhead-triceps','Estensioni tricipiti sopra la testa','tricipiti capo lungo','2','12–15','60–75s','manubrio/cavo leggero','Secondo richiamo capo lungo: senti allungamento dietro il braccio, senza stressare il gomito.')
     ]
   },
   {
     id:'lower-b', name:'Lower B — posterior chain + core', focus:'Femorali/glutei/addome', meta:'Catena posteriore, core e stabilità: mantenimento completo senza spostare il focus estetico dalle upper.',
     exercises:[
       ex('rdl-pesante','Romanian deadlift pesante','posteriori','4','8–12','120s','18–22 kg/mano','Priorità alla tecnica: anche indietro, schiena neutra, peso vicino alle gambe.'),
-      ex('hip-thrust','Hip thrust / glute bridge','glutei','4','10–15','90s','24 kg','Pausa 1 sec in alto. Se facile usa zaino o manubrio più stabile.'),
+      ex('hip-thrust','Hip thrust / Glute bridge','glutei','4','10–15','90s','24 kg','Pausa 1 sec in alto. Se facile usa zaino o manubrio più stabile.'),
       ex('step-up','Step-up su panca','gambe','3','8–12/gamba','75–90s','6–8 kg/mano','Sali controllando il ginocchio, non spingere troppo con la gamba a terra.'),
       ex('sliding-curl','Sliding leg curl','posteriori','3','8–12','75–90s','corpo libero','Bacino alto, estendi lentamente, richiama coi femorali.'),
       ex('calf-raise','Calf raise 1 gamba','polpacci','4','12–20','60s','BW + 16–24 kg','Pausa in alto e allungamento in basso.'),
@@ -57,16 +61,19 @@ const workouts = [
     ]
   },
   {
-    id:'upper-c', name:'Upper C — petto alto + spalle/braccia', focus:'Petto alto + spalle/braccia', meta:'Seconda seduta petto: mantiene il focus su petto alto ma rinforza anche spalle e braccia.',
+    id:'upper-c', name:'Upper C — petto alto + spalle/braccia', focus:'Petto alto + spalle/braccia', meta:'Seconda seduta petto: mantiene il focus su petto alto ma rinforza anche bicipiti, tricipiti e stabilità agli anelli.',
     exercises:[
       ex('panca-inclinata','Panca inclinata 30° manubri','petto','4','8–12','90–120s','14–16 kg/mano','Petto alto, scapole stabili, non trasformare in shoulder press.'),
-      ex('push-up-rialzati','Push-up piedi rialzati','petto','2','8–15','75–90s','corpo libero','Spingi controllato, busto rigido, fermati prima che la tecnica crolli.'),
-      ex('dip-assistiti','Dip assistiti/controllati','petto/tricipiti','2','6–10','90s','assistiti/BW','Inclinati leggermente avanti, spalle basse, ROM senza fastidio.'),
+      ex('ring-pushup','Ring push-up / Push-up piedi rialzati','petto/tricipiti','2','8–12','75–90s','corpo libero/anelli','Se hai gli anelli usa ring push-up; altrimenti push-up piedi rialzati.'),
+      ex('dip-assistiti','Dip assistiti/controllati','petto/tricipiti','2','6–10','90s','assistiti/BW','Inclinati leggermente avanti, spalle basse, ROM senza fastidio. Ring dip solo più avanti.'),
       ex('pulldown-stretto','Pulldown presa stretta','dorso','3','10–12','90s','25–35 kg cavo','Movimento controllato, gomiti verso il basso, petto alto.'),
       ex('rematore-cavo-leggero','Rematore cavo leggero','dorso','2','12–15','75–90s','medio','Solo mantenimento dorso: non trasformarlo in una seduta schiena pesante.'),
       ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Meglio leggere e pulite che pesanti e sporche.'),
       ex('curl-inclinato','Curl manubri o cavo','bicipiti','3','8–12','60s','moderato','Gomiti stabili, fase negativa controllata.'),
-      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','3','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa.')
+      ex('curl-inclinato-extra','Curl inclinato/cavo leggero','bicipiti','2','10–15','60s','leggero/mod.','Richiamo di pompaggio: controllo e allungamento, non cercare carichi massimali.'),
+      ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa.'),
+      ex('overhead-triceps','Estensioni tricipiti sopra la testa','tricipiti capo lungo','2','12–20','60–75s','manubrio/cavo leggero','Terzo richiamo capo lungo: più controllo che peso.'),
+      ex('ring-support-hold','Support hold agli anelli','stabilità/tricipiti','2','10–25s','60s','corpo libero/anelli','Opzionale se hai gli anelli: braccia tese, spalle basse, anelli vicini al corpo.')
     ]
   }
 ];
@@ -163,7 +170,13 @@ const exerciseImages = {
   'curl-inclinato':'assets/curl_barra_corta.png',
   'pushdown-fune':'assets/pushdown_tricipiti.png',
   'estensioni-tricipiti':'assets/pushdown_tricipiti.png',
-  'hanging-knee-raise':'assets/hanging_knee_raise.png'
+  'hanging-knee-raise':'assets/hanging_knee_raise.png',
+  'overhead-triceps':'assets/overhead_triceps_extension.png',
+  'ring-row':'assets/ring_row.png',
+  'ring-pushup':'assets/ring_pushup.png',
+  'ring-support-hold':'assets/ring_support_hold.png',
+  'hammer-curl':'assets/hammer_curl.png',
+  'curl-inclinato-extra':'assets/curl_barra_corta.png'
 };
 
 const posterGuides = [
@@ -208,6 +221,12 @@ const exerciseGuides = {
   'pushdown-fune': guide('Pushdown fune','tricipiti',['Gomiti fermi','Apri la fune in basso','Controlla ritorno'],['Spalle avanti','Dondolio']),
   'estensioni-tricipiti': guide('Estensioni tricipiti','tricipiti',['Gomiti controllati','Negativa lenta','Estendi senza dolore'],['Aprire troppo i gomiti','Carico fuori controllo']),
   'hanging-knee-raise': guide('Hanging knee raise','core',['Bacino in retroversione','Movimento controllato','Scapole attive'],['Dondolare','Sollevare solo le gambe']),
+  'overhead-triceps': guide('Estensioni tricipiti sopra la testa','tricipiti',['Braccia sopra la testa','Gomiti stretti e fermi','Scendi lentamente in allungamento','Estendi senza inarcare la schiena'],['Carico troppo alto','Gomiti che si aprono','Dolore al gomito o alla spalla']),
+  'ring-row': guide('Ring row agli anelli','dorso',['Corpo rigido','Tira gli anelli al petto','Scapole indietro e basse','Regola difficoltà inclinando il corpo'],['Bacino che cade','Tirare solo con bicipiti','Spalle alle orecchie']),
+  'ring-pushup': guide('Ring push-up','petto',['Anelli bassi e stabili','Corpo in linea','Scendi controllato','Spingi senza perdere scapole'],['Profondità eccessiva subito','Gomiti troppo larghi','Bacino che crolla']),
+  'ring-support-hold': guide('Support hold agli anelli','stabilità',['Braccia tese','Spalle depresse','Anelli vicini al corpo','Respira e resta fermo'],['Spalle alle orecchie','Gomiti piegati','Oscillare troppo']),
+  'hammer-curl': guide('Hammer curl','bicipiti',['Presa neutra','Gomiti fermi','Negativa controllata'],['Swing con schiena','Polsi che cedono','Spalle avanti']),
+  'curl-inclinato-extra': guide('Curl inclinato/cavo leggero','bicipiti',['Allungamento controllato','Gomiti stabili','Ritmo lento'],['Carico eccessivo','Accorciare ROM','Dondolare']),
 };
 function guide(name,kind,cues,errors){ return {name,kind,cues,errors}; }
 
@@ -242,7 +261,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=12').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=13').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -318,6 +337,7 @@ function seriesDots(dayId,exId,sets){
   return Array.from({length:sets},(_,i)=>`<button class="series-dot small ${done.includes(i)?'done':''}" data-day="${dayId}" data-ex="${exId}" data-set="${i}" aria-label="Serie ${i+1}">${i+1}</button>`).join('');
 }
 function bindExerciseButtons(root=document){
+  $$('#resetWeeklySets',root).forEach(btn=>btn.addEventListener('click',resetWeeklySets));
   $$('.details-btn',root).forEach(b=>b.addEventListener('click',()=>openExercise(b.dataset.ex)));
   $$('.rest-btn',root).forEach(b=>b.addEventListener('click',()=>{showTab('timer'); setTimer(Number(b.dataset.seconds)); startTimer();}));
   $$('.mark-btn',root).forEach(b=>b.addEventListener('click',()=>markNextSet(b.dataset.day,b.dataset.ex)));
@@ -627,6 +647,15 @@ function bindProgress(){
   $('#addMeasure').addEventListener('click',addMeasure);
   $('#addHistory').addEventListener('click',addHistory);
   $('#resetProgress').addEventListener('click',()=>{ if(confirm('Azzero misure, cronologia, carichi e serie completate?')){ Object.values(STORE).forEach(k=>localStorage.removeItem(k)); renderAll(); toast('Dati azzerati.'); } });
+  $$('#resetWeeklySets').forEach(btn=>btn.addEventListener('click',resetWeeklySets));
+}
+function resetWeeklySets(){
+  if(confirm('Azzerare solo le serie completate della settimana? Misure, carichi e cronologia restano salvati.')){
+    localStorage.removeItem(STORE.sets);
+    refreshWorkoutRenders();
+    renderProgress();
+    toast('Serie settimanali azzerate.');
+  }
 }
 function addMeasure(){
   const weight=Number($('#measureWeight').value); const waist=Number($('#measureWaist').value);

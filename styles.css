@@ -145,3 +145,8 @@ button{cursor:pointer;color:inherit}
 .mini-diet-box h4,.diet-panel h4{margin:10px 0 8px}
 .diet-panel .swap-result{margin-top:12px;margin-bottom:4px}
 @media (max-width:760px){.accordion-grid{grid-template-columns:1fr}.diet-panel > *:not(summary),.diet-panel > .quick-carb-table,.diet-panel > .accordion-grid{margin-left:12px;margin-right:12px}.diet-panel summary{padding:15px 14px}}
+
+/* V13 additions */
+#resetWeeklySets.full{margin-top:10px;background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--text)}
+.section-head #resetWeeklySets{align-self:flex-start;margin-top:8px}
+.mini-diet-box h4{line-height:1.2}
