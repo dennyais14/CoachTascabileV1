@@ -1,8 +1,8 @@
 {
-  "name": "Coach Tascabile v14.1",
-  "short_name": "Coach v14.1",
+  "name": "Coach Tascabile v17",
+  "short_name": "Coach v17",
   "description": "Mini-app fitness personale: scheda, dieta, timer, progressi e guide esercizi.",
-  "start_url": "./index.html?v=14.1",
+  "start_url": "./index.html?v=17",
   "scope": "./",
   "display": "standalone",
   "background_color": "#07111f",

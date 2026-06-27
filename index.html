@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Coach Tascabile v14.1</title>
+  <title>Coach Tascabile v17</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="stylesheet" href="styles.css?v=14.1" />
+  <link rel="stylesheet" href="styles.css?v=17" />
 </head>
 <body>
   <div class="app-shell">
@@ -17,7 +17,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 14.1 · doppia guida tricipiti manubrio + cavo</p>
+        <p class="sub">Versione 17 · scheda vacanza + alternative con mobili</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -31,10 +31,10 @@
             <p>La scheda principale ora lavora su dimagrimento, forza e sviluppo estetico di petto, spalle, braccia e dorso. Avambracci e collo restano una scheda extra separata e opzionale.</p>
           </div>
           <div class="hero-badges">
-            <div class="metric"><span>Giorni</span><strong>5</strong></div>
+            <div class="metric"><span>Giorni</span><strong>5 + vacanza</strong></div>
             <div class="metric"><span>Petto</span><strong>17 serie</strong></div>
             <div class="metric"><span>Focus</span><strong>Spalle/Braccia</strong></div>
-            <div class="metric"><span>Extra</span><strong>Opz.</strong></div>
+            <div class="metric"><span>Extra</span><strong>Vacanza + opz.</strong></div>
           </div>
         </div>
 
@@ -52,10 +52,10 @@
             <span class="quick-title">Scheda</span>
             <span class="quick-sub">5 giorni base</span>
           </button>
-          <button class="quick-card quick-nav" data-targettab="extra">
-            <span class="quick-icon">🧩</span>
-            <span class="quick-title">Extra</span>
-            <span class="quick-sub">Avambracci/collo opz.</span>
+          <button class="quick-card quick-nav" data-targettab="vacation">
+            <span class="quick-icon">🏖️</span>
+            <span class="quick-title">Vacanza</span>
+            <span class="quick-sub">Corpo libero + elastici</span>
           </button>
           <button class="quick-card quick-nav" data-targettab="diet">
             <span class="quick-icon">🍽️</span>
@@ -129,6 +129,37 @@
           <button id="resetWeeklySets" class="ghost small">Reset settimanale serie</button>
         </div>
         <div id="workoutDays"></div>
+      </section>
+
+
+      <section id="tab-vacation" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Scheda alternativa</p>
+            <h2>Scheda Vacanza</h2>
+          </div>
+          <p class="muted">Quando non hai manubri o palestra: usa corpo libero, elastici e mobili stabili. L’obiettivo è mantenere muscolo, continuare a dimagrire e non perdere stimolo.</p>
+        </div>
+        <div class="warning-card">
+          <h3>Regole base</h3>
+          <p>Serie vicino al cedimento tecnico, controllo del movimento, tempo lento e massima sicurezza. Per tavoli, sedie e rialzi usa solo supporti stabili, non pieghevoli e non in vetro.</p>
+        </div>
+        <div class="dashboard-grid" id="vacation3days"></div>
+        <div class="section-head stacked compact-gap">
+          <div><p class="mini">Versione completa</p><h3>4 giorni</h3></div>
+          <p class="muted">Upper A, Lower A, Upper B, Lower B + pump facoltativo.</p>
+        </div>
+        <div id="vacationDays"></div>
+        <div class="section-head stacked compact-gap">
+          <div><p class="mini">Versione rapida</p><h3>25–30 minuti</h3></div>
+          <p class="muted">Allenamenti brevi A/B per hotel, viaggio o giornate piene.</p>
+        </div>
+        <div id="vacationQuick"></div>
+        <div class="section-head stacked compact-gap">
+          <div><p class="mini">Alternative con mobili</p><h3>Tavolo, sedia, letto</h3></div>
+          <p class="muted">Ottime opzioni se non hai sbarra o elastici, ma prima di tutto conta la stabilità del supporto.</p>
+        </div>
+        <div id="vacationFurniture"></div>
       </section>
 
       <section id="tab-extra" class="tab">
@@ -369,6 +400,7 @@
     <nav class="bottom-nav glass">
       <button class="nav-btn active" data-tab="home"><span>🏠</span><small>Home</small></button>
       <button class="nav-btn" data-tab="workouts"><span>📋</span><small>Scheda</small></button>
+      <button class="nav-btn" data-tab="vacation"><span>🏖️</span><small>Vacanza</small></button>
       <button class="nav-btn" data-tab="extra"><span>🧩</span><small>Extra</small></button>
       <button class="nav-btn" data-tab="exercises"><span>🖼️</span><small>Esercizi</small></button>
       <button class="nav-btn" data-tab="timer"><span>⏱️</span><small>Timer</small></button>
@@ -401,6 +433,6 @@
     <div id="guidedContent"></div>
   </dialog>
 
-  <script src="app.js?v=14.1"></script>
+  <script src="app.js?v=17"></script>
 </body>
 </html>

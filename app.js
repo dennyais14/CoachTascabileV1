@@ -1,4 +1,4 @@
-const VERSION = '14.1';
+const VERSION = '17';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -106,6 +106,102 @@ const extraPlans = [
   }
 ];
 
+
+const vacationWorkouts = [
+  {
+    id:'vac-upper-a', name:'Vacanza Upper A — petto/spalle/tricipiti + dorso', focus:'Corpo libero + elastici', meta:'Seduta base da vacanza: spinta, tirata e braccia con esercizi semplici ma efficaci.',
+    exercises:[
+      ex('vac-pushup-slow','Push-up lento','petto','4','8–15','75–90s','corpo libero','Discesa lenta 3 secondi, corpo rigido e 0–3 reps in riserva.'),
+      ex('vac-pike-pushup','Pike push-up','spalle','3','6–12','75–90s','corpo libero','Ottimo richiamo per spalle e parte alta del petto.'),
+      ex('vac-band-row','Rematore con elastico','dorso','4','12–20','75–90s','elastico medio/forte','Tira i gomiti indietro e mantieni il petto aperto.'),
+      ex('vac-band-pulldown','Pulldown con elastico','dorso','3','12–20','60–75s','elastico ancorato in alto','Pensa a portare i gomiti verso il basso e le scapole in tasca.'),
+      ex('vac-band-overhead-triceps','Estensioni tricipiti sopra la testa con elastico','tricipiti','3','12–20','60s','elastico','Molto utile per il capo lungo del tricipite.'),
+      ex('vac-band-curl','Curl bicipiti con elastico','bicipiti','3','12–20','60s','elastico','Chiudi bene il bicipite e controlla la discesa.'),
+      ex('vac-plank','Plank','core','3','30–60 sec','45–60s','corpo libero','Core attivo, glutei contratti e schiena neutra.')
+    ]
+  },
+  {
+    id:'vac-lower-a', name:'Vacanza Lower A — gambe + core', focus:'Gambe, glutei, femorali, addome', meta:'Per le gambe usa tempo lento, lavoro unilaterale e serie vicine al cedimento tecnico.',
+    exercises:[
+      ex('vac-slow-squat','Squat corpo libero lento','gambe','4','15–30','60–75s','corpo libero','Scendi controllato, fermo breve in basso e risalita pulita.'),
+      ex('vac-bulgarian-split-squat','Bulgarian split squat','gambe','4','8–15/gamba','75–90s','sedia/letto','Una delle migliori scelte in vacanza per quadricipiti e glutei.'),
+      ex('vac-reverse-lunge','Affondi indietro','gambe','3','10–20/gamba','60–75s','corpo libero','Passo indietro controllato e spinta dal piede davanti.'),
+      ex('vac-hip-thrust','Hip thrust / Glute bridge','glutei','4','15–30','60s','corpo libero','Pausa in alto di 1 secondo e glutei contratti.'),
+      ex('vac-towel-leg-curl','Leg curl con asciugamano','femorali','3','8–15','75s','asciugamano + pavimento liscio','Ottimo per i femorali se non hai macchine o manubri.'),
+      ex('vac-single-leg-calf-raise','Calf raise 1 gamba','polpacci','4','15–30','45–60s','corpo libero','Massima escursione e pausa in alto.'),
+      ex('vac-reverse-crunch','Reverse crunch','addome','3','12–20','45–60s','corpo libero','Retroversione del bacino e niente slanci.'),
+      ex('vac-side-plank','Side plank','obliqui','2','30–45 sec/lato','45s','corpo libero','Linea pulita e bacino alto.')
+    ]
+  },
+  {
+    id:'vac-upper-b', name:'Vacanza Upper B — dorso/braccia/spalle', focus:'Dorso, braccia e spalle', meta:'Seduta ideale se vuoi mantenere il focus estetico anche in vacanza.',
+    exercises:[
+      ex('vac-band-row','Rematore con elastico','dorso','4','12–20','75–90s','elastico medio/forte','Mantieni petto aperto e chiusura breve dietro.'),
+      ex('vac-band-face-pull','Face pull con elastico','spalle posteriori','3','15–25','60s','elastico','Ottimo per postura, retro spalle e cuffia.'),
+      ex('vac-band-pulldown','Pulldown con elastico','dorso','3','12–20','60–75s','elastico ancorato in alto','Usa ROM pulita e controllo in discesa.'),
+      ex('vac-band-pushup','Push-up con elastico','petto','3','8–15','75–90s','elastico attorno alla schiena','Ottima variante più intensa dei push-up normali.'),
+      ex('vac-band-hammer-curl','Hammer curl con elastico','bicipiti/avambraccio','3','12–20','60s','elastico','Neutro, controllato, senza slanci.'),
+      ex('vac-band-pushdown','Pushdown tricipiti con elastico','tricipiti','3','12–20','60s','elastico ancorato in alto','Gomiti fermi e completa estensione.'),
+      ex('vac-band-overhead-triceps','Estensioni tricipiti sopra la testa con elastico','tricipiti','3','12–20','60s','elastico','Ancora lavoro utile per il capo lungo.'),
+      ex('vac-pallof-press','Pallof press con elastico','core','3','10–15/lato','45–60s','elastico','Anti-rotazione: non farti trascinare di lato.')
+    ]
+  },
+  {
+    id:'vac-lower-b', name:'Vacanza Lower B + pump', focus:'Gambe, core e richiamo braccia/spalle', meta:'Seduta facoltativa: se cammini molto o sei stanco puoi saltarla.',
+    exercises:[
+      ex('vac-step-up','Step-up','gambe','3','10–15/gamba','60–75s','gradino/sedia stabile','Spingi con la gamba sopra e controlla la discesa.'),
+      ex('vac-slow-squat','Squat corpo libero lento','gambe','3','15–25','60s','corpo libero','Versione più leggera di richiamo.'),
+      ex('vac-hip-thrust','Hip thrust / Glute bridge','glutei','3','12–20','60s','corpo libero','Pausa in alto e addome attivo.'),
+      ex('vac-pallof-press','Pallof press con elastico','core','3','10–15/lato','45–60s','elastico','Stabilità del tronco.'),
+      ex('vac-slow-mountain-climber','Mountain climber lento','core','3','20–40 totali','45s','corpo libero','Movimento lento e controllato, non cardio caotico.'),
+      ex('vac-band-curl','Curl bicipiti con elastico','bicipiti','2','15–25','45–60s','elastico','Richiamo pump finale.'),
+      ex('vac-band-pushdown','Pushdown tricipiti con elastico','tricipiti','2','15–25','45–60s','elastico','Richiamo pump finale.'),
+      ex('vac-band-face-pull','Face pull con elastico','spalle posteriori','2','15–25','45–60s','elastico','Piccolo richiamo posturale.')
+    ]
+  }
+];
+
+const vacationQuickPlans = [
+  {
+    id:'vac-quick-a', name:'Vacanza rapida A — 25–30 min', focus:'Upper veloce', meta:'Quando hai poco tempo ma vuoi dare uno stimolo completo alla parte alta.',
+    exercises:[
+      ex('vac-pushup','Push-up','petto','4','max tecnico','60–75s','corpo libero','Serie vicine al cedimento tecnico, forma sempre pulita.'),
+      ex('vac-band-row','Rematore con elastico','dorso','4','15–20','60–75s','elastico','Remata controllata.'),
+      ex('vac-pike-pushup','Pike push-up','spalle','3','8–12','60–75s','corpo libero','Lavoro spalle senza pesi.'),
+      ex('vac-band-curl','Curl bicipiti con elastico','bicipiti','3','15–20','45–60s','elastico','Pompa controllata.'),
+      ex('vac-band-overhead-triceps','Estensioni tricipiti sopra la testa con elastico','tricipiti','3','15–20','45–60s','elastico','Allungamento controllato.'),
+      ex('vac-plank','Plank','core','3','40–60 sec','45s','corpo libero','Core solido.')
+    ]
+  },
+  {
+    id:'vac-quick-b', name:'Vacanza rapida B — 25–30 min', focus:'Lower veloce', meta:'Per stimolare le gambe con poco tempo e zero attrezzatura pesante.',
+    exercises:[
+      ex('vac-bulgarian-split-squat','Bulgarian split squat','gambe','4','10–15/gamba','75s','sedia/letto','Tieni controllo e ROM buona.'),
+      ex('vac-slow-squat','Squat corpo libero lento','gambe','3','20–30','60s','corpo libero','Tempo lento.'),
+      ex('vac-hip-thrust','Hip thrust / Glute bridge','glutei','4','20','45–60s','corpo libero','Pausa in alto.'),
+      ex('vac-towel-leg-curl','Leg curl con asciugamano','femorali','3','8–15','75s','asciugamano','Lento e controllato.'),
+      ex('vac-single-leg-calf-raise','Calf raise 1 gamba','polpacci','4','20','45s','corpo libero','Massima escursione.'),
+      ex('vac-reverse-crunch','Reverse crunch','addome','3','15–20','45s','corpo libero','Chiusura addominale vera.')
+    ]
+  }
+];
+
+const furnitureAlternatives = {
+  id:'vac-furniture', name:'Alternative con mobili', focus:'Soluzioni pratiche da hotel, casa vacanze o appartamento', meta:'Usa solo mobili stabili, non pieghevoli, non in vetro e che non scivolino. Se il supporto si muove, scegli l’alternativa con elastico.',
+  exercises:[
+    ex('vac-table-australian-row','Australian pull-up al tavolo','dorso','3','6–15','75–120s','tavolo molto stabile','Ottima alternativa per la schiena se non hai sbarra o elastici.'),
+    ex('vac-incline-pushup','Push-up inclinato su tavolo o sedia','petto','3','10–20','60–75s','tavolo/sedia stabile','Più alto è il supporto, più l’esercizio è facile.'),
+    ex('vac-chair-dip','Dip su sedia','tricipiti','2','8–15','60–75s','sedia/panca stabile','Da usare con cautela: se senti fastidio alle spalle, riduci ROM o scegli altro.')
+  ]
+};
+
+const vacationPlan3Days = [
+  'Giorno 1: Vacanza Upper A',
+  'Giorno 2: Vacanza Lower A',
+  'Giorno 3: Vacanza Upper B',
+  'Nei giorni liberi: camminata, mobilità e recupero'
+];
+
 const dietPlan = [
   day(1,'Upper A · circa 2000 kcal',true,['Yogurt greco 0–2% 250 g + whey 30 g + pane 50 g + frutta 200 g','Pollo/tacchino 180–200 g oppure tonno naturale 150–170 g sgocciolato + pasta secca 70 g + verdure 300 g + olio EVO 10 g','Yogurt greco 200 g + whey 20 g + frutta 200–300 g','Proteina magra 180–200 g oppure merluzzo/nasello 250 g + patate 300 g + verdure 300 g + olio EVO 10 g']),
   day(2,'Lower A · circa 2000 kcal',true,['Colazione alternativa: pane 70 g + 2 uova intere + yogurt greco 0–2% 150 g + frutta 150–200 g','Tacchino 180–200 g + riso secco 70–75 g + verdure 300 g + olio EVO 10 g','Fiocchi di latte 200 g + frutta 150–200 g','Manzo magro 150–180 g + polenta cotta 250–300 g + verdure 300 g + olio EVO 10 g']),
@@ -177,7 +273,34 @@ const exerciseImages = {
   'ring-pushup':'assets/ring_pushup.png',
   'ring-support-hold':'assets/ring_support_hold.png',
   'hammer-curl':'assets/hammer_curl.png',
-  'curl-inclinato-extra':'assets/curl_barra_corta.png'
+  'curl-inclinato-extra':'assets/curl_barra_corta.png',
+  'vac-pushup-slow':'assets/vac_pushup_slow.png',
+  'vac-pike-pushup':'assets/vac_pike_pushup.png',
+  'vac-band-row':'assets/vac_band_row.png',
+  'vac-band-pulldown':'assets/vac_band_pulldown.png',
+  'vac-band-overhead-triceps':'assets/vac_band_overhead_triceps.png',
+  'vac-band-curl':'assets/vac_band_biceps_curl.png',
+  'vac-slow-squat':'assets/vac_slow_squat.png',
+  'vac-bulgarian-split-squat':'assets/vac_bulgarian_split_squat.png',
+  'vac-band-face-pull':'assets/vac_band_face_pull.png',
+  'vac-band-hammer-curl':'assets/vac_band_hammer_curl.png',
+  'vac-band-pushdown':'assets/vac_band_pushdown.png',
+  'vac-band-pushup':'assets/vac_band_pushup.png',
+  'vac-reverse-lunge':'assets/vac_reverse_lunge.png',
+  'vac-hip-thrust':'assets/vac_hip_thrust.png',
+  'vac-towel-leg-curl':'assets/vac_towel_leg_curl.png',
+  'vac-single-leg-calf-raise':'assets/vac_single_leg_calf_raise.png',
+  'vac-pushup':'assets/vac_pushup.png',
+  'vac-decline-pushup':'assets/vac_decline_pushup.png',
+  'vac-step-up':'assets/vac_step_up.png',
+  'vac-plank':'assets/vac_plank.png',
+  'vac-side-plank':'assets/vac_side_plank.png',
+  'vac-reverse-crunch':'assets/vac_reverse_crunch.png',
+  'vac-pallof-press':'assets/vac_pallof_press.png',
+  'vac-slow-mountain-climber':'assets/vac_slow_mountain_climber.png',
+  'vac-table-australian-row':'assets/vac_australian_table_row.png',
+  'vac-incline-pushup':'assets/vac_incline_pushup_table_chair.png',
+  'vac-chair-dip':'assets/vac_chair_dip.png',
 };
 
 const posterGuides = [
@@ -263,7 +386,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=14.1').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=17').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -286,7 +409,7 @@ function renderAll(){
   const historyDay=$('#historyDay');
   picker.innerHTML=workouts.map((d,i)=>`<option value="${i}">${d.name}</option>`).join('');
   historyDay.innerHTML=workouts.map(d=>`<option value="${d.name}">${d.name}</option>`).join('');
-  renderToday(); renderWorkouts(); renderExtra(); renderLibrary(); renderDiet(); renderCarbTool(); renderProgress();
+  renderToday(); renderWorkouts(); renderVacation(); renderExtra(); renderLibrary(); renderDiet(); renderCarbTool(); renderProgress();
 }
 function renderToday(){
   const day=workouts[state.selectedDay];
@@ -362,7 +485,8 @@ function markNextSet(dayId,exId){
   refreshWorkoutRenders();
 }
 function refreshWorkoutRenders(){ renderToday(); renderWorkouts(); if(state.guided) updateGuidedContent(); }
-function findExercise(id){ return workouts.flatMap(d=>d.exercises).find(e=>e.id===id) || workouts[0].exercises[0]; }
+function allExerciseCollections(){ return [...workouts, ...vacationWorkouts, ...vacationQuickPlans, furnitureAlternatives]; }
+function findExercise(id){ return allExerciseCollections().flatMap(d=>d.exercises).find(e=>e.id===id) || workouts[0].exercises[0]; }
 function findDay(id){ return workouts.find(d=>d.id===id) || workouts[0]; }
 
 function exerciseImage(id){ return exerciseImages[id] || ''; }
@@ -424,10 +548,33 @@ function renderExtra(){
   $$('.poster-btn', $('#extraPlans')).forEach(b=>b.addEventListener('click',()=>openPoster(b.dataset.poster)));
 }
 
+function renderVacation(){
+  const card = day => `
+    <article class="day-card">
+      <p class="mini">${day.focus}</p>
+      <h3>${day.name}</h3>
+      <div class="day-meta">${day.meta}</div>
+      <div class="day-exercises">${day.exercises.map(e=>exerciseCard(e,day.id)).join('')}</div>
+    </article>`;
+  $('#vacationDays').innerHTML = vacationWorkouts.map(card).join('');
+  $('#vacationQuick').innerHTML = vacationQuickPlans.map(card).join('');
+  $('#vacationFurniture').innerHTML = card(furnitureAlternatives);
+  $('#vacation3days').innerHTML = `
+    <article class="info-card soft">
+      <h4>Versione 3 giorni</h4>
+      <ul class="clean-list">${vacationPlan3Days.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <p class="muted">Se sei molto attivo in vacanza, questa è la scelta più realistica.</p>
+    </article>`;
+  bindExerciseButtons($('#vacationDays'));
+  bindExerciseButtons($('#vacationQuick'));
+  bindExerciseButtons($('#vacationFurniture'));
+  bindExerciseButtons($('#vacation3days'));
+}
+
 function renderLibrary(){
   const q=($('#searchExercises').value||'').toLowerCase().trim();
   const seen=new Map();
-  workouts.flatMap(d=>d.exercises).forEach(e=>{ if(!seen.has(e.id)) seen.set(e.id,e); });
+  allExerciseCollections().flatMap(d=>d.exercises).forEach(e=>{ if(!seen.has(e.id)) seen.set(e.id,e); });
   const list=[...seen.values()].filter(e=>!q || `${e.name} ${e.group} ${e.note}`.toLowerCase().includes(q));
   $('#exerciseLibrary').innerHTML=list.map(e=>`
     <article class="library-card">
@@ -445,10 +592,10 @@ function openExercise(id){
   if(id==='overhead-triceps'){
     $('#modalContent').innerHTML=`
       <div class="exercise-meta"><span class="tag">${e.sets}×${e.reps}</span><span class="tag green">${e.rest}</span><span class="tag warn">${e.load}</span></div>
-      <p class="guided-sub">Puoi scegliere la variante che preferisci: manubrio o cavo con fune. Entrambe lavorano bene il capo lungo del tricipite, soprattutto perché il braccio resta sopra la testa.</p>
+      <p class="guided-sub">Per questo esercizio puoi usare sia il manubrio sia il cavo con fune. Qui sotto trovi entrambe le infografiche per scegliere la variante che preferisci.</p>
       ${dualGuideBlock('overhead-triceps','overhead-triceps-cable')}
-      <div class="modal-section"><h4>Quando scegliere il manubrio</h4><p>Usalo se vuoi una variante semplice da fare in casa, con setup rapido e buon allungamento del capo lungo.</p></div>
-      <div class="modal-section"><h4>Quando scegliere il cavo</h4><p>Usalo se hai la carrucola: la tensione resta più continua e spesso è più facile controllare la fase eccentrica con la fune.</p></div>
+      <div class="modal-section"><h4>Quando scegliere il manubrio</h4><p>Usalo se vuoi una variante semplice da fare in casa, con setup rapido e buon allungamento del capo lungo del tricipite.</p></div>
+      <div class="modal-section"><h4>Quando scegliere il cavo</h4><p>Usalo se hai la carrucola: la tensione resta più continua e può risultare più comodo controllare il movimento con la fune.</p></div>
       <div class="modal-section"><h4>Cose da fare in entrambe</h4><ul>${[...new Set([...(exerciseGuides['overhead-triceps']?.cues||[]), ...(exerciseGuides['overhead-triceps-cable']?.cues||[])])].slice(0,6).map(x=>`<li>${x}</li>`).join('')}</ul></div>
       <div class="modal-section"><h4>Errori da evitare in entrambe</h4><ul>${[...new Set([...(exerciseGuides['overhead-triceps']?.errors||[]), ...(exerciseGuides['overhead-triceps-cable']?.errors||[])])].map(x=>`<li>${x}</li>`).join('')}</ul></div>
       <div class="exercise-actions"><button class="primary" onclick="openGuided('${currentDayForExercise(id)}','${id}')">Avvia serie guidata</button></div>`;
@@ -489,7 +636,7 @@ function openPoster(id){
     <div class="modal-section"><h4>Nota coach</h4><p>${g.tip}</p></div>`;
   $('#exerciseModal').showModal();
 }
-function currentDayForExercise(exId){ return workouts.find(d=>d.exercises.some(e=>e.id===exId))?.id || workouts[state.selectedDay].id; }
+function currentDayForExercise(exId){ return allExerciseCollections().find(d=>d.exercises.some(e=>e.id===exId))?.id || workouts[state.selectedDay].id; }
 function svgFigure(kind){
   const color='currentColor';
   const base=`<svg viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="${color}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".9">`;

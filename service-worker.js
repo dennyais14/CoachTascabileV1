@@ -1,9 +1,9 @@
-const CACHE_NAME = 'coach-tascabile-v14-1-20260625';
+const CACHE_NAME = 'coach-tascabile-v17-20260627';
 const ASSETS = [
   './',
-  './index.html?v=14.1',
-  './styles.css?v=14.1',
-  './app.js?v=14.1',
+  './index.html?v=17',
+  './styles.css?v=17',
+  './app.js?v=17',
   './manifest.json',
   './assets/affondi_indietro.png',
   './assets/alzate_laterali.png',
@@ -54,6 +54,33 @@ const ASSETS = [
   './assets/sliding_leg_curl.png',
   './assets/step_up_panca.png',
   './assets/trazioni.png',
+  './assets/vac_australian_table_row.png',
+  './assets/vac_band_biceps_curl.png',
+  './assets/vac_band_face_pull.png',
+  './assets/vac_band_hammer_curl.png',
+  './assets/vac_band_overhead_triceps.png',
+  './assets/vac_band_pulldown.png',
+  './assets/vac_band_pushdown.png',
+  './assets/vac_band_pushup.png',
+  './assets/vac_band_row.png',
+  './assets/vac_bulgarian_split_squat.png',
+  './assets/vac_chair_dip.png',
+  './assets/vac_decline_pushup.png',
+  './assets/vac_hip_thrust.png',
+  './assets/vac_incline_pushup_table_chair.png',
+  './assets/vac_pallof_press.png',
+  './assets/vac_pike_pushup.png',
+  './assets/vac_plank.png',
+  './assets/vac_pushup.png',
+  './assets/vac_pushup_slow.png',
+  './assets/vac_reverse_crunch.png',
+  './assets/vac_reverse_lunge.png',
+  './assets/vac_side_plank.png',
+  './assets/vac_single_leg_calf_raise.png',
+  './assets/vac_slow_mountain_climber.png',
+  './assets/vac_slow_squat.png',
+  './assets/vac_step_up.png',
+  './assets/vac_towel_leg_curl.png',
   './assets/wrist_curl.png',
 ];
 self.addEventListener('install', event => {
@@ -71,6 +98,6 @@ self.addEventListener('fetch', event => {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => {});
       return response;
-    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=14.1')))
+    }).catch(() => caches.match(event.request).then(match => match || caches.match('./index.html?v=17')))
   );
 });
