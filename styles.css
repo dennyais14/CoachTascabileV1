@@ -162,3 +162,44 @@ button{cursor:pointer;color:inherit}
 .bottom-nav{overflow-x:auto;gap:6px}
 .bottom-nav .nav-btn{min-width:72px}
 .compact-gap{margin-top:20px}
+
+
+/* V17.1 — menu mobile adattivo su due righe, senza scorrimento orizzontale */
+.bottom-nav{
+  display:grid!important;
+  grid-template-columns:repeat(8,minmax(0,1fr));
+  overflow:visible!important;
+  gap:4px!important;
+  align-items:stretch;
+}
+.bottom-nav .nav-btn,.nav-btn{
+  min-width:0!important;
+  padding:7px 2px;
+}
+.nav-btn small{
+  white-space:normal!important;
+  overflow-wrap:anywhere;
+  line-height:1.05;
+  text-align:center;
+}
+@media (max-width:820px){
+  :root{--nav-h:132px;}
+  .main-wrap{padding-bottom:calc(var(--nav-h) + 46px + env(safe-area-inset-bottom));}
+  .bottom-nav{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    border-radius:22px;
+    padding:6px!important;
+    left:6px!important;
+    right:6px!important;
+  }
+  .nav-btn{min-height:50px;}
+  .nav-btn span{font-size:18px;}
+  .nav-btn small{font-size:10px;}
+}
+@media (max-width:380px){
+  :root{--nav-h:136px;}
+  .bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:3px!important;padding:5px!important;}
+  .nav-btn{min-height:49px;padding:6px 1px;}
+  .nav-btn span{font-size:17px;}
+  .nav-btn small{font-size:9px;}
+}

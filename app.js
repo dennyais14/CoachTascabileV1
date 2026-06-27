@@ -1,4 +1,4 @@
-const VERSION = '17';
+const VERSION = '17.1';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -386,7 +386,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=17').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=17.1').catch(()=>{}); }
 }
 
 function bindNavigation(){
