@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Coach Tascabile v17.2</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css?v=17.2" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar glass">
+      <div>
+        <p class="eyebrow">Coach personale</p>
+        <h1>Coach Tascabile</h1>
+        <p class="sub">Versione 17.2 · calendario, home intelligente e serie guidata</p>
+      </div>
+      <button id="installBtn" class="install-btn hidden">Installa</button>
+    </header>
+
+    <main class="main-wrap">
+      <section id="tab-home" class="tab active">
+        <div class="hero-card glass">
+          <div class="hero-copy">
+            <span class="pill">Obiettivo 15% BF</span>
+            <h2>Fase petto + spalle + braccia</h2>
+            <p>La scheda principale ora lavora su dimagrimento, forza e sviluppo estetico di petto, spalle, braccia e dorso. Avambracci e collo restano una scheda extra separata e opzionale.</p>
+          </div>
+          <div class="hero-badges">
+            <div class="metric"><span>Giorni</span><strong>5 + vacanza</strong></div>
+            <div class="metric"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="metric"><span>Focus</span><strong>Spalle/Braccia</strong></div>
+            <div class="metric"><span>Extra</span><strong>Vacanza + opz.</strong></div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <p class="mini">Allenamento del giorno</p>
+            <h3 id="todayTitle">Allenamento</h3>
+            <p id="todayAutoBadge" class="muted small-muted"></p>
+          </div>
+          <select id="dayPicker" aria-label="Seleziona giornata"></select>
+        </div>
+
+        <div class="quick-row">
+          <button class="quick-card quick-nav" data-targettab="workouts">
+            <span class="quick-icon">🏋️</span>
+            <span class="quick-title">Scheda</span>
+            <span class="quick-sub">5 giorni base</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="calendar">
+            <span class="quick-icon">🗓️</span>
+            <span class="quick-title">Calendario</span>
+            <span class="quick-sub">Settimana visibile</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="vacation">
+            <span class="quick-icon">🏖️</span>
+            <span class="quick-title">Vacanza</span>
+            <span class="quick-sub">Corpo libero + elastici</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="diet">
+            <span class="quick-icon">🍽️</span>
+            <span class="quick-title">Dieta</span>
+            <span class="quick-sub">Alternative grammi</span>
+          </button>
+          <button class="quick-card quick-nav" data-targettab="timer">
+            <span class="quick-icon">⏱️</span>
+            <span class="quick-title">Timer</span>
+            <span class="quick-sub">Recupero + suono</span>
+          </button>
+        </div>
+
+        <div class="chest-focus-card">
+          <h3>Focus petto + spalle + braccia — 8 settimane</h3>
+          <p>Petto all’inizio di Upper A e Upper C, ma con dorso, spalle e braccia sufficienti per costruire un fisico più atletico e a V. Volume controllato: petto circa 17 serie settimanali, dorso e spalle mantenuti forti, bicipiti e tricipiti in specializzazione moderata per 8 settimane. Il capo lungo del tricipite ha ora lavoro diretto sopra la testa.</p>
+          <div class="focus-grid">
+            <div class="focus-stat"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="focus-stat"><span>Focus extra</span><strong>Spalle/Braccia</strong></div>
+            <div class="focus-stat"><span>Obiettivo</span><strong>Fisico a V</strong></div>
+          </div>
+        </div>
+
+        <div class="chest-focus-card goal-card">
+          <h3>Obiettivi forza per fisico atletico</h3>
+          <div class="goal-columns">
+            <div>
+              <p class="mini">Target intermedi 12 mesi</p>
+              <ul class="clean-list">
+                <li>Panca manubri: 24 kg/mano × 10–12 reps pulite</li>
+                <li>Push-up: 25–35 ripetizioni pulite</li>
+                <li>Trazioni/pulldown: progressione costante</li>
+                <li>Panca inclinata: migliora gradualmente senza trasformarla in shoulder press</li>
+              </ul>
+            </div>
+            <div>
+              <p class="mini">Target avanzati lungo periodo</p>
+              <ul class="clean-list">
+                <li>Panca bilanciere: 80–90 kg × 8–10 reps</li>
+                <li>Panca manubri: 30–34 kg/mano × 8–10 reps</li>
+                <li>Panca inclinata manubri: 26–32 kg/mano × 8–10 reps</li>
+                <li>Dip: 10–15 ripetizioni pulite</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="chest-focus-card volume-card">
+          <h3>Volume settimanale V13</h3>
+          <div class="focus-grid volume-grid">
+            <div class="focus-stat"><span>Petto</span><strong>17 serie</strong></div>
+            <div class="focus-stat"><span>Dorso</span><strong>16 serie</strong></div>
+            <div class="focus-stat"><span>Spalle</span><strong>14–15 serie</strong></div>
+            <div class="focus-stat"><span>Bicipiti</span><strong>10 dirette</strong></div>
+            <div class="focus-stat"><span>Tricipiti</span><strong>12 dirette + spinte</strong></div>
+            <div class="focus-stat"><span>Core</span><strong>9 serie</strong></div>
+            <div class="focus-stat"><span>Gambe</span><strong>mantenimento completo</strong></div>
+          </div>
+        </div>
+
+        <div id="todayWorkout" class="today-list"></div>
+      </section>
+
+
+      <section id="tab-calendar" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Planner settimanale</p>
+            <h2>Calendario allenamenti</h2>
+          </div>
+          <p class="muted">Qui vedi la distribuzione settimanale. Puoi aprire la scheda del giorno o impostarla come allenamento visibile in Home.</p>
+        </div>
+        <div class="warning-card">
+          <h3>Nota pratica</h3>
+          <p>La Home ora non parte più sempre da Upper A: usa il giorno consigliato della settimana oppure l’ultima scheda che hai selezionato.</p>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </section>
+
+      <section id="tab-workouts" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Programma principale</p>
+            <h2>Scheda settimanale</h2>
+          </div>
+          <p class="muted">Ogni esercizio ha Dettagli, Recupero, Segna e Serie guidata. Il tracker ora conta le serie completate, non le singole ripetizioni.</p>
+          <button id="resetWeeklySets" class="ghost small">Reset settimanale serie</button>
+        </div>
+        <div id="workoutDays"></div>
+      </section>
+
+
+      <section id="tab-vacation" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Scheda alternativa</p>
+            <h2>Scheda Vacanza</h2>
+          </div>
+          <p class="muted">Quando non hai manubri o palestra: usa corpo libero, elastici e mobili stabili. L’obiettivo è mantenere muscolo, continuare a dimagrire e non perdere stimolo.</p>
+        </div>
+        <div class="warning-card">
+          <h3>Regole base</h3>
+          <p>Serie vicino al cedimento tecnico, controllo del movimento, tempo lento e massima sicurezza. Per tavoli, sedie e rialzi usa solo supporti stabili, non pieghevoli e non in vetro.</p>
+        </div>
+        <div class="dashboard-grid" id="vacation3days"></div>
+        <div class="section-head stacked compact-gap">
+          <div><p class="mini">Versione completa</p><h3>4 giorni</h3></div>
+          <p class="muted">Upper A, Lower A, Upper B, Lower B + pump facoltativo.</p>
+        </div>
+        <div id="vacationDays"></div>
+        <div class="section-head stacked compact-gap">
+          <div><p class="mini">Versione rapida</p><h3>25–30 minuti</h3></div>
+          <p class="muted">Allenamenti brevi A/B per hotel, viaggio o giornate piene.</p>
+        </div>
+        <div id="vacationQuick"></div>
+        <div class="section-head stacked compact-gap">
+          <div><p class="mini">Alternative con mobili</p><h3>Tavolo, sedia, letto</h3></div>
+          <p class="muted">Ottime opzioni se non hai sbarra o elastici, ma prima di tutto conta la stabilità del supporto.</p>
+        </div>
+        <div id="vacationFurniture"></div>
+      </section>
+
+      <section id="tab-extra" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Scheda separata</p>
+            <h2>Extra avambracci e collo</h2>
+          </div>
+          <p class="muted">Non è urgente: falla solo se hai tempo, recuperi bene e non senti la zona braccio/avambraccio già troppo carica.</p>
+        </div>
+        <div class="warning-card">
+          <h3>Regola pratica</h3>
+          <p>Per ora tieni gli extra leggeri: massimo 1 volta a settimana, 10–18 minuti. Evita farmer hold pesanti, hammer curl pesanti e reverse curl pesanti se vuoi evitare di aumentare ancora il volume visivo dell’avambraccio.</p>
+        </div>
+        <div id="extraPlans" class="extra-grid"></div>
+      </section>
+
+      <section id="tab-exercises" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Libreria tecnica</p>
+            <h2>Esercizi e guide</h2>
+          </div>
+          <p class="muted">Cerca un esercizio e apri la guida tecnica con immagine illustrata, note e errori da evitare.</p>
+        </div>
+        <div class="search-wrap">
+          <input id="searchExercises" class="search" type="search" placeholder="Cerca panca, push-up, squat..." />
+        </div>
+        <div id="exerciseLibrary" class="library-grid"></div>
+      </section>
+
+      <section id="tab-timer" class="tab">
+        <div class="timer-screen glass">
+          <p class="mini center">Timer recupero</p>
+          <h2 id="timerTitle" class="center">Recupero</h2>
+          <div class="timer-ring"><div id="timerDisplay">01:30</div></div>
+          <p id="timerHint" class="timer-hint">Scegli il recupero e premi Avvia. Con schermo bloccato il browser può sospendere l’app: usa “Tieni schermo acceso” quando disponibile.</p>
+          <div class="timer-presets">
+            <button class="preset" data-seconds="45">45s</button>
+            <button class="preset" data-seconds="60">60s</button>
+            <button class="preset active" data-seconds="90">90s</button>
+            <button class="preset" data-seconds="120">120s</button>
+            <button class="preset" data-seconds="180">180s</button>
+          </div>
+          <div class="timer-actions">
+            <button id="startTimer">Avvia</button>
+            <button id="pauseTimer" class="secondary">Pausa</button>
+            <button id="resetTimer" class="secondary">Reset</button>
+          </div>
+          <div class="timer-options">
+            <label class="sound-control">Suono
+              <select id="soundSelect">
+                <option value="strong">Forte</option>
+                <option value="classic">Classico</option>
+                <option value="bell">Campana</option>
+                <option value="long">Lungo</option>
+              </select>
+            </label>
+            <label class="sound-control">Volume
+              <select id="volumeSelect">
+                <option value="0.55">Medio</option>
+                <option value="0.8">Alto</option>
+                <option value="0.95">Max</option>
+              </select>
+            </label>
+            <button id="wakeLockBtn" class="ghost small">Tieni schermo acceso</button>
+            <button id="soundTestBtn" class="ghost small">Prova suono</button>
+            <button id="notifyBtn" class="ghost small">Notifiche</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-diet" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Alimentazione flessibile · V13</p>
+            <h2>Dieta 2000 kcal smart</h2>
+          </div>
+          <p class="muted">Schema indicativo da circa 2000 kcal/giorno. Obiettivo: perdere pancia mantenendo massa muscolare, con alternative pratiche ed economiche: tonno, pesce economico, latticini light e burger vegetariani. Non è una prescrizione medica: le calorie reali cambiano in base a marca, peso sgocciolato, cottura e prodotto.</p>
+        </div>
+
+        <div class="diet-accordion">
+          <details class="diet-panel" open>
+            <summary><span>📌</span><strong>Regole rapide</strong></summary>
+            <ul class="clean-list">
+              <li>Pasta, riso, noodles e farina per polenta: pesali da crudi/secco.</li>
+              <li>Carne, pollo, tacchino e pesce: meglio pesarli da crudi o da sgocciolati quando sono in scatola.</li>
+              <li>Tonno, sgombro e sardine in scatola: considera sempre il peso sgocciolato.</li>
+              <li>Olio, formaggio, mozzarella e frutta secca vanno pesati sempre.</li>
+              <li>Se usi alimenti più grassi, come tonno all’olio, sgombro, sardine o mozzarella, riduci o togli i 10 g di olio del pasto.</li>
+              <li>La frutta va conteggiata, ma non va evitata.</li>
+            </ul>
+          </details>
+
+          <details class="diet-panel" open>
+            <summary><span>🍽️</span><strong>Giornata tipo da circa 2000 kcal</strong></summary>
+            <div class="accordion-grid">
+              <article class="mini-diet-box"><h4>Colazione — opzione A</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>250 g</td></tr><tr><td>Proteine in polvere</td><td>30 g</td></tr><tr><td>Pane integrale/comune</td><td>50 g</td></tr><tr><td>Frutta</td><td>200 g</td></tr></tbody></table></div><p class="muted">Se usi yogurt greco intero: fai 200 g invece di 250 g, oppure togli 5 g di olio più avanti.</p></article>
+              <article class="mini-diet-box"><h4>Colazione alternativa</h4><div class="quick-carb-table"><table><tbody><tr><td>Pane</td><td>70 g</td></tr><tr><td>Uova intere</td><td>2, circa 110–120 g</td></tr><tr><td>Yogurt greco 0–2%</td><td>150 g</td></tr><tr><td>Frutta</td><td>150–200 g</td></tr></tbody></table></div><p class="muted">Questa sostituisce la colazione A: non si aggiunge.</p></article>
+              <article class="mini-diet-box"><h4>Colazione senza yogurt greco</h4><div class="quick-carb-table"><table><tbody><tr><td>Latte parzialmente scremato</td><td>250 ml</td></tr><tr><td>Proteine whey</td><td>20–30 g</td></tr><tr><td>Fiocchi d’avena</td><td>35–45 g</td></tr><tr><td>Frutta</td><td>150–200 g</td></tr></tbody></table></div><p class="muted">Alternativa dolce e pratica quando non hai yogurt greco. Se usi 30 g whey e 45 g avena, resta più saziante; se vuoi stare più leggero usa 20 g whey e 35 g avena.</p></article>
+              <article class="mini-diet-box"><h4>Pranzo</h4><div class="quick-carb-table"><table><tbody><tr><td>Proteina principale</td><td>vedi tabella alternative</td></tr><tr><td>Pasta secca</td><td>70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article>
+              <article class="mini-diet-box"><h4>Cena</h4><div class="quick-carb-table"><table><tbody><tr><td>Proteina principale</td><td>vedi alternative proteiche</td></tr><tr><td>Patate</td><td>300 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article>
+            </div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🔁</span><strong>Alternative carboidrati</strong></summary>
+            <div class="accordion-grid">
+              <article class="mini-diet-box"><h4>Alternative ai 70 g di pasta secca</h4><div class="quick-carb-table"><table><tbody><tr><td>Riso secco</td><td>70–75 g</td></tr><tr><td>Riso cotto</td><td>210–230 g</td></tr><tr><td>Patate</td><td>300–350 g</td></tr><tr><td>Polenta cotta</td><td>300 g</td></tr><tr><td>Farina per polenta secca</td><td>65–70 g</td></tr><tr><td>Pane</td><td>90–100 g</td></tr><tr><td>Noodles secchi</td><td>65–70 g</td></tr><tr><td>Noodles cotti</td><td>180–220 g</td></tr></tbody></table></div></article>
+              <article class="mini-diet-box"><h4>Alternative ai 300 g di patate</h4><div class="quick-carb-table"><table><tbody><tr><td>Pasta secca</td><td>60 g</td></tr><tr><td>Riso secco</td><td>60–65 g</td></tr><tr><td>Riso cotto</td><td>180–200 g</td></tr><tr><td>Polenta cotta</td><td>250–300 g</td></tr><tr><td>Pane</td><td>70–80 g</td></tr><tr><td>Noodles secchi</td><td>60 g</td></tr></tbody></table></div></article>
+            </div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🥩</span><strong>Alternative proteiche pranzo/cena</strong></summary>
+            <div class="quick-carb-table"><table><tbody><tr><td>Pollo/tacchino</td><td>180–200 g</td></tr><tr><td>Manzo magro</td><td>150–180 g</td></tr><tr><td>Tonno al naturale</td><td>150–170 g sgocciolato</td></tr><tr><td>Tonno all’olio</td><td>120–140 g sgocciolato; togli olio del pasto</td></tr><tr><td>Merluzzo/nasello surgelato</td><td>230–280 g</td></tr><tr><td>Sgombro o sardine</td><td>120–160 g sgocciolati; togli olio del pasto</td></tr><tr><td>Uova + albumi</td><td>2 uova intere + 200 g albumi</td></tr><tr><td>Macinato magro per polpette</td><td>180 g</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🥛</span><strong>Latticini: come inserirli</strong></summary>
+            <p class="muted">I latticini possono aiutare, ma non tutti sono equivalenti. Yogurt greco, fiocchi di latte e mozzarella light sono più utili. Formaggi stagionati, ricotta normale e mozzarella non light hanno più calorie: usali con porzioni più controllate.</p>
+            <div class="quick-carb-table"><table><tbody><tr><td>Mozzarella light</td><td>125 g come parte proteica; 250 g come pasto più proteico</td></tr><tr><td>Fiocchi di latte</td><td>200–250 g</td></tr><tr><td>Yogurt greco 0–2%</td><td>250–300 g</td></tr><tr><td>Ricotta light</td><td>180–220 g; meglio con albumi o tonno</td></tr><tr><td>Grana/pecorino</td><td>20–25 g al posto di 10 g olio</td></tr><tr><td>Mozzarella normale</td><td>100–125 g, ma togli olio e riduci carboidrati</td></tr></tbody></table></div>
+            <ul class="clean-list"><li>125 g mozzarella light da sola spesso non basta come proteina principale: abbinala a 100 g tonno al naturale oppure 150–200 g albumi.</li><li>Se usi 250 g mozzarella light, togli l’olio del pasto e valuta di ridurre pane/pasta/riso se le calorie del prodotto sono alte.</li><li>Se usi mozzarella normale, considerala più come grasso + proteine, non come proteina magra.</li></ul>
+            <h4>Esempio pranzo con mozzarella light</h4><div class="quick-carb-table"><table><tbody><tr><td>Mozzarella light</td><td>125 g</td></tr><tr><td>Tonno al naturale</td><td>100 g sgocciolato</td></tr><tr><td>Pane</td><td>60–70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>0–5 g</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🐟</span><strong>Pesce economico e tonno</strong></summary>
+            <p class="muted">Il tonno in scatola si può inserire, soprattutto al naturale. Non renderlo però l’unica fonte proteica tutti i giorni: ruotalo con pollo, uova, latticini, legumi e altri pesci.</p>
+            <div class="quick-carb-table"><table><tbody><tr><td>Tonno al naturale</td><td>150–170 g sgocciolato; pratico e magro</td></tr><tr><td>Tonno all’olio</td><td>120–140 g sgocciolato; togli 10 g olio</td></tr><tr><td>Merluzzo/nasello surgelato</td><td>230–280 g; economico e molto leggero</td></tr><tr><td>Sgombro in scatola</td><td>120–160 g; più grasso, saziante</td></tr><tr><td>Sardine in scatola</td><td>120–160 g; più grasse, togli olio</td></tr><tr><td>Salmone</td><td>150 g; ok se in offerta, più calorico</td></tr></tbody></table></div>
+            <div class="accordion-grid"><article class="mini-diet-box"><h4>Cena pesce economico</h4><div class="quick-carb-table"><table><tbody><tr><td>Merluzzo o nasello</td><td>250 g</td></tr><tr><td>Patate</td><td>300 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>10 g</td></tr></tbody></table></div></article><article class="mini-diet-box"><h4>Cena sgombro/sardine</h4><div class="quick-carb-table"><table><tbody><tr><td>Sgombro o sardine</td><td>140 g sgocciolati</td></tr><tr><td>Pane o patate</td><td>50–60 g pane oppure 200–250 g patate</td></tr><tr><td>Verdure</td><td>300–400 g</td></tr><tr><td>Olio EVO</td><td>0 g</td></tr></tbody></table></div></article></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🌱</span><strong>Burger vegetariani e legumi</strong></summary>
+            <p class="muted">I burger vegetariani possono andare bene, ma devi guardare l’etichetta: alcuni sono proteici, altri sono soprattutto patate, pane, formaggio o olio. Non tutti valgono come proteina principale.</p>
+            <div class="quick-carb-table"><table><tbody><tr><td>Burger veg proteico</td><td>150–200 g; cerca almeno 20 g proteine totali</td></tr><tr><td>Burger soia/seitan/pisello</td><td>spesso migliore come proteina</td></tr><tr><td>Burger verdure/patate</td><td>non è proteina; conta come carbo + grassi</td></tr><tr><td>Tofu compatto</td><td>180–220 g; meglio con verdure e carbo controllati</td></tr><tr><td>Legumi cotti</td><td>ceci 150–200 g; lenticchie 180–220 g</td></tr></tbody></table></div>
+            <ul class="clean-list"><li>Scegli prodotti con almeno 15–20 g di proteine per porzione e calorie non troppo alte.</li><li>Se il burger ha molti grassi, togli i 10 g di olio del pasto.</li><li>Se il burger ha molti carboidrati, riduci pasta/riso/pane nello stesso pasto.</li><li>Se il burger è di sole verdure/patate, usalo come contorno/carboidrato, non come proteina principale.</li></ul>
+            <h4>Esempio pasto con burger vegetale</h4><div class="quick-carb-table"><table><tbody><tr><td>Burger vegetariano proteico</td><td>160–200 g</td></tr><tr><td>Pane</td><td>50–70 g</td></tr><tr><td>Verdure</td><td>300 g</td></tr><tr><td>Olio EVO</td><td>0–5 g, in base al burger</td></tr></tbody></table></div>
+            <h4>Ceci e lenticchie</h4><p class="muted">Ceci e lenticchie sono economici e utili, ma sono proteine + carboidrati. Quando li usi, riduci pasta, riso, pane o patate nello stesso pasto.</p><div class="quick-carb-table"><table><tbody><tr><td>Se usi 200 g legumi cotti</td><td>riduci circa</td></tr><tr><td>Pasta/riso secco</td><td>40–60 g</td></tr><tr><td>Pane</td><td>60–80 g</td></tr><tr><td>Patate</td><td>200–250 g</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>🍓</span><strong>Merenda e frutta</strong></summary>
+            <div class="accordion-grid"><article class="mini-diet-box"><h4>Merenda base</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>200 g</td></tr><tr><td>Proteine in polvere</td><td>20 g</td></tr><tr><td>Frutta</td><td>200–300 g</td></tr></tbody></table></div></article><article class="mini-diet-box"><h4>Alternative merenda</h4><div class="quick-carb-table"><table><tbody><tr><td>Fiocchi di latte</td><td>200 g + frutta 150–200 g</td></tr><tr><td>Yogurt greco</td><td>250 g + frutta 200 g</td></tr><tr><td>Mozzarella light</td><td>125 g + frutta 150 g</td></tr><tr><td>Whey in acqua</td><td>30 g + frutta 200 g</td></tr></tbody></table></div></article></div>
+            <h4>Frutta: alternative stagionali</h4><div class="quick-carb-table"><table><tbody><tr><td>Fragole</td><td>300 g</td></tr><tr><td>Albicocche</td><td>250 g</td></tr><tr><td>Mela/pera</td><td>180–220 g</td></tr><tr><td>Banana</td><td>100–120 g</td></tr><tr><td>Uva</td><td>120–150 g</td></tr><tr><td>Kiwi</td><td>200 g</td></tr><tr><td>Arancia</td><td>200–250 g</td></tr><tr><td>Melone/anguria</td><td>300–400 g</td></tr><tr><td>Pesca/nettarina</td><td>200–250 g</td></tr></tbody></table></div>
+            <p class="muted">La frutta va conteggiata, ma non va evitata. Fragole, melone e anguria hanno molto volume per poche calorie. Banana e uva sono buone ma più caloriche, quindi meglio pesarle.</p>
+          </details>
+
+          <details class="diet-panel">
+            <summary><span>⚡</span><strong>Cena veloce e prima di dormire</strong></summary>
+            <h4>Pasti pronti/combinazioni veloci</h4><div class="quick-carb-table"><table><tbody><tr><td>Tonno naturale + patate</td><td>160 g tonno + 300 g patate + verdure + 10 g olio</td></tr><tr><td>Mozzarella light + tonno</td><td>125 g mozzarella + 100 g tonno + 60 g pane + verdure</td></tr><tr><td>Burger veg proteico</td><td>160–200 g burger + 50–70 g pane + verdure</td></tr><tr><td>Nasello surgelato</td><td>250 g nasello + 300 g patate + verdure + 10 g olio</td></tr><tr><td>Fiocchi di latte salati</td><td>250 g fiocchi + 80 g pane + verdure</td></tr></tbody></table></div>
+            <h4>Prima di dormire — solo se hai fame</h4><div class="quick-carb-table"><table><tbody><tr><td>Yogurt greco 0–2%</td><td>150 g</td></tr><tr><td>Fiocchi di latte</td><td>150 g</td></tr><tr><td>Albumi</td><td>200 g</td></tr><tr><td>Proteine in polvere in acqua</td><td>20 g</td></tr><tr><td>Mozzarella light</td><td>80–100 g, se rientra nelle calorie</td></tr></tbody></table></div>
+            <p class="muted">Per inserirlo senza salire troppo con le calorie, togli una di queste cose dalla giornata:</p><div class="quick-carb-table"><table><tbody><tr><td>Pane</td><td>30–40 g</td></tr><tr><td>Pasta secca</td><td>25–30 g</td></tr><tr><td>Riso secco</td><td>25–30 g</td></tr><tr><td>Olio</td><td>10 g</td></tr><tr><td>Frutta</td><td>200–300 g, a seconda del frutto</td></tr></tbody></table></div>
+          </details>
+
+          <details class="diet-panel" open>
+            <summary><span>📉</span><strong>Come passare a 1800 kcal + controllo progressi</strong></summary>
+            <p class="muted">Mantieni uguale la struttura e togli una di queste opzioni.</p><div class="quick-carb-table"><table><tbody><tr><td>Pasta/riso secco</td><td>30 g in meno nella giornata</td></tr><tr><td>Pane</td><td>70–80 g in meno nella giornata</td></tr><tr><td>Olio</td><td>10 g in meno, se non hai troppa fame</td></tr><tr><td>Mix</td><td>15 g pasta + 30–40 g pane</td></tr></tbody></table></div>
+            <ul class="clean-list"><li>Pesati ogni mattina nelle stesse condizioni e guarda la media settimanale, non il singolo giorno.</li><li>Se perdi circa 0,4–0,8 kg a settimana e ti alleni bene, resta a 2000 kcal.</li><li>Se non scendi per 2 settimane, passa a 1900 kcal.</li><li>Se a 1900 kcal ti blocchi ancora, valuta 1800 kcal per alcune settimane.</li><li>Se cali troppo velocemente, hai fame e peggiori nei carichi, risali leggermente.</li><li>Se usi spesso alimenti più calorici come mozzarella normale, tonno all’olio, sgombro, sardine o burger molto conditi, riduci olio e carboidrati del pasto.</li></ul>
+            <div class="swap-result"><strong>Obiettivo reale:</strong> la pancia non si perde con alimenti speciali: si perde con deficit calorico sostenibile, proteine alte, allenamento progressivo e costanza. Il piano deve essere aggiustato ogni 4 settimane in base alla risposta del corpo.</div>
+          </details>
+        </div>
+
+        <div class="diet-tool glass">
+          <div>
+            <p class="mini">Scambia carboidrati</p>
+            <h3>Convertitore porzioni</h3>
+            <p class="muted">Valori approssimativi: pesa pasta/riso/noodles/farina per polenta a crudo; riso cotto, noodles cotti, patate e polenta cotta da già pronti.</p>
+          </div>
+          <div class="swap-form">
+            <label>Ho nel piano
+              <select id="swapFrom"></select>
+            </label>
+            <label>Grammi
+              <input id="swapGrams" type="number" min="1" step="1" value="80" />
+            </label>
+            <label>Voglio mangiare
+              <select id="swapTo"></select>
+            </label>
+          </div>
+          <div id="swapResult" class="swap-result"></div>
+          <div id="quickCarbTable" class="quick-carb-table"></div>
+        </div>
+
+        <div class="diet-tool glass compact-diet-card">
+          <p class="mini">Versione semplice del giorno</p>
+          <h3>Nuove opzioni rapide</h3>
+          <ul class="clean-list">
+            <li><strong>Colazione:</strong> yogurt greco 250 g + whey 30 g + pane 50 g + frutta 200 g.</li>
+            <li><strong>Pranzo:</strong> pollo 180 g oppure tonno naturale 160 g oppure nasello 250 g + pasta 70 g + verdure 300 g + olio 10 g.</li>
+            <li><strong>Merenda:</strong> yogurt greco 200 g + whey 20 g + frutta 200–300 g.</li>
+            <li><strong>Cena:</strong> tacchino/pollo 200 g oppure mozzarella light 125 g + tonno 100 g oppure burger veg proteico 160–200 g + patate 300 g + verdure 300 g + olio 0–10 g.</li>
+          </ul>
+        </div>
+
+        <div class="diet-controls">
+          <button class="diet-filter active" data-dietfilter="all">Tutti</button>
+          <button class="diet-filter" data-dietfilter="week1">Settimana 1</button>
+          <button class="diet-filter" data-dietfilter="week2">Settimana 2</button>
+          <button class="diet-filter" data-dietfilter="sweet">Allenamento</button>
+        </div>
+        <div id="dietList" class="diet-list"></div>
+      </section>
+
+      <section id="tab-progress" class="tab">
+        <div class="section-head stacked">
+          <div>
+            <p class="mini">Diario</p>
+            <h2>Progressi</h2>
+          </div>
+          <p class="muted">Carichi, misure corporee, cronologia allenamenti e serie completate.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="info-card soft">
+            <h4>Misure corporee</h4>
+            <div class="measure-form">
+              <input id="measureWeight" type="number" step="0.1" placeholder="Peso kg" />
+              <input id="measureWaist" type="number" step="0.1" placeholder="Girovita cm" />
+              <button id="addMeasure">Aggiungi</button>
+            </div>
+            <canvas id="measureChart" height="170"></canvas>
+            <div id="measureList" class="mini-list"></div>
+          </div>
+
+          <div class="info-card soft">
+            <h4>Cronologia allenamenti</h4>
+            <div class="history-form">
+              <select id="historyDay"></select>
+              <input id="historyNotes" type="text" placeholder="Note: energia, carichi, fatica..." />
+              <button id="addHistory">Registra allenamento</button>
+            </div>
+            <div id="historyList" class="mini-list"></div>
+          </div>
+        </div>
+
+        <div class="progress-card soft">
+          <div class="section-head compact">
+            <div>
+              <p class="mini">Carichi</p>
+              <h3>Progressione esercizi</h3>
+            </div>
+            <p class="muted">Quando completi tutte le serie al limite alto del range con tecnica pulita, valuta un piccolo aumento.</p>
+          </div>
+          <div id="progressTable"></div>
+        </div>
+        <button id="resetWeeklySets" class="ghost full">Reset settimanale solo serie schede</button>
+        <button id="resetProgress" class="danger full">Azzera dati locali</button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav glass">
+      <button class="nav-btn active" data-tab="home"><span>🏠</span><small>Home</small></button>
+      <button class="nav-btn" data-tab="workouts"><span>📋</span><small>Scheda</small></button>
+      <button class="nav-btn" data-tab="calendar"><span>🗓️</span><small>Calend.</small></button>
+      <button class="nav-btn" data-tab="vacation"><span>🏖️</span><small>Vacanza</small></button>
+      <button class="nav-btn" data-tab="extra"><span>🧩</span><small>Extra</small></button>
+      <button class="nav-btn" data-tab="exercises"><span>🖼️</span><small>Esercizi</small></button>
+      <button class="nav-btn" data-tab="timer"><span>⏱️</span><small>Timer</small></button>
+      <button class="nav-btn" data-tab="diet"><span>🍽️</span><small>Dieta</small></button>
+      <button class="nav-btn" data-tab="progress"><span>📈</span><small>Progressi</small></button>
+    </nav>
+  </div>
+
+  <dialog id="exerciseModal" class="sheet-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-top">
+      <div>
+        <p class="mini" id="modalEyebrow">Esercizio</p>
+        <h3 id="modalTitle"></h3>
+      </div>
+      <button id="closeModal" class="icon-btn">✕</button>
+    </div>
+    <div id="modalContent"></div>
+  </dialog>
+
+  <dialog id="guidedModal" class="sheet-modal guided-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-top">
+      <div>
+        <p class="mini" id="guidedEyebrow">Serie guidata</p>
+        <h3 id="guidedTitle"></h3>
+      </div>
+      <button id="closeGuided" class="icon-btn">✕</button>
+    </div>
+    <div id="guidedContent"></div>
+  </dialog>
+
+  <script src="app.js?v=17.2"></script>
+</body>
+</html>
