@@ -1,4 +1,4 @@
-const VERSION = '17.2';
+const VERSION = '17.4';
 const STORE = {
   sets: 'coach_v11_sets',
   measures: 'coach_v11_measures',
@@ -6,12 +6,13 @@ const STORE = {
   loads: 'coach_v11_loads',
   selectedDay: 'coach_v17_selected_day',
   sound: 'coach_v17_timer_sound',
-  volume: 'coach_v17_timer_volume'
+  volume: 'coach_v17_timer_volume',
+  countdownVoice: 'coach_v17_countdown_voice'
 };
 
 const workouts = [
   {
-    id:'upper-a', name:'Upper A — petto forza + schiena + tricipite', focus:'Petto forza + schiena + capo lungo tricipite', meta:'Petto all’inizio, dorso mantenuto e tricipite più completo con lavoro sopra la testa.',
+    id:'upper-a', name:'Upper A — petto forza + schiena + braccia', focus:'Petto forza + schiena + braccia', meta:'Petto all’inizio, dorso mantenuto e richiamo diretto braccia: bicipiti + tricipiti/capo lungo.',
     exercises:[
       ex('panca-piana-manubri','Panca piana manubri','petto','4','8–12','90–120s','16 kg/mano','Scapole addotte e depresse, petto alto, discesa 2–3 secondi, fermo leggero in basso.'),
       ex('ring-pushup','Ring push-up / Push-up','petto/tricipiti','3','8–12','75–90s','corpo libero/anelli','Se hai gli anelli usa ring push-up controllati; altrimenti push-up classici. Quando chiudi 3×12 pulite, aumenta difficoltà.'),
@@ -19,6 +20,7 @@ const workouts = [
       ex('rematore-manubrio','Rematore manubrio 1 braccio','dorso','3','8–12/lato','90s','18–20 kg','Gomito vicino al fianco, busto stabile, non ruotare per tirare più peso.'),
       ex('trazioni-prone','Trazioni prone / pulldown','dorso','3','6–10','120s','BW o 25–35 kg cavo','Petto verso la barra, scapole attive, ROM pulita prima della zavorra.'),
       ex('alzate-laterali','Alzate laterali','spalle','3','12–20','60s','5–6 kg','Movimento pulito, no slancio. Sono importanti per spalle più larghe.'),
+      ex('curl-cavo-manubri-uppera','Curl bicipiti al cavo o manubri','bicipiti','2','10–15','60s','cavo leggero/mod. o 8–12 kg/mano','Richiamo bicipiti in Upper A: gomiti fermi, supinazione controllata e fase negativa lenta.'),
       ex('pushdown-fune','Pushdown tricipiti fune','tricipiti','2','10–15','60s','10–15 kg cavo','Gomiti fermi, estensione completa, non spingere con le spalle.'),
       ex('overhead-triceps','Estensioni tricipiti sopra la testa','tricipiti capo lungo','2','12–15','60–75s','manubrio/cavo leggero','Focus capo lungo: braccia sopra la testa, gomiti stretti, allungamento controllato senza dolore al gomito.'),
       ex('hanging-knee-raise','Hanging knee raise','core','3','8–15','60s','corpo libero','Bacino in retroversione, evita dondolio e slancio.')
@@ -277,6 +279,7 @@ const exerciseImages = {
   'ring-support-hold':'assets/ring_support_hold.png',
   'hammer-curl':'assets/hammer_curl.png',
   'curl-inclinato-extra':'assets/curl_barra_corta.png',
+  'curl-cavo-manubri-uppera':'assets/curl_bicipiti_cavo_o_manubri.png',
   'vac-pushup-slow':'assets/vac_pushup_slow.png',
   'vac-pike-pushup':'assets/vac_pike_pushup.png',
   'vac-band-row':'assets/vac_band_row.png',
@@ -355,12 +358,13 @@ const exerciseGuides = {
   'ring-support-hold': guide('Support hold agli anelli','stabilità',['Braccia tese','Spalle depresse','Anelli vicini al corpo','Respira e resta fermo'],['Spalle alle orecchie','Gomiti piegati','Oscillare troppo']),
   'hammer-curl': guide('Hammer curl','bicipiti',['Presa neutra','Gomiti fermi','Negativa controllata'],['Swing con schiena','Polsi che cedono','Spalle avanti']),
   'curl-inclinato-extra': guide('Curl inclinato/cavo leggero','bicipiti',['Allungamento controllato','Gomiti stabili','Ritmo lento'],['Carico eccessivo','Accorciare ROM','Dondolare']),
+  'curl-cavo-manubri-uppera': guide('Curl bicipiti al cavo o manubri','bicipiti',['Gomiti fermi','Supinazione controllata','Negativa lenta','Non rubare con schiena e spalle'],['Slancio del busto','Spalle avanti','Carico troppo alto']),
 };
 function guide(name,kind,cues,errors){ return {name,kind,cues,errors}; }
 
 
 const weeklySchedule = [
-  { day:'Lunedì', workoutIndex:0, type:'main', label:'Upper A', title:'Upper A — petto forza + schiena + tricipite', note:'Petto forza, schiena e tricipite/capo lungo.' },
+  { day:'Lunedì', workoutIndex:0, type:'main', label:'Upper A', title:'Upper A — petto forza + schiena + braccia', note:'Petto forza, schiena, bicipiti e tricipite/capo lungo.' },
   { day:'Martedì', workoutIndex:1, type:'main', label:'Lower A', title:'Lower A — gambe + core', note:'Quadricipiti, glutei e core.' },
   { day:'Mercoledì', workoutIndex:2, type:'main', label:'Upper B', title:'Upper B — dorso/spalle/braccia', note:'Dorso, spalle, bicipiti e tricipiti.' },
   { day:'Giovedì', workoutIndex:3, type:'main', label:'Lower B', title:'Lower B — posterior chain + core', note:'Femorali, glutei, core e stabilità.' },
@@ -401,8 +405,11 @@ let state = {
   guided: null,
   guidedRestId: null,
   guidedRestEnd: null,
+  timerSpoken: new Set(),
+  restSpoken: new Set(),
   soundType: localStorage.getItem(STORE.sound) || 'strong',
-  soundVolume: Number(localStorage.getItem(STORE.volume) || 0.95)
+  soundVolume: Number(localStorage.getItem(STORE.volume) || 0.95),
+  countdownVoice: localStorage.getItem(STORE.countdownVoice) || 'on'
 };
 
 const $ = (s,root=document)=>root.querySelector(s);
@@ -422,7 +429,7 @@ function init(){
 }
 
 function registerServiceWorker(){
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=17.2').catch(()=>{}); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js?v=17.4').catch(()=>{}); }
 }
 
 function bindNavigation(){
@@ -432,6 +439,7 @@ function bindNavigation(){
   $('#searchExercises').addEventListener('input',renderLibrary);
   $('#closeModal').addEventListener('click',()=>$('#exerciseModal').close());
   $('#closeGuided').addEventListener('click',()=>{ clearGuidedRest(); $('#guidedModal').close(); });
+  $$('.wake-toggle').forEach(btn=>btn.addEventListener('click',()=>toggleWakeLock()));
 }
 function showTab(tab){
   $$('.tab').forEach(s=>s.classList.remove('active'));
@@ -659,6 +667,7 @@ function renderLibrary(){
   bindExerciseButtons($('#exerciseLibrary'));
 }
 function openExercise(id){
+  requestWakeLock(false);
   const e=findExercise(id); const g=exerciseGuides[id] || guide(e.name,e.group,['Controlla la tecnica','Mantieni 1–2 reps in riserva'],['Non forzare se senti dolore']);
   $('#modalTitle').textContent=g.name;
   $('#modalEyebrow').textContent=g.kind;
@@ -723,6 +732,7 @@ function svgFigure(kind){
 }
 
 function openGuided(dayId,exId){
+  requestWakeLock(false);
   if ($('#exerciseModal').open) $('#exerciseModal').close();
   state.guided={dayId,exId};
   updateGuidedContent();
@@ -756,6 +766,8 @@ function completeGuidedSet(){
   startGuidedRest(dayId,exId,e);
 }
 function startGuidedRest(dayId,exId,e){
+  requestWakeLock(false);
+  state.restSpoken = new Set();
   clearGuidedRest();
   state.guided={dayId,exId};
   state.guidedRestEnd=Date.now()+e.restSeconds*1000;
@@ -769,6 +781,7 @@ function updateGuidedRestScreen(dayId,exId,e){
   const remaining=Math.max(0,Math.ceil((state.guidedRestEnd-Date.now())/1000));
   const m=String(Math.floor(remaining/60)).padStart(2,'0');
   const s=String(remaining%60).padStart(2,'0');
+  speakCountdown(remaining,'rest');
   $('#guidedContent').innerHTML=`
     <div class="guided-box rest-box">
       <p class="guided-sub">Recupero in corso. Alla fine comparirà direttamente la prossima serie da fare.</p>
@@ -801,7 +814,8 @@ function bindTimer(){
   $('#resetTimer').addEventListener('click',()=>resetTimer());
   const soundSelect=$('#soundSelect'); if(soundSelect){ soundSelect.value=state.soundType; soundSelect.addEventListener('change',e=>{state.soundType=e.target.value; localStorage.setItem(STORE.sound,state.soundType); toast('Suono timer aggiornato.');}); }
   const volumeSelect=$('#volumeSelect'); if(volumeSelect){ volumeSelect.value=String(state.soundVolume); volumeSelect.addEventListener('change',e=>{state.soundVolume=Number(e.target.value); localStorage.setItem(STORE.volume,String(state.soundVolume)); toast('Volume timer aggiornato.');}); }
-  $('#soundTestBtn').addEventListener('click',()=>{ unlockAudio(); beep(); toast('Suono attivato.'); });
+  const countdownSelect=$('#countdownSelect'); if(countdownSelect){ countdownSelect.value=state.countdownVoice; countdownSelect.addEventListener('change',e=>{state.countdownVoice=e.target.value; localStorage.setItem(STORE.countdownVoice,state.countdownVoice); toast(state.countdownVoice==='on'?'Voce 3-2-1 attivata.':'Voce 3-2-1 disattivata.');}); }
+  $('#soundTestBtn').addEventListener('click',()=>{ unlockAudio(); speakCountdown(3,'test',true); setTimeout(()=>speakCountdown(2,'test',true),650); setTimeout(()=>speakCountdown(1,'test',true),1300); setTimeout(()=>beep(),1900); toast('Suono attivato.'); });
   $('#notifyBtn').addEventListener('click',requestNotifications);
   $('#wakeLockBtn').addEventListener('click',toggleWakeLock);
   updateTimerDisplay();
@@ -809,6 +823,7 @@ function bindTimer(){
 function setTimer(sec){ state.timerSeconds=sec; state.timerRemaining=sec; state.timerEnd=null; updateTimerDisplay(); }
 function startTimer(onDone){
   unlockAudio();
+  state.timerSpoken = new Set();
   if(state.timerRunning) return;
   state.timerRunning=true; state.timerPaused=false; state.timerEnd=Date.now()+state.timerRemaining*1000; state.onTimerDone=onDone || null;
   requestWakeLock(false);
@@ -827,6 +842,7 @@ function tickTimer(){
   clearTimeout(state.timerId);
   if(!state.timerRunning || !state.timerEnd) return;
   state.timerRemaining=Math.max(0,Math.ceil((state.timerEnd-Date.now())/1000));
+  speakCountdown(state.timerRemaining,'timer');
   updateTimerDisplay();
   if(state.timerRemaining<=0){
     state.timerRunning=false; beep(); vibrate(); showDoneNotification();
@@ -852,6 +868,28 @@ function unlockAudio(){
     if(!state.audioCtx) state.audioCtx=new (window.AudioContext||window.webkitAudioContext)();
     if(state.audioCtx.state==='suspended') state.audioCtx.resume();
     state.audioReady=true;
+  }catch{}
+}
+function speakCountdown(remaining,scope='timer',force=false){
+  try{
+    if(state.countdownVoice !== 'on' && !force) return;
+    const n=Number(remaining);
+    if(![3,2,1].includes(n)) return;
+    const set = scope==='rest' ? state.restSpoken : state.timerSpoken;
+    if(!force && set && set.has(n)) return;
+    if(set) set.add(n);
+    if(!('speechSynthesis' in window)) return;
+    const word = n===3 ? 'three' : n===2 ? 'two' : 'one';
+    const utter = new SpeechSynthesisUtterance(word);
+    utter.lang = 'en-US';
+    utter.rate = .82;
+    utter.pitch = .72;
+    utter.volume = Math.min(1,Math.max(.2,state.soundVolume || .95));
+    const voices = speechSynthesis.getVoices ? speechSynthesis.getVoices() : [];
+    const male = voices.find(v=>/male|david|mark|alex|daniel|thomas|fred|google us english/i.test(v.name)) || voices.find(v=>/en[-_ ]?us|english/i.test(v.lang || v.name));
+    if(male) utter.voice = male;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
   }catch{}
 }
 function beep(){

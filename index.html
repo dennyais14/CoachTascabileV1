@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Coach Tascabile v17.2</title>
+  <title>Coach Tascabile v17.4</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
-  <link rel="stylesheet" href="styles.css?v=17.2" />
+  <link rel="stylesheet" href="styles.css?v=17.4" />
 </head>
 <body>
   <div class="app-shell">
@@ -17,7 +17,7 @@
       <div>
         <p class="eyebrow">Coach personale</p>
         <h1>Coach Tascabile</h1>
-        <p class="sub">Versione 17.2 · calendario, home intelligente e serie guidata</p>
+        <p class="sub">Versione 17.4 · nuova infografica curl bicipiti cavo/manubri</p>
       </div>
       <button id="installBtn" class="install-btn hidden">Installa</button>
     </header>
@@ -72,6 +72,11 @@
             <span class="quick-icon">⏱️</span>
             <span class="quick-title">Timer</span>
             <span class="quick-sub">Recupero + suono</span>
+          </button>
+          <button class="quick-card wake-toggle">
+            <span class="quick-icon">🔆</span>
+            <span class="quick-title">Schermo attivo</span>
+            <span class="quick-sub">Durante le serie</span>
           </button>
         </div>
 
@@ -148,7 +153,10 @@
             <h2>Scheda settimanale</h2>
           </div>
           <p class="muted">Ogni esercizio ha Dettagli, Recupero, Segna e Serie guidata. Il tracker ora conta le serie completate, non le singole ripetizioni.</p>
-          <button id="resetWeeklySets" class="ghost small">Reset settimanale serie</button>
+          <div class="inline-actions">
+            <button id="resetWeeklySets" class="ghost small">Reset settimanale serie</button>
+            <button class="ghost small wake-toggle">Schermo attivo</button>
+          </div>
         </div>
         <div id="workoutDays"></div>
       </section>
@@ -245,6 +253,12 @@
                 <option value="0.55">Medio</option>
                 <option value="0.8">Alto</option>
                 <option value="0.95">Max</option>
+              </select>
+            </label>
+            <label class="sound-control">Voce
+              <select id="countdownSelect">
+                <option value="on">3-2-1 attiva</option>
+                <option value="off">Disattivata</option>
               </select>
             </label>
             <button id="wakeLockBtn" class="ghost small">Tieni schermo acceso</button>
@@ -471,6 +485,6 @@
     <div id="guidedContent"></div>
   </dialog>
 
-  <script src="app.js?v=17.2"></script>
+  <script src="app.js?v=17.4"></script>
 </body>
 </html>
